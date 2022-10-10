@@ -52,10 +52,14 @@ body {
     display: grid;
     grid-template-columns: [mo] 1fr [tu] 1fr [we] 1fr [th] 1fr [fr] 1fr [sa] 1fr [su] 1fr;
     grid-template-rows: repeat(auto, 100px);
-
     div {
       text-align: center;
       font-weight: bold;
+    }
+
+    .today {
+      background-color: gray;
+      color: white;
     }
     .weekday {
       display: flex;
