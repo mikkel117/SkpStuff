@@ -20,7 +20,7 @@ export default function UserChangeMonth({
   }, []);
 
   return (
-    <div className='test'>
+    <div className='UserChangeMonth'>
       {months.map((month) => {
         return <p key={month}>{month}</p>;
       })}
