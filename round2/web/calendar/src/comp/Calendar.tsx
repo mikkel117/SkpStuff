@@ -5,6 +5,7 @@ import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import { DaysOfWeek, WEEKDAYS } from "./model/Models";
 import BuildAmonth from "./BuildAmonth";
 import ClassNameChange from "./ClassNameChange";
+import UserChangeMonth from "./UserChangeMonth";
 
 const Calendar: React.FC = () => {
   const [days, setDays] = useState<DaysOfWeek[]>([]);
@@ -55,11 +56,22 @@ const Calendar: React.FC = () => {
   };
 
   const ChosenAMonth = () => {
-    console.log("ChosenAMonth");
+    setIsChangeMonth(!isChangeMonth);
   };
 
   return (
     <>
+      {isChangeMonth ? (
+        <UserChangeMonth
+          month={month}
+          setMonth={setMonth}
+          isChangeMonth={isChangeMonth}
+          setIsChangeMonth={setIsChangeMonth}
+        />
+      ) : (
+        <></>
+      )}
+
       <section className='calendarWrapper'>
         <div className='calendarInfo'>
           <AiOutlineArrowLeft
@@ -72,7 +84,6 @@ const Calendar: React.FC = () => {
               onClick={() => {
                 ChosenAMonth();
               }}>
-              {" "}
               {moment().month(month).format("MMMM")}
             </h3>
           </span>

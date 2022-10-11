@@ -90,6 +90,28 @@ body {
   }
 }
 
+.test {
+  margin: auto;
+  padding: 10px;
+  border: 1px solid #ddd;
+  width: 200px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: repeat(auto, 100px);
+  grid-gap: 10px;
+  background-color: #ddd;
+  color: black;
+  p {
+    padding: 5px;
+    text-align: center;
+    border: 1px solid gray;
+    font-weight: bold;
+  }
+  button {
+    grid-column: 1/4;
+  }
+}
+
 .monday {
   grid-column: mo;
 }
