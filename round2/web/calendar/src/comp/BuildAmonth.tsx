@@ -6,9 +6,18 @@ export default function BuildAmonth(
   month?: number,
   year?: number
 ): DaysOfWeek[] {
-  let Month: number = month || moment().month();
-
-  let Year: number = year || moment().year();
+  let Month: number;
+  let Year: number;
+  if (month === undefined) {
+    Month = moment().month();
+  } else {
+    Month = month;
+  }
+  if (year === undefined) {
+    Year = moment().year();
+  } else {
+    Year = year;
+  }
   let daysInWeek: DaysOfWeek[] = [];
   let daysInMonth: number = moment([Year, Month]).daysInMonth();
 
@@ -22,5 +31,6 @@ export default function BuildAmonth(
     };
     daysInWeek.push(days);
   }
+
   return daysInWeek;
 }

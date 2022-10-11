@@ -26,6 +26,13 @@ body {
       justify-self: center;
       grid-column: 2;
       grid-row: 2;
+      h3,
+      h1 {
+        &:hover {
+          color: gray;
+          cursor: default;
+        }
+      }
     }
     .arrowRight {
       grid-column: 3;
@@ -75,7 +82,7 @@ body {
       border: 1px solid gray;
       text-align: end;
     }
-    .test {
+    .event {
       grid-column: mo/we;
       background-color: red;
       width: 100%;
