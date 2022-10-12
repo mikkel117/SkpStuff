@@ -6,6 +6,7 @@ import { DaysOfWeek, WEEKDAYS } from "./model/Models";
 import BuildAmonth from "./BuildAmonth";
 import ClassNameChange from "./ClassNameChange";
 import UserChangeMonth from "./UserChangeMonth";
+import UserChangeYear from "./UserChangeYear";
 
 const Calendar: React.FC = () => {
   const [days, setDays] = useState<DaysOfWeek[]>([]);
@@ -55,18 +56,28 @@ const Calendar: React.FC = () => {
     }
   };
 
-  const ChosenAMonth = () => {
-    setIsChangeMonth(!isChangeMonth);
-  };
-
   return (
     <>
+      {isChangeYear ? (
+        <UserChangeYear
+          month={month}
+          year={year}
+          setYear={setYear}
+          setDays={setDays}
+          isChangeYear={isChangeYear}
+          setIsChangeYear={setIsChangeYear}
+        />
+      ) : (
+        <> </>
+      )}
       {isChangeMonth ? (
         <UserChangeMonth
           month={month}
           setMonth={setMonth}
           isChangeMonth={isChangeMonth}
           setIsChangeMonth={setIsChangeMonth}
+          year={year}
+          setDays={setDays}
         />
       ) : (
         <></>
@@ -79,10 +90,16 @@ const Calendar: React.FC = () => {
             onClick={() => PrevMonth()}
           />
           <span>
-            <h1>{moment().year(year).format("YYYY")}</h1> <br />
+            <h1
+              onClick={() => {
+                setIsChangeYear(!isChangeYear);
+              }}>
+              {moment().year(year).format("YYYY")}
+            </h1>
+            <br />
             <h3
               onClick={() => {
-                ChosenAMonth();
+                setIsChangeMonth(!isChangeMonth);
               }}>
               {moment().month(month).format("MMMM")}
             </h3>

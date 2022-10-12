@@ -1,4 +1,3 @@
-import React from "react";
 import { DaysOfWeek } from "./model/Models";
 import moment from "moment";
 

@@ -13,7 +13,7 @@ body {
   color: white;
 }
 .calendarWrapper {
-  width: 50%;
+  width: 40%;
   margin: auto;
   border: 1px solid gray;
   .calendarInfo {
@@ -65,8 +65,8 @@ body {
     }
 
     .today {
-      background-color: gray;
-      color: white;
+      background-color: #ddd;
+      color: black;
     }
     .weekday {
       display: flex;
@@ -78,9 +78,12 @@ body {
       width: 100%;
     }
     .day {
-      min-height: 50px;
+      min-height: 70px;
       border: 1px solid gray;
       text-align: end;
+      &:hover {
+        opacity: 0.5;
+      }
     }
     .event {
       grid-column: mo/we;
@@ -90,11 +93,11 @@ body {
   }
 }
 
-.UserChangeMonth {
+.UserChangeMonthYear {
   margin: auto;
   padding: 10px;
   border: 1px solid #ddd;
-  width: 200px;
+  width: 300px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: repeat(auto, 100px);
@@ -106,9 +109,45 @@ body {
     text-align: center;
     border: 1px solid gray;
     font-weight: bold;
+    cursor: default;
+    &:hover {
+      opacity: 0.5;
+      box-shadow: 3px 3px;
+    }
   }
   button {
+    grid-column: 3;
+    font-size: large;
+    background-color: red;
+    border: none;
+    &:hover {
+      /* opacity: 0.5; */
+      box-shadow: 3px 3px;
+    }
+  }
+
+  form {
     grid-column: 1/4;
+    justify-self: center;
+  }
+
+  .fromErrorMsg {
+    grid-column: 1/4;
+    justify-self: center;
+    color: red;
+    font-size: large;
+    font-weight: bold;
+  }
+
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+
+  /* Firefox */
+  input[type="number"] {
+    -moz-appearance: textfield;
   }
 }
 
@@ -138,4 +177,14 @@ body {
 
 .sunday {
   grid-column: su;
+}
+
+@media only screen and (max-width: 600px) {
+  .calendarWrapper {
+    width: auto;
+    margin: 10px;
+  }
+  .UserChangeMonthYear {
+    width: auto;
+  }
 }

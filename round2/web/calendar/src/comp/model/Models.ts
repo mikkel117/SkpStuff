@@ -15,3 +15,12 @@ export const WEEKDAYS = [
   { day: "Lø", class: "saturday" },
   { day: "Sø", class: "sunday" },
 ];
+
+export interface Event {
+  id: number;
+  startDate: moment.Moment;
+  endDate: moment.Moment;
+  title: string;
+  description: string;
+  color: string;
+}
