@@ -7,6 +7,7 @@ import BuildAmonth from "./BuildAmonth";
 import ClassNameChange from "./ClassNameChange";
 import UserChangeMonth from "./UserChangeMonth";
 import UserChangeYear from "./UserChangeYear";
+import AddEvents from "./AddEvents";
 
 const Calendar: React.FC = () => {
   const [days, setDays] = useState<DaysOfWeek[]>([]);
@@ -144,6 +145,7 @@ const Calendar: React.FC = () => {
             );
           })}
         </div>
+        <AddEvents />
       </section>
     </>
   );
