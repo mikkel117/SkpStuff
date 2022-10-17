@@ -15,10 +15,28 @@ body {
 
 .popularAnimeContaninger {
   display: flex;
+  gap: 10px;
+  padding: 10px;
   height: 300px;
   overflow-x: scroll;
   overflow-y: hidden;
-  img {
-    height: 100%;
+  .animeCard {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 100%;
+    img {
+      grid-row: 1;
+      grid-column: 1;
+      height: 100%;
+    }
+    .animeTitle {
+      grid-row: 1;
+      grid-column: 1;
+      justify-self: center;
+      align-self: center;
+      text-align: center;
+      background-color: #1e1f26;
+      width: 100%;
+    }
   }
 }

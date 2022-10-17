@@ -32,6 +32,7 @@ export default function PopularAnime() {
           return (
             <div key={item.animeId} className='animeCard'>
               <img src={item.animeImg} alt={item.animeTitle} />
+              <div className='animeTitle'>{item.animeTitle}</div>
             </div>
           );
         })}
