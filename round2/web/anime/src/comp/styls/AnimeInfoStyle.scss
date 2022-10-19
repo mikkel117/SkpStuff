@@ -1,0 +1,122 @@
+.AnimeInfoPopUp {
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  .AnimeInfoContent {
+    background-color: #232946;
+    color: white;
+    margin: auto;
+    padding: 20px;
+    border: 3cpx solid #888;
+    width: 60%;
+    height: 65%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 10px;
+    grid-template-rows: repeat(auto, 30px);
+    img {
+      grid-row: 2;
+      width: 100%;
+      height: auto;
+      object-fit: fill;
+      align-self: center;
+    }
+    .close {
+      grid-column: 3;
+      justify-self: end;
+      align-self: flex-start;
+      font-weight: bold;
+      font-size: 1.5rem;
+      cursor: default;
+      transition: all 200ms ease-in-out;
+      &:hover {
+        opacity: 0.5;
+      }
+    }
+    .animeTitle {
+      grid-column: 1/3;
+    }
+    .animeInfoWrapper {
+      grid-column: 2/4;
+      grid-row: 2;
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr minmax(50px, auto);
+      .animeSynopsisWrapper {
+        .animeSynopsis {
+          transition: all 0.3s ease-in-out;
+          border: 1px solid gray;
+          padding: 5px;
+          overflow: hidden;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+        }
+      }
+      #expand-toggle {
+        display: none;
+      }
+      #expand-btn {
+        display: inline-block;
+        margin-top: 12px;
+        padding: 5px 11px;
+        border: 1px solid;
+        border-radius: 3px;
+        &::before {
+          content: "show more";
+        }
+      }
+      #expand-toggle:checked ~ .animeSynopsis {
+        -webkit-line-clamp: unset;
+      }
+      #expand-toggle:checked ~ #expand-btn {
+        &::before {
+          content: "show less";
+        }
+      }
+    }
+  }
+}
+
+.synopsisClose {
+  grid-row: 2;
+}
+
+.synopsisOpen {
+  grid-row: 1/3;
+  align-self: end;
+}
+
+.showAnimeInfo {
+  display: block;
+}
+
+.hideAnimeInfo {
+  display: none;
+}
+
+.loader {
+  justify-self: center;
+  align-self: center;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+  grid-column: 2;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

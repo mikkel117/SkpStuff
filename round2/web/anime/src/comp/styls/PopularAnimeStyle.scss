@@ -1,0 +1,53 @@
+.popularAnimeContaninger {
+  grid-column: 1/4;
+  margin: 0 10px 10px 10px;
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  height: 300px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  /* scroll-snap-type: x mandatory; */
+  .animeCard {
+    display: grid;
+    transition: transform 100ms ease-in-out;
+    grid-template-columns: 100%;
+    grid-template-rows: 100%;
+    /* scroll-snap-align: center; */
+
+    img {
+      grid-row: 1;
+      grid-column: 1;
+      height: 100%;
+    }
+    .animeTitle {
+      grid-row: 1;
+      grid-column: 1;
+      justify-self: center;
+      align-self: center;
+      text-align: center;
+      background-color: #1e1f26;
+      width: 100%;
+      display: none;
+    }
+    &:hover {
+      .animeTitle {
+        display: block;
+      }
+      img {
+      }
+      box-shadow: 5px 10px 5px black;
+      transform: scale(1.1);
+    }
+  }
+}
+
+.popularAnimeContaninger::-webkit-scrollbar {
+  height: 10px;
+}
+.popularAnimeContaninger::-webkit-scrollbar-track {
+  background: white;
+}
+.popularAnimeContaninger::-webkit-scrollbar-thumb {
+  background-color: gray;
+}

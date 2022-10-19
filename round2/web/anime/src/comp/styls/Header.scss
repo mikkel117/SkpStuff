@@ -1,0 +1,56 @@
+header {
+  width: 100%;
+  min-height: 50px;
+  background-color: #161929;
+  display: grid;
+  grid-template-columns: 5% 20% 1fr 20% 5%;
+  grid-template-rows: 1fr;
+  .animeSearch {
+    grid-column: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    .animeSearchInput {
+      width: 70%;
+      height: 50%;
+      border-radius: 10px;
+      padding: 0 10px;
+      &:focus ~ .dropinputContent {
+        display: block;
+      }
+    }
+    .dropinputContent {
+      display: none;
+      top: 85%;
+      position: absolute;
+      background-color: #f1f1f1;
+      width: 80%;
+      font-size: large;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      max-height: 300px;
+      overflow-y: scroll;
+      span {
+        color: black;
+        padding: 12px 16px;
+        border: 1px solid black;
+        text-decoration: none;
+        display: block;
+      }
+    }
+  }
+  .title {
+    justify-self: center;
+    align-self: center;
+    font-weight: bold;
+  }
+
+  .profile {
+    justify-self: end;
+    align-self: center;
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+}

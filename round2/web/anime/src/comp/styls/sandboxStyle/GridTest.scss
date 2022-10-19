@@ -1,0 +1,17 @@
+.wrapper {
+  width: 200px;
+  height: 300px;
+  border: 1px solid #ccc;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr minmax(50px, auto);
+}
+
+.test {
+  grid-row: 2;
+}
+
+.test2 {
+  z-index: 1;
+  grid-row: 1/3;
+}

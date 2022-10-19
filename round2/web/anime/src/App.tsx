@@ -1,11 +1,21 @@
 import React from "react";
 import "./App.scss";
-import PopularAnime from "./comp/page/PopularAnime";
+import { Link, Routes, Route } from "react-router-dom";
+import MyHeader from "./comp/header/MyHeader";
+import MovieSliderTest from "./comp/page/sandbox/MovieSliderTest";
+import Home from "./comp/page/Home";
 
 function App() {
   return (
     <>
-      <PopularAnime />
+      <MyHeader />
+      {/* <Home /> */}
+      {/* <GridTest /> */}
+      {/* <MovieSliderTest /> */}
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/MovieSliderTest' element={<MovieSliderTest />} />
+      </Routes>
     </>
   );
 }
