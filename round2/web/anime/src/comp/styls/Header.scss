@@ -16,12 +16,13 @@ header {
       height: 50%;
       border-radius: 10px;
       padding: 0 10px;
-      &:focus ~ .dropinputContent {
+      z-index: 1;
+      /* &:focus ~ .dropinputContent {
         display: block;
-      }
+      } */
     }
     .dropinputContent {
-      display: none;
+      /* display: none; */
       top: 85%;
       position: absolute;
       background-color: #f1f1f1;
@@ -29,14 +30,28 @@ header {
       font-size: large;
       box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
       z-index: 1;
-      max-height: 300px;
+      max-height: 100vh;
       overflow-y: scroll;
-      span {
+      p {
+        display: grid;
+        grid-template-rows: 10% 1fr;
         color: black;
         padding: 12px 16px;
         border: 1px solid black;
-        text-decoration: none;
-        display: block;
+        justify-items: center;
+        align-items: center;
+        span {
+          display: block;
+          font-size: larger;
+          font-weight: bold;
+        }
+        img {
+          width: 70%;
+          height: auto;
+        }
+        &:hover {
+          opacity: 0.5;
+        }
       }
     }
   }
@@ -53,4 +68,11 @@ header {
       opacity: 0.5;
     }
   }
+}
+
+.hiddingCover {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
 }

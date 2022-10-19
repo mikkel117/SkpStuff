@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
+import AnimeInfoPopUp from "../AnimeInfoPopUp";
 import { CgProfile } from "react-icons/cg";
 
 export default function MyHeader() {
   const [userInput, setUserInput] = useState<string>("");
   const [data, setData] = useState<any[]>([]);
+  const [animeId, setAnimeId] = useState<string>("");
+  const [isAnimeInfoPopUp, setIsAnimeInfoPopUp] = useState<boolean>(false);
 
   useEffect(() => {
     if (userInput.length > 2) {
@@ -23,16 +26,6 @@ export default function MyHeader() {
     },
   };
 
-  async function Fetch() {
-    let response = await fetch(
-      `https://gogoanime2.p.rapidapi.com/search?keyw=${userInput}&page=1`,
-      options
-    );
-    let data = await response.json();
-    setData(data);
-    console.log(data);
-  }
-
   async function FetchData() {
     await fetch(
       `https://gogoanime2.p.rapidapi.com/search?keyw=${userInput}&page=1`,
@@ -46,6 +39,16 @@ export default function MyHeader() {
         console.log("error", err.message);
       });
   }
+
+  const ChangeAnimePopUpOpen = (animeId: string) => {
+    setAnimeId(animeId);
+    setIsAnimeInfoPopUp(true);
+  };
+
+  const EmptyData = (): void => {
+    setUserInput("");
+    setData([]);
+  };
   return (
     <>
       <header>
@@ -60,6 +63,7 @@ export default function MyHeader() {
             {data
               .filter((post: any) => {
                 if (userInput === "") {
+                  setData([]);
                   return "";
                 } else if (
                   post.animeTitle
@@ -70,13 +74,39 @@ export default function MyHeader() {
                 }
               })
               .map((post: any) => {
-                return <span key={post.animeId}>{post.animeTitle}</span>;
+                return (
+                  <p
+                    key={post.animeId}
+                    onClick={() => {
+                      ChangeAnimePopUpOpen(post.animeId);
+                    }}>
+                    <span> {post.animeTitle}</span>
+                    <img src={post.animeImg} alt={post.animeId} />
+                  </p>
+                );
               })}
           </div>
         </form>
+        {userInput.length > 2 ? (
+          <div
+            className='hiddingCover'
+            onClick={() => {
+              EmptyData();
+            }}></div>
+        ) : (
+          <></>
+        )}
         <h1 className='title'>title</h1>
         <CgProfile size={35} className='profile' />
       </header>
+      {isAnimeInfoPopUp ? (
+        <AnimeInfoPopUp
+          animeId={animeId}
+          setIsAnimeInfoPopUp={setIsAnimeInfoPopUp}
+        />
+      ) : (
+        <></>
+      )}
     </>
   );
 }
