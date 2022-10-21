@@ -18,11 +18,10 @@ export default function TopAiring() {
   };
 
   const FetchData = () => {
-    fetch(`https://gogoanime.herokuapp.com/top-airing`, options)
+    fetch(`https://rumbo-anime-api.herokuapp.com/top-airing`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        setData(data);
+        setData(data[0].episodes);
       })
       .catch((err) => {
         console.log("error", err.message);

@@ -22,12 +22,11 @@ export default function RecentEpisodes({ animeType }: RecentEpisodesProps) {
 
   const FetchData = () => {
     fetch(
-      `https://gogoanime2.p.rapidapi.com/recent-release?type=${animeType}&page=1`,
-      options
+      `https://rumbo-anime-api.herokuapp.com/recent-release?type=${animeType}&page=1`
     )
       .then((response) => response.json())
       .then((data) => {
-        setData(data);
+        setData(data[0].episodes);
       })
       .catch((err) => {
         console.log("error", err.message);

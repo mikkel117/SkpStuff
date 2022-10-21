@@ -29,7 +29,7 @@ export default function MyHeader() {
 
   async function FetchData() {
     await fetch(
-      `https://gogoanime2.p.rapidapi.com/search?keyw=${userInput}&page=1`,
+      `https://rumbo-anime-api.herokuapp.com/search?keyw=${userInput}`,
       options
     )
       .then((response) => response.json())

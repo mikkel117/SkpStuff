@@ -40,7 +40,7 @@ export default function AnimeInfoPopUp({
   };
 
   const FetchData = () => {
-    fetch(`https://gogoanime2.p.rapidapi.com/anime-details/${animeId}`, Options)
+    fetch(`https://rumbo-anime-api.herokuapp.com/anime-details/${animeId}`)
       .then((response) => response.json())
       .then((data) => {
         setData(data);
