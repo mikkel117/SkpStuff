@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
+import AnimeInfoPopUp from "../AnimeInfoPopUp";
 import AnimeSlider from "../AnimeSlider";
-import { Link } from "react-router-dom";
 
-export default function PopularAnime() {
+export default function TopAiring() {
   const [data, setData] = useState<any[]>([]);
+
   useEffect(() => {
     FetchData();
   }, []);
@@ -17,9 +18,10 @@ export default function PopularAnime() {
   };
 
   const FetchData = () => {
-    fetch(`https://gogoanime2.p.rapidapi.com/popular?page=1`, options)
+    fetch(`https://gogoanime.herokuapp.com/top-airing`, options)
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         setData(data);
       })
       .catch((err) => {
@@ -29,9 +31,6 @@ export default function PopularAnime() {
   return (
     <>
       <AnimeSlider data={data} />
-      {/* <div>
-        <Link to='/AddCity'>click me</Link>
-      </div> */}
     </>
   );
 }

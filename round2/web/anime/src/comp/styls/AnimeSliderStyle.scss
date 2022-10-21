@@ -1,4 +1,4 @@
-.popularAnimeContaninger {
+.animeContaninger {
   grid-column: 1/4;
   margin: 0 10px 10px 10px;
   display: flex;
@@ -42,12 +42,12 @@
   }
 }
 
-.popularAnimeContaninger::-webkit-scrollbar {
+.animeContaninger::-webkit-scrollbar {
   height: 10px;
 }
-.popularAnimeContaninger::-webkit-scrollbar-track {
+.animeContaninger::-webkit-scrollbar-track {
   background: white;
 }
-.popularAnimeContaninger::-webkit-scrollbar-thumb {
+.animeContaninger::-webkit-scrollbar-thumb {
   background-color: gray;
 }

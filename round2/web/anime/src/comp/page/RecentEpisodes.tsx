@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
 import AnimeSlider from "../AnimeSlider";
-import { Link } from "react-router-dom";
 
-export default function PopularAnime() {
+interface RecentEpisodesProps {
+  animeType: number;
+}
+
+export default function RecentEpisodes({ animeType }: RecentEpisodesProps) {
   const [data, setData] = useState<any[]>([]);
+
   useEffect(() => {
     FetchData();
-  }, []);
+  }, [animeType]);
 
   const options = {
     method: "GET",
@@ -17,7 +21,10 @@ export default function PopularAnime() {
   };
 
   const FetchData = () => {
-    fetch(`https://gogoanime2.p.rapidapi.com/popular?page=1`, options)
+    fetch(
+      `https://gogoanime2.p.rapidapi.com/recent-release?type=${animeType}&page=1`,
+      options
+    )
       .then((response) => response.json())
       .then((data) => {
         setData(data);
@@ -29,9 +36,6 @@ export default function PopularAnime() {
   return (
     <>
       <AnimeSlider data={data} />
-      {/* <div>
-        <Link to='/AddCity'>click me</Link>
-      </div> */}
     </>
   );
 }

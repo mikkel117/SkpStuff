@@ -1,5 +1,4 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { isDoStatement } from "typescript";
 
 interface AnimeInfoPopUpProps {
   animeId: string;

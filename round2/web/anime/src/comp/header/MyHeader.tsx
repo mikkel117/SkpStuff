@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import AnimeInfoPopUp from "../AnimeInfoPopUp";
 import { CgProfile } from "react-icons/cg";
+import { Link } from "react-router-dom";
 
 export default function MyHeader() {
   const [userInput, setUserInput] = useState<string>("");
@@ -96,7 +97,10 @@ export default function MyHeader() {
         ) : (
           <></>
         )}
-        <h1 className='title'>title</h1>
+        <h1 className='title'>
+          {" "}
+          <Link to='/'>Title</Link>
+        </h1>
         <CgProfile size={35} className='profile' />
       </header>
       {isAnimeInfoPopUp ? (
