@@ -1,0 +1,85 @@
+.SeeAllAnimeWrapper {
+  .animeSubDub {
+    grid-column: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    span {
+      user-select: none;
+      padding: 5px;
+      border: 1px solid #eebbc3;
+      background-color: gray;
+      transition: opacity 200ms ease-in-out;
+      &:hover {
+        opacity: 0.5;
+      }
+      &:nth-child(2) {
+        margin-left: 5px;
+      }
+    }
+    .animeSubDubActive {
+      background-color: #232946;
+      font-weight: bold;
+      font-size: large;
+    }
+  }
+  .animeImgWrapper {
+    margin: 0 auto;
+    width: 50%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 10px;
+    .animeCard {
+      display: grid;
+      /* transition: opacity 250ms ease-in-out; */
+      transition: scale 250ms ease-in-out;
+      grid-template-columns: 100%;
+      grid-template-rows: 100%;
+      span {
+        grid-row: 1;
+        grid-column: 1;
+        justify-self: center;
+        align-self: center;
+        text-align: center;
+        background-color: #1e1f26;
+        width: 100%;
+        display: none;
+      }
+      img {
+        -webkit-user-drag: none;
+        grid-column: 1;
+        grid-row: 1;
+        width: 100%;
+        height: auto;
+      }
+      &:hover {
+        span {
+          display: block;
+        }
+        scale: 1.1;
+      }
+    }
+  }
+  .animePages {
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    span {
+      font-weight: bold;
+      font-size: 1.5rem;
+      margin: 5px;
+      text-decoration: underline;
+      user-select: none;
+      &:hover {
+        opacity: 0.5;
+      }
+    }
+    .onPage {
+      color: gray;
+    }
+    svg {
+      height: 100%;
+    }
+  }
+}
