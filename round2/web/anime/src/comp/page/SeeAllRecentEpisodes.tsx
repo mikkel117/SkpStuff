@@ -35,14 +35,18 @@ export default function SeeAllRecentEpisodes() {
       <h3 className='title'>Recent episodes</h3>
       <div className='animeSubDub'>
         <span
-          className={`${animeTypeSubDub === 1 ? "animeSubDubActive" : ""}`}
+          className={`${
+            animeTypeSubDub === 1 ? "animeSubDubActive" : "animeTypeDeactivated"
+          }`}
           onClick={() => {
             UpdateSubDub(1);
           }}>
           sub
         </span>
         <span
-          className={`${animeTypeSubDub === 2 ? "animeSubDubActive" : ""}`}
+          className={`${
+            animeTypeSubDub === 2 ? "animeSubDubActive" : "animeTypeDeactivated"
+          }`}
           onClick={() => {
             UpdateSubDub(2);
           }}>

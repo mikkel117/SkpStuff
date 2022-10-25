@@ -25,9 +25,12 @@
       }
     }
     .animeSubDubActive {
-      background-color: #232946;
+      background-color: gray;
       font-weight: bold;
       font-size: large;
+    }
+    .animeTypeDeactivated {
+      opacity: 0.2;
     }
   }
   .animeImgWrapper {

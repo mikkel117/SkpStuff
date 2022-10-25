@@ -17,14 +17,18 @@ export default function Home() {
       <div className='animeWrapper'>
         <div className='animeType'>
           <span
-            className={`${animeTypeSubDub === 1 ? "animeTypeActive" : ""}`}
+            className={`${
+              animeTypeSubDub === 1 ? "animeTypeActive" : "animeTypeDeactivated"
+            }`}
             onClick={() => {
               setAnimeTypeSubDub(1);
             }}>
             sub
           </span>
           <span
-            className={`${animeTypeSubDub === 2 ? "animeTypeActive" : ""}`}
+            className={`${
+              animeTypeSubDub === 2 ? "animeTypeActive" : "animeTypeDeactivated"
+            }`}
             onClick={() => {
               setAnimeTypeSubDub(2);
             }}>
