@@ -5,7 +5,9 @@ export default function SeeAllPopular() {
   const [episodes, setEpisodes] = useState<any[]>([]);
   const [pages, setPages] = useState<any[]>([]);
   const [page, setPage] = useState<number>(1);
+  const [isloading, setIsloading] = useState<boolean>(false);
   useEffect(() => {
+    setIsloading(true);
     FetchPopular(page);
   }, [page]);
 
@@ -15,6 +17,7 @@ export default function SeeAllPopular() {
       .then((data) => {
         setEpisodes(data[0].episodes);
         setPages(data[0].pages);
+        setIsloading(false);
       })
       .catch((err) => {
         console.log("error", err.message);
@@ -23,14 +26,18 @@ export default function SeeAllPopular() {
   return (
     <div className='SeeAllAnimeWrapper'>
       <h3 className='title'>Popular</h3>
-      <SeeAllAnime
-        episodes={episodes}
-        setEpisodes={setEpisodes}
-        pages={pages}
-        setPages={setPages}
-        pageNumber={page}
-        setPageNumber={setPage}
-      />
+      {isloading ? (
+        <div className='loader SeeAllAnimeLoading'></div>
+      ) : (
+        <SeeAllAnime
+          episodes={episodes}
+          setEpisodes={setEpisodes}
+          pages={pages}
+          setPages={setPages}
+          pageNumber={page}
+          setPageNumber={setPage}
+        />
+      )}
     </div>
   );
 }

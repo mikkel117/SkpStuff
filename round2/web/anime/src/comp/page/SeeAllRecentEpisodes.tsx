@@ -6,8 +6,9 @@ export default function SeeAllRecentEpisodes() {
   const [pages, setPages] = useState<any[]>([]);
   const [page, setPage] = useState<number>(1);
   const [animeTypeSubDub, setAnimeTypeSubDub] = useState<number>(1);
-
+  const [isloading, setIsloading] = useState<boolean>(false);
   useEffect(() => {
+    setIsloading(true);
     FetchRecentEpisodes(animeTypeSubDub, page);
   }, [page]);
 
@@ -24,6 +25,7 @@ export default function SeeAllRecentEpisodes() {
       .then((data) => {
         setEpisodes(data[0].episodes);
         setPages(data[0].pages);
+        setIsloading(false);
       })
       .catch((err) => {
         console.log("error", err.message);
@@ -53,14 +55,18 @@ export default function SeeAllRecentEpisodes() {
           dub
         </span>
       </div>
-      <SeeAllAnime
-        episodes={episodes}
-        setEpisodes={setEpisodes}
-        pages={pages}
-        setPages={setPages}
-        pageNumber={page}
-        setPageNumber={setPage}
-      />
+      {isloading ? (
+        <div className='loader SeeAllAnimeLoading'></div>
+      ) : (
+        <SeeAllAnime
+          episodes={episodes}
+          setEpisodes={setEpisodes}
+          pages={pages}
+          setPages={setPages}
+          pageNumber={page}
+          setPageNumber={setPage}
+        />
+      )}
     </div>
   );
 }
