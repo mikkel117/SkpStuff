@@ -5,7 +5,9 @@ import MyHeader from "./comp/header/MyHeader";
 import MovieSliderTest from "./comp/page/sandbox/MovieSliderTest";
 import PageNotFound from "./comp/page/PageNotFound";
 import Home from "./comp/page/Home";
-import SeeAllAnimeOfType from "./comp/page/SeeAllAnimeOfType";
+import SeeAllRecentEpisodes from "./comp/page/SeeAllRecentEpisodes";
+import SeeAllPopular from "./comp/page/SeeAllPopular";
+import SeeAllTopAiring from "./comp/page/SeeAllTopAiring";
 
 import AnimeTypeProvider from "./context/SeeAllAnimeContext";
 
@@ -20,7 +22,9 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/MovieSliderTest' element={<MovieSliderTest />} />
-          <Route path='/seeAllAnimeOfType' element={<SeeAllAnimeOfType />} />
+          <Route path='/RecentEpisodes' element={<SeeAllRecentEpisodes />} />
+          <Route path='/TopAiring' element={<SeeAllTopAiring />} />
+          <Route path='/Popular' element={<SeeAllPopular />} />
           <Route path='*' element={<PageNotFound />} />
         </Routes>
       </AnimeTypeProvider>

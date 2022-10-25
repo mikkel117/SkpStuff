@@ -32,36 +32,21 @@ export default function Home() {
           </span>
         </div>
         <h3 className='title'>Recent episodes</h3>
-        <Link
-          to='/seeAllAnimeOfType'
-          className='seeAll'
-          onClick={() => {
-            updateAnimeType("RecentEpisodes");
-          }}>
+        <Link to='/RecentEpisodes' className='seeAll'>
           see all
         </Link>
         <RecentEpisodes animeType={animeTypeSubDub} />
       </div>
       <div className='animeWrapper'>
         <h3 className='title'>Top Airing</h3>
-        <Link
-          to='/seeAllAnimeOfType'
-          className='seeAll'
-          onClick={() => {
-            updateAnimeType("TopAiring");
-          }}>
+        <Link to='/TopAiring' className='seeAll'>
           see all
         </Link>
         <TopAiring />
       </div>
       <div className='animeWrapper'>
         <h3 className='title'>Popular anime</h3>
-        <Link
-          to='/seeAllAnimeOfType'
-          className='seeAll'
-          onClick={() => {
-            updateAnimeType("PopularAnime");
-          }}>
+        <Link to='/Popular' className='seeAll'>
           see all
         </Link>
         <PopularAnime />
