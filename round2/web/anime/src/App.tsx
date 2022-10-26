@@ -1,8 +1,10 @@
 import React from "react";
 import "./App.scss";
 import { Routes, Route } from "react-router-dom";
-import MyHeader from "./comp/header/MyHeader";
 import MovieSliderTest from "./comp/page/sandbox/MovieSliderTest";
+import GridTest from "./comp/page/sandbox/GridTest";
+
+import MyHeader from "./comp/header/MyHeader";
 import PageNotFound from "./comp/page/PageNotFound";
 import Home from "./comp/page/Home";
 import SeeAllRecentEpisodes from "./comp/page/SeeAllRecentEpisodes";
@@ -22,6 +24,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/MovieSliderTest' element={<MovieSliderTest />} />
+          <Route path='/Test' element={<GridTest />} />
           <Route path='/RecentEpisodes' element={<SeeAllRecentEpisodes />} />
           <Route path='/TopAiring' element={<SeeAllTopAiring />} />
           <Route path='/Popular' element={<SeeAllPopular />} />
