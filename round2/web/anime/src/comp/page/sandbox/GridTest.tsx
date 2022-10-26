@@ -30,7 +30,7 @@ export default function GridTest() {
         </div>
       </div> */}
       <div className='wrapper'>
-        <div className='test'>
+        <div className={`test ${isOpen ? "testClose" : ""}`}>
           Lorem nec magna sapien himenaeos magnis dictum hendrerit per nunc
           euismod fermentum senectus vel dignissim habitasse facilisis molestie
           suscipit taciti volutpat ad feugiat vestibulum faucibus iaculis

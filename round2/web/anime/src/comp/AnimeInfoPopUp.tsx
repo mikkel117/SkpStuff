@@ -67,45 +67,18 @@ export default function AnimeInfoPopUp({
                 X
               </p>
               <img src={data?.animeImg} alt='' />
-              <div className='animeInfoWrapper'>
-                <div
-                  className={`animeInfo ${
-                    isOpen ? "hideAnimeInfo" : "showAnimeInfo"
-                  }`}>
-                  <p>{data?.otherNames}</p>
-                  <p>{data?.releasedDate}</p>
-                  <p>{data?.status}</p>
-                  <p>{data?.totalEpisodes}</p>
-                  <p>{data?.type}</p>
-                  <p>
-                    {data?.genres.map((item: any) => {
-                      return (
-                        <span key={item}>
-                          {item} <br />
-                        </span>
-                      );
-                    })}
-                  </p>
-                </div>
-                <div
-                  className={`animeSynopsisWrapper ${
-                    isOpen ? "synopsisOpen" : "synopsisClose"
-                  } `}>
-                  <input type='checkbox' id='expand-toggle' />
-                  <p className={`animeSynopsis`}>{data?.synopsis}</p>
-                  <label
-                    htmlFor='expand-toggle'
-                    id='expand-btn'
-                    onClick={() => {
-                      setIsOpen(!isOpen);
-                    }}
-                  />
-                </div>
-              </div>
             </>
           )}
         </div>
       </section>
     </>
   );
+}
+
+{
+  /* <p>{data?.otherNames}</p>
+                  <p>{data?.releasedDate}</p>
+                  <p>{data?.status}</p>
+                  <p>{data?.totalEpisodes}</p>
+                  <p>{data?.type}</p> */
 }

@@ -10,6 +10,9 @@
     grid-row: 1;
     overflow: hidden;
   }
+  .testClose {
+    height: 6rem;
+  }
 }
 
 .animeSynopsisWrapper {
@@ -73,6 +76,7 @@
     animation: open 0.1s linear 0.1s forwards;
     overflow-y: scroll;
     border-top: 1px solid #ccc;
+    padding: 5px;
   }
 
   button {
