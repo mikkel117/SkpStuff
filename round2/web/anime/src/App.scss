@@ -93,6 +93,7 @@ body::-webkit-scrollbar-thumb {
   height: 120px;
   animation: spin 2s linear infinite;
   grid-column: 2;
+  grid-row: 1/3;
 }
 
 .SeeAllAnimeLoading {
