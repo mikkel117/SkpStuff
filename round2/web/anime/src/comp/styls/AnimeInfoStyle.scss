@@ -43,5 +43,36 @@
     .animeTitle {
       grid-column: 1/3;
     }
+    .animeTest {
+      grid-column: 2/4;
+      grid-row: 2;
+      display: flex;
+    }
+    .openTest {
+      max-height: 100px;
+      overflow: hidden;
+      transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+    }
+
+    .open {
+      max-height: 100%;
+      transition: max-height 0.5s cubic-bezier(0.9, 0, 0.8, 0.2);
+    }
+    .text {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      margin: 12px 0;
+      -webkit-line-clamp: 3;
+    }
+    .open .text {
+      -webkit-line-clamp: 8;
+      overflow-y: auto;
+      border-top: 1px solid #ccc;
+      padding: 5px;
+    }
   }
 }
