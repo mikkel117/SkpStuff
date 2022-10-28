@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 interface AnimeInfoPopUpProps {
   animeId: string;
-  isAnimeInfoPopUp: boolean;
+  /* isAnimeInfoPopUp: boolean; */
   setIsAnimeInfoPopUp: Dispatch<SetStateAction<boolean>>;
 }
 
@@ -22,8 +22,8 @@ type test = {
 export default function AnimeInfoPopUp({
   animeId,
   setIsAnimeInfoPopUp,
-  isAnimeInfoPopUp,
-}: AnimeInfoPopUpProps) {
+}: /* isAnimeInfoPopUp, */
+AnimeInfoPopUpProps) {
   const [data, setData] = useState<test>();
   const [isloading, setIsLoading] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -33,14 +33,14 @@ export default function AnimeInfoPopUp({
     FetchData();
   }, [animeId]);
 
-  useEffect(() => {
+  /* useEffect(() => {
     if (isAnimeInfoPopUp) {
       document.body.classList.add("notScrollable");
     }
-  }, [isAnimeInfoPopUp]);
+  }, [isAnimeInfoPopUp]); */
 
   const RemoveBodyStyle = () => {
-    document.body.classList.remove("notScrollable");
+    /* document.body.classList.remove("notScrollable"); */
     setIsAnimeInfoPopUp(false);
   };
 
