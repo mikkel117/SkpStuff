@@ -2,6 +2,7 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 interface AnimeInfoPopUpProps {
   animeId: string;
+  isAnimeInfoPopUp: boolean;
   setIsAnimeInfoPopUp: Dispatch<SetStateAction<boolean>>;
 }
 
@@ -21,6 +22,7 @@ type test = {
 export default function AnimeInfoPopUp({
   animeId,
   setIsAnimeInfoPopUp,
+  isAnimeInfoPopUp,
 }: AnimeInfoPopUpProps) {
   const [data, setData] = useState<test>();
   const [isloading, setIsLoading] = useState<boolean>(false);
@@ -31,16 +33,21 @@ export default function AnimeInfoPopUp({
     FetchData();
   }, [animeId]);
 
-  const Options = {
-    method: "GET",
-    headers: {
-      "X-RapidAPI-Key": "aee2130728mshc250038c75dd0d2p181ea1jsn58e75ec5d280",
-      "X-RapidAPI-Host": "gogoanime2.p.rapidapi.com",
-    },
+  useEffect(() => {
+    if (isAnimeInfoPopUp) {
+      document.body.classList.add("notScrollable");
+    }
+  }, [isAnimeInfoPopUp]);
+
+  const RemoveBodyStyle = () => {
+    document.body.classList.remove("notScrollable");
+    setIsAnimeInfoPopUp(false);
   };
 
   const FetchData = () => {
-    fetch(`https://rumbo-anime-api.herokuapp.com/anime-details/${animeId}`)
+    fetch(
+      `https://gogo-anime-api-sand.vercel.app/api/anime-api/anime-details?id=${animeId}`
+    )
       .then((response) => response.json())
       .then((data) => {
         setData(data);
@@ -62,11 +69,22 @@ export default function AnimeInfoPopUp({
               <p
                 className='close'
                 onClick={() => {
-                  setIsAnimeInfoPopUp(false);
+                  RemoveBodyStyle();
                 }}>
                 X
               </p>
               <img src={data?.animeImg} alt='' />
+              <div className='animeTest'>
+                <div className={`openTest ${isOpen ? "open" : ""}`}>
+                  <p className='text'>{data?.synopsis}</p>
+                </div>
+              </div>
+              <button
+                onClick={() => {
+                  setIsOpen(!isOpen);
+                }}>
+                click me
+              </button>
             </>
           )}
         </div>
