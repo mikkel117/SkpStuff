@@ -75,7 +75,12 @@ export default function AnimeInfoPopUp({
               </p>
               <img src={data?.animeImg} alt='' />
               <div className='animeTest'>
-                <div className={`openTest ${isOpen ? "open" : ""}`}>
+                <p>other names: {data?.otherNames}</p>
+                <p>relesaed date: {data?.releasedDate}</p>
+                <p>status: {data?.status}</p>
+                <p>totale episodes: {data?.totalEpisodes}</p>
+                <p>type: {data?.type}</p>
+                <div className={`animeSynopsis ${isOpen ? "open" : ""}`}>
                   <p className='text'>{data?.synopsis}</p>
                 </div>
               </div>
@@ -91,12 +96,4 @@ export default function AnimeInfoPopUp({
       </section>
     </>
   );
-}
-
-{
-  /* <p>{data?.otherNames}</p>
-                  <p>{data?.releasedDate}</p>
-                  <p>{data?.status}</p>
-                  <p>{data?.totalEpisodes}</p>
-                  <p>{data?.type}</p> */
 }
