@@ -18,6 +18,10 @@ body {
   color: white;
 }
 
+.notScrollable {
+  overflow: hidden;
+}
+
 .animeWrapper {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;

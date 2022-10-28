@@ -39,6 +39,7 @@ export default function AnimeSlider({ data }: AnimeSliderProps) {
         <AnimeInfoPopUp
           animeId={animeId}
           setIsAnimeInfoPopUp={setIsAnimeInfoPopUp}
+          isAnimeInfoPopUp={isAnimeInfoPopUp}
         />
       ) : (
         <></>

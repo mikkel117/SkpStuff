@@ -26,6 +26,8 @@ export default function RecentEpisodes({ animeType }: RecentEpisodesProps) {
     )
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
+
         setData(data[0].episodes);
       })
       .catch((err) => {

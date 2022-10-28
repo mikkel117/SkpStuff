@@ -107,6 +107,7 @@ export default function MyHeader() {
         <AnimeInfoPopUp
           animeId={animeId}
           setIsAnimeInfoPopUp={setIsAnimeInfoPopUp}
+          isAnimeInfoPopUp={isAnimeInfoPopUp}
         />
       ) : (
         <></>

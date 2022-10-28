@@ -75,6 +75,7 @@ export default function SeeAllAnime({
         <AnimeInfoPopUp
           animeId={animeId}
           setIsAnimeInfoPopUp={setIsAnimeInfoPopUp}
+          isAnimeInfoPopUp={isAnimeInfoPopUp}
         />
       ) : (
         <></>
