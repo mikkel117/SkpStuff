@@ -40,18 +40,21 @@ header {
         border: 1px solid black;
         justify-items: center;
         align-items: center;
-        transition: opacity 250ms ease-in-out;
         span {
           user-select: none;
           font-size: larger;
           font-weight: bold;
         }
         img {
+          transition: all 250ms ease-in-out;
           width: 70%;
           height: auto;
         }
         &:hover {
-          opacity: 0.5;
+          img {
+            /* opacity: 0.5; */
+            box-shadow: 6px 6px 6px 6px black;
+          }
         }
       }
     }

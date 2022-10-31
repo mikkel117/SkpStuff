@@ -57,10 +57,10 @@ body {
     .animeTypeActive {
       background-color: gray;
       font-weight: bold;
-      font-size: large;
+      opacity: 0.2;
     }
     .animeTypeDeactivated {
-      opacity: 0.2;
+      opacity: 1;
     }
   }
   .seeAll {
