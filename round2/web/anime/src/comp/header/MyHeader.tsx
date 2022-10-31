@@ -13,28 +13,20 @@ export default function MyHeader() {
     if (userInput.length > 2) {
       FetchData();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userInput]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
   };
 
-  const options = {
-    method: "GET",
-    headers: {
-      "X-RapidAPI-Key": "process.env.REACT_APP_gogoanime_key",
-      "X-RapidAPI-Host": "gogoanime2.p.rapidapi.com",
-    },
-  };
-
   async function FetchData() {
     await fetch(
-      `https://rumbo-anime-api.herokuapp.com/search?keyw=${userInput}`,
-      options
+      `https://gogo-anime-api-sand.vercel.app/api/anime-api/search?keyw=${userInput}`
     )
       .then((response) => response.json())
       .then((data) => {
-        setData(data);
+        setData(data.list);
       })
       .catch((err) => {
         console.log("error", err.message);

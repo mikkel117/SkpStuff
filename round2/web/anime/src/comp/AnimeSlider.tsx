@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import AnimeInfoPopUp from "./AnimeInfoPopUp";
 interface AnimeSliderProps {
   data: any[];
-  /* setData: Dispatch<SetStateAction<any[]>>; */
 }
 
 export default function AnimeSlider({ data }: AnimeSliderProps) {
@@ -30,7 +29,7 @@ export default function AnimeSlider({ data }: AnimeSliderProps) {
                 alt={item.animeTitle}
                 draggable={false}
               />
-              <div className='animeTitle'>{item.animeTitle}</div>
+              <span className='animeTitle'>{item.animeTitle}</span>
             </div>
           );
         })}

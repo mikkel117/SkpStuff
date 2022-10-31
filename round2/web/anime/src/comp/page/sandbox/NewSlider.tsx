@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import AnimeSlider from "../AnimeSlider";
+import AnimeInfoPopUp from "../../AnimeInfoPopUp";
 
-export default function TopAiring() {
+export default function NewSlider() {
   const [data, setData] = useState<any[]>([]);
-
   useEffect(() => {
     FetchData();
-  }, []);
+  });
 
   const FetchData = () => {
     fetch(`https://gogo-anime-api-sand.vercel.app/api/anime-api/top-airing`)
@@ -20,7 +19,16 @@ export default function TopAiring() {
   };
   return (
     <>
-      <AnimeSlider data={data} />
+      <div className='NewSliderContainer'>
+        {data.map((item: any) => {
+          return (
+            <div>
+              <img src={item.animeImg} alt='' />
+              <span>{item.animeTitle}</span>
+            </div>
+          );
+        })}
+      </div>
     </>
   );
 }

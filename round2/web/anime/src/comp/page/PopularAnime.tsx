@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import AnimeSlider from "../AnimeSlider";
-import { Link } from "react-router-dom";
 
 export default function PopularAnime() {
   const [data, setData] = useState<any[]>([]);
@@ -8,19 +7,13 @@ export default function PopularAnime() {
     FetchData();
   }, []);
 
-  const options = {
-    method: "GET",
-    headers: {
-      "X-RapidAPI-Key": "process.env.REACT_APP_gogoanime_key",
-      "X-RapidAPI-Host": "gogoanime2.p.rapidapi.com",
-    },
-  };
-
   const FetchData = () => {
-    fetch(`https://rumbo-anime-api.herokuapp.com/popular?page=1`)
+    fetch(`https://gogo-anime-api-sand.vercel.app/api/anime-api/popular?page=1`)
       .then((response) => response.json())
       .then((data) => {
-        setData(data[0].episodes);
+        console.log(data);
+
+        setData(data.list[0].episodes);
       })
       .catch((err) => {
         console.log("error", err.message);

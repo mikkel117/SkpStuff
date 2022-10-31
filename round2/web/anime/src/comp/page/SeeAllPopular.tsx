@@ -12,11 +12,13 @@ export default function SeeAllPopular() {
   }, [page]);
 
   const FetchPopular = (pageNumber: number) => {
-    fetch(`https://rumbo-anime-api.herokuapp.com/popular?page=${pageNumber}`)
+    fetch(
+      `https://gogo-anime-api-sand.vercel.app/api/anime-api/popular?page=${pageNumber}`
+    )
       .then((response) => response.json())
       .then((data) => {
-        setEpisodes(data[0].episodes);
-        setPages(data[0].pages);
+        setEpisodes(data.list[0].episodes);
+        setPages(data.list[0].pages);
         setIsloading(false);
       })
       .catch((err) => {

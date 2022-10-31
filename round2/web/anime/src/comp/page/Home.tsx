@@ -1,15 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import PopularAnime from "./PopularAnime";
 import RecentEpisodes from "./RecentEpisodes";
 import TopAiring from "./TopAiring";
-import { SeeAllAnimesType } from "../../model/Typs";
-import { AnimeTypeContext } from "../../context/SeeAllAnimeContext";
 
 export default function Home() {
-  const { animeType, updateAnimeType } = useContext(
-    AnimeTypeContext
-  ) as SeeAllAnimesType;
   const [animeTypeSubDub, setAnimeTypeSubDub] = useState<number>(1);
 
   return (

@@ -3,6 +3,7 @@ import "./App.scss";
 import { Routes, Route } from "react-router-dom";
 import MovieSliderTest from "./comp/page/sandbox/MovieSliderTest";
 import GridTest from "./comp/page/sandbox/GridTest";
+import NewSlider from "./comp/page/sandbox/NewSlider";
 
 import MyHeader from "./comp/header/MyHeader";
 import PageNotFound from "./comp/page/PageNotFound";
@@ -24,6 +25,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/MovieSliderTest' element={<MovieSliderTest />} />
+          <Route path='/new-slider' element={<NewSlider />} />
           <Route path='/Test' element={<GridTest />} />
           <Route path='/RecentEpisodes' element={<SeeAllRecentEpisodes />} />
           <Route path='/TopAiring' element={<SeeAllTopAiring />} />

@@ -7,10 +7,12 @@ export default function SeeAllRecentEpisodes() {
   const [page, setPage] = useState<number>(1);
   const [animeTypeSubDub, setAnimeTypeSubDub] = useState<number>(1);
   const [isloading, setIsloading] = useState<boolean>(false);
+
   useEffect(() => {
+    /* const getAnimeTypeSubDub = () => animeTypeSubDub; */
     setIsloading(true);
     FetchRecentEpisodes(animeTypeSubDub, page);
-  }, [page]);
+  }, [page, animeTypeSubDub]);
 
   const UpdateSubDub = (SubDub: number) => {
     setAnimeTypeSubDub(SubDub);
@@ -19,12 +21,12 @@ export default function SeeAllRecentEpisodes() {
 
   const FetchRecentEpisodes = (SubDub: number, pageNumber: number): void => {
     fetch(
-      `https://rumbo-anime-api.herokuapp.com/recent-release?type=${SubDub}&page=${pageNumber}`
+      `https://gogo-anime-api-sand.vercel.app/api/anime-api/recent-release?type=${SubDub}&page=${pageNumber}`
     )
       .then((response) => response.json())
       .then((data) => {
-        setEpisodes(data[0].episodes);
-        setPages(data[0].pages);
+        setEpisodes(data.list[0].episodes);
+        setPages(data.list[0].pages);
         setIsloading(false);
       })
       .catch((err) => {

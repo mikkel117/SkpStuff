@@ -6,7 +6,7 @@ interface AnimeInfoPopUpProps {
   setIsAnimeInfoPopUp: Dispatch<SetStateAction<boolean>>;
 }
 
-type test = {
+type AnimeInfoArray = {
   animeImg: string;
   animeTitle: string;
   episodesList: any[];
@@ -24,13 +24,14 @@ export default function AnimeInfoPopUp({
   setIsAnimeInfoPopUp,
   isAnimeInfoPopUp,
 }: AnimeInfoPopUpProps) {
-  const [data, setData] = useState<test>();
+  const [data, setData] = useState<AnimeInfoArray>();
   const [isloading, setIsLoading] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   useEffect(() => {
     setIsLoading(true);
     FetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [animeId]);
 
   useEffect(() => {
