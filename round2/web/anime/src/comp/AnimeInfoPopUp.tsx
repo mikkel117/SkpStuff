@@ -62,6 +62,11 @@ export default function AnimeInfoPopUp({
     <>
       <section className='AnimeInfoPopUp'>
         <div className='AnimeInfoContent'>
+          <div
+            className='bgClose'
+            onClick={() => {
+              RemoveBodyStyle();
+            }}></div>
           {isloading ? (
             <div className='loader'></div>
           ) : (

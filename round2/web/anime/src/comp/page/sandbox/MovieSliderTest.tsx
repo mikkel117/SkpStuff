@@ -1,16 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function MovieSliderTest() {
-  const [userInput, setUserInput] = useState<string>();
-  const colors: string[] = [
-    "red",
-    "green",
-    "blue",
-    "orange",
-    "black",
-    "yellow",
-    "white",
-  ];
+  const [userInput, setUserInput] = useState<string>("");
+  const [data, setData] = useState<any[]>([]);
+
+  useEffect(() => {
+    if (userInput.length > 2) {
+      FetchData();
+    }
+  }, [userInput]);
+
+  async function FetchData() {
+    await fetch(
+      `https://gogo-anime-api-sand.vercel.app/api/anime-api/search?keyw=${userInput}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setData(data.list);
+      })
+      .catch((err) => {
+        console.log("error", err.message);
+      });
+  }
 
   return (
     <>
@@ -21,23 +32,15 @@ export default function MovieSliderTest() {
           onChange={(e) => setUserInput(e.target.value)}
         />
         <div className='dropinputContent'>
-          {colors
-            .filter((post: any) => {
-              if (userInput === "") {
-                return "";
-              } else if (
-                post.includes(userInput?.toLocaleLowerCase() as string)
-              ) {
-                return post;
-              }
-            })
-            .map((post: any) => {
-              return (
-                <a href='#' key={post}>
-                  {post}
-                </a>
-              );
-            })}
+          {data.length > 0 ? (
+            <a>
+              {data.map((item: any) => {
+                return <a href={item.animeUrl}>{item.animeTitle}</a>;
+              })}
+            </a>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     </>

@@ -57,8 +57,22 @@ header {
           }
         }
       }
+      .seeAllSearch {
+        width: 100%;
+        background-color: green;
+        display: flex;
+        justify-content: center;
+        a {
+          margin: 10px;
+          color: black;
+          font-size: large;
+          font-weight: bold;
+          text-decoration: none;
+        }
+      }
     }
   }
+
   .title {
     user-select: none;
     justify-self: center;

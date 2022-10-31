@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.scss";
 import { Routes, Route } from "react-router-dom";
 import MovieSliderTest from "./comp/page/sandbox/MovieSliderTest";
@@ -11,14 +11,16 @@ import Home from "./comp/page/Home";
 import SeeAllRecentEpisodes from "./comp/page/SeeAllRecentEpisodes";
 import SeeAllPopular from "./comp/page/SeeAllPopular";
 import SeeAllTopAiring from "./comp/page/SeeAllTopAiring";
+import SeeAllSearch from "./comp/page/SeeAllSearch";
 
 import AnimeTypeProvider from "./context/SeeAllAnimeContext";
 
 function App() {
+  const [userInput, setUserInput] = useState<string>("");
   return (
     <>
       <AnimeTypeProvider>
-        <MyHeader />
+        <MyHeader userInput={userInput} setUserInput={setUserInput} />
         {/* <Home /> */}
         {/* <GridTest /> */}
         {/* <UseContextTest /> */}
@@ -30,6 +32,10 @@ function App() {
           <Route path='/RecentEpisodes' element={<SeeAllRecentEpisodes />} />
           <Route path='/TopAiring' element={<SeeAllTopAiring />} />
           <Route path='/Popular' element={<SeeAllPopular />} />
+          <Route
+            path='/see-all-search'
+            element={<SeeAllSearch userInput={userInput} />}
+          />
           <Route path='*' element={<PageNotFound />} />
         </Routes>
       </AnimeTypeProvider>

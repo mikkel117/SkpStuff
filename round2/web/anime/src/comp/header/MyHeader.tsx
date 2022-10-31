@@ -1,11 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
 import AnimeInfoPopUp from "../AnimeInfoPopUp";
 import { CgProfile } from "react-icons/cg";
 import { Link } from "react-router-dom";
 
-export default function MyHeader() {
-  const [userInput, setUserInput] = useState<string>("");
+interface MyHeaderProps {
+  userInput: string;
+  setUserInput: Dispatch<SetStateAction<string>>;
+}
+
+export default function MyHeader({ userInput, setUserInput }: MyHeaderProps) {
+  /* const [userInput, setUserInput] = useState<string>(""); */
   const [data, setData] = useState<any[]>([]);
+  const [pages, setPages] = useState<any[]>([]);
   const [animeId, setAnimeId] = useState<string>("");
   const [isAnimeInfoPopUp, setIsAnimeInfoPopUp] = useState<boolean>(false);
 
@@ -26,7 +32,8 @@ export default function MyHeader() {
     )
       .then((response) => response.json())
       .then((data) => {
-        setData(data.list);
+        setData(data.list[0].episodes);
+        setPages(data.list[0].pages);
       })
       .catch((err) => {
         console.log("error", err.message);
@@ -39,8 +46,9 @@ export default function MyHeader() {
   };
 
   const EmptyData = (): void => {
-    setUserInput("");
+    /* setUserInput(""); */
     setData([]);
+    setPages([]);
   };
   return (
     <>
@@ -53,34 +61,34 @@ export default function MyHeader() {
             onChange={(e) => setUserInput(e.target.value)}
           />
           <div className='dropinputContent'>
-            {data
-              .filter((post: any) => {
-                if (userInput === "") {
-                  setData([]);
-                  return "";
-                } else if (
-                  post.animeTitle
-                    .toLowerCase()
-                    .includes(userInput?.toLowerCase() as string)
-                ) {
-                  return post;
-                }
-              })
-              .map((post: any) => {
-                return (
-                  <p
-                    key={post.animeId}
-                    onClick={() => {
-                      ChangeAnimePopUpOpen(post.animeId);
-                    }}>
-                    <span> {post.animeTitle}</span>
-                    <img src={post.animeImg} alt={post.animeId} />
-                  </p>
-                );
-              })}
+            {data.map((post: any) => {
+              return (
+                <p
+                  key={post.animeId}
+                  onClick={() => {
+                    ChangeAnimePopUpOpen(post.animeId);
+                  }}>
+                  <span> {post.animeTitle}</span>
+                  <img src={post.animeImg} alt={post.animeId} />
+                </p>
+              );
+            })}
+            {pages.length > 0 ? (
+              <button className='seeAllSearch'>
+                <Link
+                  to='/see-all-search'
+                  onClick={() => {
+                    EmptyData();
+                  }}>
+                  see all
+                </Link>
+              </button>
+            ) : (
+              <></>
+            )}
           </div>
         </form>
-        {userInput.length > 2 ? (
+        {data.length > 0 ? (
           <div
             className='hiddingCover'
             onClick={() => {
@@ -106,4 +114,17 @@ export default function MyHeader() {
       )}
     </>
   );
+}
+
+{
+  /* <div className='seeAllSearch'>
+  <Link
+    to='/see-all-search'
+    onClick={() => {
+      EmptyData();
+    }}>
+    see all
+  </Link>
+</div>;
+ */
 }
