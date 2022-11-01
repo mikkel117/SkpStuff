@@ -2,6 +2,7 @@ import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
 import AnimeInfoPopUp from "../AnimeInfoPopUp";
 import { CgProfile } from "react-icons/cg";
 import { Link } from "react-router-dom";
+import { AiOutlineSearch } from "react-icons/ai";
 
 interface MyHeaderProps {
   userInput: string;
@@ -53,6 +54,9 @@ export default function MyHeader({ userInput, setUserInput }: MyHeaderProps) {
   return (
     <>
       <header>
+        <Link to='/see-all-search' className='phoneSearch'>
+          <AiOutlineSearch size={30} />
+        </Link>
         <form className='animeSearch' onSubmit={handleSubmit}>
           <input
             type='text'

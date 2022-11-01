@@ -54,6 +54,16 @@
       opacity: 0.2;
     }
   }
+
+  .SearchInput {
+    display: none;
+    margin: 0 auto;
+    font-size: 1.5rem;
+    padding: 0 10px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+  }
   .animeImgWrapper {
     margin: 0 auto;
     width: 50%;

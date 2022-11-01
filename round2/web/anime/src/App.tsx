@@ -37,7 +37,9 @@ function App() {
           <Route path='/Popular' element={<SeeAllPopular />} />
           <Route
             path='/see-all-search'
-            element={<SeeAllSearch userInput={userInput} />}
+            element={
+              <SeeAllSearch userInput={userInput} setUserInput={setUserInput} />
+            }
           />
           <Route path='/Movies' element={<SeeAllMovies />} />
           <Route

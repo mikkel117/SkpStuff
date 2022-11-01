@@ -155,4 +155,42 @@ body::-webkit-scrollbar-thumb {
       }
     }
   }
+
+  header {
+    grid-template-columns: 2% 10% 1fr 10% 2%;
+    .title {
+      grid-column: 3;
+    }
+    .phoneSearch {
+      grid-column: 2;
+      display: block;
+      justify-self: center;
+      align-self: center;
+      text-decoration: none;
+      color: white;
+    }
+    .profile {
+      justify-self: center;
+      align-self: center;
+    }
+    .animeSearch {
+      display: none;
+      .animeSearchInput {
+        width: 100%;
+      }
+      .dropinputContent {
+        width: 100%;
+        overflow-x: hidden;
+      }
+    }
+  }
+  .SeeAllAnimeWrapper {
+    .SearchInput {
+      display: block;
+    }
+    .animeImgWrapper {
+      width: 90%;
+      grid-template-columns: 1fr 1fr;
+    }
+  }
 }

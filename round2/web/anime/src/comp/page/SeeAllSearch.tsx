@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
 import SeeAllAnime from "../SeeAllAnime";
 
 interface SeeAllSearchProps {
   userInput: string;
+  setUserInput: Dispatch<SetStateAction<string>>;
 }
 
-export default function SeeAllSearch({ userInput }: SeeAllSearchProps) {
+export default function SeeAllSearch({
+  userInput,
+  setUserInput,
+}: SeeAllSearchProps) {
   const [episodes, setEpisodes] = useState<any[]>([]);
   const [pages, setPages] = useState<any[]>([]);
   const [page, setPage] = useState<number>(1);
@@ -34,18 +38,26 @@ export default function SeeAllSearch({ userInput }: SeeAllSearchProps) {
 
   return (
     <div className='SeeAllAnimeWrapper'>
-      <h3 className='title'>Popular</h3>
+      <h3 className='title'>Search</h3>
+      <input
+        type='text'
+        placeholder='search anime'
+        className='SearchInput'
+        onChange={(e) => setUserInput(e.target.value)}
+      />
       {isloading ? (
         <div className='loader SeeAllAnimeLoading'></div>
       ) : (
-        <SeeAllAnime
-          episodes={episodes}
-          setEpisodes={setEpisodes}
-          pages={pages}
-          setPages={setPages}
-          pageNumber={page}
-          setPageNumber={setPage}
-        />
+        <>
+          <SeeAllAnime
+            episodes={episodes}
+            setEpisodes={setEpisodes}
+            pages={pages}
+            setPages={setPages}
+            pageNumber={page}
+            setPageNumber={setPage}
+          />
+        </>
       )}
     </div>
   );
