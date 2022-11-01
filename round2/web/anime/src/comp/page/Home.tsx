@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, Dispatch, SetStateAction } from "react";
 import { Link } from "react-router-dom";
 import PopularAnime from "./PopularAnime";
 import RecentEpisodes from "./RecentEpisodes";
 import TopAiring from "./TopAiring";
 import Movies from "./Movies";
+import Genres from "./Genres";
 
-export default function Home() {
+interface HomePorps {
+  setGenre: Dispatch<SetStateAction<string>>;
+}
+
+export default function Home({ setGenre }: HomePorps) {
   const [animeTypeSubDub, setAnimeTypeSubDub] = useState<number>(1);
 
   return (
@@ -57,6 +62,10 @@ export default function Home() {
           see all
         </Link>
         <Movies />
+      </div>
+      <div className='genresWrapper'>
+        <h3 className='title'>Genres</h3>
+        <Genres setGenre={setGenre} />
       </div>
     </>
   );

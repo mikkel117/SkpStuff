@@ -13,11 +13,13 @@ import SeeAllPopular from "./comp/page/SeeAllPopular";
 import SeeAllTopAiring from "./comp/page/SeeAllTopAiring";
 import SeeAllSearch from "./comp/page/SeeAllSearch";
 import SeeAllMovies from "./comp/page/SeeAllMovies";
+import SeeGenre from "./comp/page/SeeGenre";
 
 import AnimeTypeProvider from "./context/SeeAllAnimeContext";
 
 function App() {
   const [userInput, setUserInput] = useState<string>("");
+  const [genre, setGenre] = useState<string>("");
   return (
     <>
       <AnimeTypeProvider>
@@ -26,7 +28,7 @@ function App() {
         {/* <GridTest /> */}
         {/* <UseContextTest /> */}
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route path='/' element={<Home setGenre={setGenre} />} />
           <Route path='/MovieSliderTest' element={<MovieSliderTest />} />
           <Route path='/new-slider' element={<NewSlider />} />
           <Route path='/Test' element={<GridTest />} />
@@ -38,6 +40,10 @@ function App() {
             element={<SeeAllSearch userInput={userInput} />}
           />
           <Route path='/Movies' element={<SeeAllMovies />} />
+          <Route
+            path='/Genre'
+            element={<SeeGenre genre={genre} setGenre={setGenre} />}
+          />
           <Route path='*' element={<PageNotFound />} />
         </Routes>
       </AnimeTypeProvider>

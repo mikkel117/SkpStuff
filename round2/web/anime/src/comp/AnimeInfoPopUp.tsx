@@ -27,6 +27,10 @@ export default function AnimeInfoPopUp({
   const [data, setData] = useState<AnimeInfoArray>();
   const [isloading, setIsLoading] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [otherNames, setOtherNames] = useState<any[]>([]);
+  const [genres, setGenres] = useState<any[]>([]);
+  const [error, setError] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   useEffect(() => {
     setIsLoading(true);
@@ -51,11 +55,22 @@ export default function AnimeInfoPopUp({
     )
       .then((response) => response.json())
       .then((data) => {
+        if (data.error) {
+          /* console.log(data.error); */
+          setError(true);
+          setErrorMessage("404");
+        }
+
+        setOtherNames(data.otherNames);
+        setGenres(data.genres);
+
         setData(data);
         setIsLoading(false);
       })
       .catch((err) => {
-        console.log("error", err.message);
+        setError(true);
+        setErrorMessage(err.message);
+        /* console.log("error", err.message); */
       });
   };
   return (
@@ -71,31 +86,56 @@ export default function AnimeInfoPopUp({
             <div className='loader'></div>
           ) : (
             <>
-              <h2 className='animeTitle'>{data?.animeTitle}</h2>
-              <p
-                className='close'
-                onClick={() => {
-                  RemoveBodyStyle();
-                }}>
-                X
-              </p>
-              <img src={data?.animeImg} alt='' />
-              <div className='animeTest'>
-                <p>other names: {data?.otherNames}</p>
-                <p>relesaed date: {data?.releasedDate}</p>
-                <p>status: {data?.status}</p>
-                <p>totale episodes: {data?.totalEpisodes}</p>
-                <p>type: {data?.type}</p>
-                <div className={`animeSynopsis ${isOpen ? "open" : ""}`}>
-                  <p className='text'>{data?.synopsis}</p>
-                </div>
-              </div>
-              <button
-                onClick={() => {
-                  setIsOpen(!isOpen);
-                }}>
-                click me
-              </button>
+              {error ? (
+                <h3 className='error'>error: {errorMessage}</h3>
+              ) : (
+                <>
+                  <h2 className='animeTitle'>{data?.animeTitle}</h2>
+                  <p
+                    className='close'
+                    onClick={() => {
+                      RemoveBodyStyle();
+                    }}>
+                    X
+                  </p>
+                  <img src={data?.animeImg} alt='' />
+                  <div className='animeInfo'>
+                    <p className='animeInfoText'>
+                      other names:
+                      {otherNames.map((item: any) => {
+                        return <span key={item}>{item},</span>;
+                      })}
+                    </p>
+                    <p className='animeInfoText'>
+                      genres:
+                      {genres.map((item: any) => {
+                        return <span key={item}>{item},</span>;
+                      })}
+                    </p>
+                    <p className='animeInfoText'>
+                      relesaed date: <span> {data?.releasedDate}</span>
+                    </p>
+                    <p className='animeInfoText'>
+                      status: <span> {data?.status}</span>{" "}
+                    </p>
+                    <p className='animeInfoText'>
+                      totale episodes: <span> {data?.totalEpisodes} </span>{" "}
+                    </p>
+                    <p className='animeInfoText'>
+                      type: <span> {data?.type} </span>
+                    </p>
+                    <div className={`animeSynopsis ${isOpen ? "open" : ""}`}>
+                      <p className='text'> {data?.synopsis}</p>
+                    </div>
+                    <button
+                      onClick={() => {
+                        setIsOpen(!isOpen);
+                      }}>
+                      {isOpen ? "show less" : "show more"}
+                    </button>
+                  </div>
+                </>
+              )}
             </>
           )}
         </div>

@@ -48,29 +48,33 @@ export default function SeeAllAnime({
           );
         })}
       </div>
-      <div className='animePages'>
-        <span>
-          <AiOutlineDoubleLeft
-            onClick={() => {
-              updatePageNUmber(1);
-            }}
-          />
-        </span>
-        {pages.map((item: any) => {
-          return (
-            <span
-              key={item.page}
+      {pages.length === 0 ? (
+        <></>
+      ) : (
+        <div className='animePages'>
+          <span>
+            <AiOutlineDoubleLeft
               onClick={() => {
-                updatePageNUmber(parseInt(item.page));
+                updatePageNUmber(1);
               }}
-              className={`${
-                pageNumber === parseInt(item.page) ? "onPage" : ""
-              }`}>
-              {item.page}
-            </span>
-          );
-        })}
-      </div>
+            />
+          </span>
+          {pages.map((item: any) => {
+            return (
+              <span
+                key={item.page}
+                onClick={() => {
+                  updatePageNUmber(parseInt(item.page));
+                }}
+                className={`${
+                  pageNumber === parseInt(item.page) ? "onPage" : ""
+                }`}>
+                {item.page}
+              </span>
+            );
+          })}
+        </div>
+      )}
       {isAnimeInfoPopUp ? (
         <AnimeInfoPopUp
           animeId={animeId}

@@ -23,9 +23,8 @@
     margin: auto;
     padding: 20px;
     border: 3cpx solid #888;
-    width: 60%;
-    height: 60%;
-    max-height: 90%;
+    width: 80%;
+    height: 80%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 10px;
@@ -53,16 +52,27 @@
     .animeTitle {
       grid-column: 1/3;
     }
-    .animeTest {
+    .animeInfo {
       grid-column: 2/4;
       grid-row: 2;
       display: flex;
       flex-direction: column;
+      button {
+        width: 30%;
+      }
+      .animeInfoText {
+        font-size: larger;
+        font-weight: bold;
+        span {
+          font-weight: normal;
+          margin-left: 10px;
+        }
+      }
     }
     .animeSynopsis {
-      max-height: 100px;
+      max-height: 120px;
       overflow: hidden;
-      transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+      transition: max-height 0.5s cubic-bezier(0.9, 0, 0.8, 0.2);
       display: -webkit-box;
       -webkit-box-orient: vertical;
     }
@@ -72,8 +82,11 @@
       transition: max-height 0.5s cubic-bezier(0.9, 0, 0.8, 0.2);
     }
     .text {
+      font-size: larger;
       padding: 5px;
       border: 1px solid #ccc;
+      padding: 10px;
+      line-height: 130%;
       display: -webkit-box;
       -webkit-box-orient: vertical;
       text-overflow: ellipsis;
@@ -86,4 +99,12 @@
       overflow-y: auto;
     }
   }
+}
+
+.error {
+  text-align: center;
+  align-self: center;
+  grid-column: 1/4;
+  font-size: 2rem;
+  font-weight: bolder;
 }

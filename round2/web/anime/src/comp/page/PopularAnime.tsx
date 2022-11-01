@@ -11,8 +11,6 @@ export default function PopularAnime() {
     fetch(`https://gogo-anime-api-sand.vercel.app/api/anime-api/popular?page=1`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-
         setData(data.list[0].episodes);
       })
       .catch((err) => {
