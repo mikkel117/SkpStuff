@@ -35,10 +35,19 @@ export default function SeeAllMovies() {
         <div className='loader SeeAllAnimeLoading'></div>
       ) : (
         <>
-          <div className='aphContainer'>
+          <div className={`aphContainer`}>
             {aphArr.map((item: any) => {
               return (
                 <p
+                  className={`${
+                    aph === item.aph
+                      ? "active"
+                      : aph === item.value
+                      ? "active"
+                      : aph === item.value
+                      ? "active"
+                      : ""
+                  }`}
                   key={item.aph}
                   onClick={() => {
                     setAph(item.value);
