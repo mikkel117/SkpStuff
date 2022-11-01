@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import PopularAnime from "./PopularAnime";
 import RecentEpisodes from "./RecentEpisodes";
 import TopAiring from "./TopAiring";
+import Movies from "./Movies";
 
 export default function Home() {
   const [animeTypeSubDub, setAnimeTypeSubDub] = useState<number>(1);
@@ -49,6 +50,13 @@ export default function Home() {
           see all
         </Link>
         <PopularAnime />
+      </div>
+      <div className='animeWrapper'>
+        <h3 className='title'>Movies</h3>
+        <Link to='/Movies' className='seeAll'>
+          see all
+        </Link>
+        <Movies />
       </div>
     </>
   );

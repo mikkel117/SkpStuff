@@ -12,6 +12,7 @@ import SeeAllRecentEpisodes from "./comp/page/SeeAllRecentEpisodes";
 import SeeAllPopular from "./comp/page/SeeAllPopular";
 import SeeAllTopAiring from "./comp/page/SeeAllTopAiring";
 import SeeAllSearch from "./comp/page/SeeAllSearch";
+import SeeAllMovies from "./comp/page/SeeAllMovies";
 
 import AnimeTypeProvider from "./context/SeeAllAnimeContext";
 
@@ -36,6 +37,7 @@ function App() {
             path='/see-all-search'
             element={<SeeAllSearch userInput={userInput} />}
           />
+          <Route path='/Movies' element={<SeeAllMovies />} />
           <Route path='*' element={<PageNotFound />} />
         </Routes>
       </AnimeTypeProvider>

@@ -2,8 +2,26 @@
   .title {
     margin: 10px;
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: bold;
+  }
+  .aphContainer {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: #161929;
+    margin-bottom: 20px;
+    overflow: hidden;
+    p {
+      margin: 10px;
+      cursor: default;
+      transition: opacity 100ms ease-in-out;
+      &:hover {
+        opacity: 0.5;
+      }
+    }
   }
   .animeSubDub {
     grid-column: 2;
