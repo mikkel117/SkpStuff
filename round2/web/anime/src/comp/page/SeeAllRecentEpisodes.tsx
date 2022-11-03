@@ -25,8 +25,8 @@ export default function SeeAllRecentEpisodes() {
     )
       .then((response) => response.json())
       .then((data) => {
-        setEpisodes(data.list[0].episodes);
-        setPages(data.list[0].pages);
+        setEpisodes(data.episodes);
+        setPages(data.pages);
         setIsloading(false);
       })
       .catch((err) => {

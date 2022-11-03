@@ -27,8 +27,8 @@ export default function SeeAllSearch({
       .then((data) => {
         console.log(data);
 
-        setEpisodes(data.list[0].episodes);
-        setPages(data.list[0].pages);
+        setEpisodes(data.episodes);
+        setPages(data.pages);
         setIsloading(false);
       })
       .catch((err) => {

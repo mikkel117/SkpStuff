@@ -10,7 +10,6 @@ interface MyHeaderProps {
 }
 
 export default function MyHeader({ userInput, setUserInput }: MyHeaderProps) {
-  /* const [userInput, setUserInput] = useState<string>(""); */
   const [data, setData] = useState<any[]>([]);
   const [pages, setPages] = useState<any[]>([]);
   const [animeId, setAnimeId] = useState<string>("");
@@ -33,8 +32,8 @@ export default function MyHeader({ userInput, setUserInput }: MyHeaderProps) {
     )
       .then((response) => response.json())
       .then((data) => {
-        setData(data.list[0].episodes);
-        setPages(data.list[0].pages);
+        setData(data.episodes);
+        setPages(data.pages);
       })
       .catch((err) => {
         console.log("error", err.message);

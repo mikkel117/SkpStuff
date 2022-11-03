@@ -16,7 +16,7 @@ export default function Genres({ setGenre }: Genresprops) {
     fetch(`https://gogo-anime-api-sand.vercel.app/api/anime-api/get-genres`)
       .then((response) => response.json())
       .then((data) => {
-        setData(data.Genres);
+        setData(data.genres);
       })
       .catch((err) => {
         console.log("error", err.message);
@@ -26,16 +26,21 @@ export default function Genres({ setGenre }: Genresprops) {
   return (
     <>
       <div className='genres'>
-        {data.map((item: string) => {
-          if (item != "hentai" && item != "yaoi" && item != "yuri") {
+        {data.map((item: any) => {
+          if (
+            item.genre != "Hentai" &&
+            item.genre != "Yaoi" &&
+            item.genre != "Yuri" &&
+            item.genre != "Erotica"
+          ) {
             return (
               <Link
                 to='/Genre'
-                key={item}
+                key={item.genre}
                 onClick={() => {
-                  setGenre(item);
+                  setGenre(item.value);
                 }}>
-                {item}
+                {item.genre}
               </Link>
             );
           }

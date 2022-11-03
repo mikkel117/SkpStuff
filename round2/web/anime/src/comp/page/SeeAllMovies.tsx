@@ -19,9 +19,9 @@ export default function SeeAllMovies() {
     )
       .then((response) => response.json())
       .then((data) => {
-        setEpisodes(data.list[0].episodes);
-        setPages(data.list[0].pages);
-        setAphArr(data.list[0].aphList);
+        setEpisodes(data.episodes);
+        setPages(data.pages);
+        setAphArr(data.aphList);
         setIsloading(false);
       })
       .catch((err) => {

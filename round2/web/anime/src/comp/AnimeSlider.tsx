@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AnimeInfoPopUp from "./AnimeInfoPopUp";
 interface AnimeSliderProps {
   data: any[];
@@ -12,6 +12,10 @@ export default function AnimeSlider({ data }: AnimeSliderProps) {
     setAnimeId(animeId);
     setIsAnimeInfoPopUp(true);
   };
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   return (
     <>

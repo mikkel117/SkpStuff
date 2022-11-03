@@ -11,7 +11,7 @@ export default function Movies() {
     fetch(`https://gogo-anime-api-sand.vercel.app/api/anime-api/movies?page=1`)
       .then((response) => response.json())
       .then((data) => {
-        setData(data.list[0].episodes);
+        setData(data.episodes);
       })
       .catch((err) => {
         console.log("error", err.message);

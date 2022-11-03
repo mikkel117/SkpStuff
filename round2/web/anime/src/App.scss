@@ -57,10 +57,10 @@ body {
     .animeTypeActive {
       background-color: gray;
       font-weight: bold;
-      opacity: 0.2;
+      opacity: 1;
     }
     .animeTypeDeactivated {
-      opacity: 1;
+      opacity: 0.2;
     }
   }
   .seeAll {
@@ -124,10 +124,10 @@ body::-webkit-scrollbar-thumb {
   .genres {
     margin: 0 auto;
     padding: 10px;
-    width: 80%;
+    width: 90%;
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 15px;
     background-color: #161929;
     justify-content: center;
     a {

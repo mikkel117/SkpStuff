@@ -20,14 +20,19 @@ export default function SeeGenre({ genre, setGenre }: SeeGenreProps) {
     fetch(
       `https://gogo-anime-api-sand.vercel.app/api/anime-api/genres?genre=${genre}&page=${pageNumber}`
     )
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        return Promise.reject(response);
+      })
       .then((data) => {
-        setEpisodes(data.list[0].episodes);
-        setPages(data.list[0].pages);
+        setEpisodes(data.episodes);
+        setPages(data.pages);
         setIsloading(false);
       })
       .catch((err) => {
-        console.log("error", err.message);
+        console.log("error", err.status);
       });
   };
   return (

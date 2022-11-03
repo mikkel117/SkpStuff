@@ -1,3 +1,4 @@
+import { log } from "console";
 import React, { useState, useEffect } from "react";
 import AnimeSlider from "../AnimeSlider";
 
@@ -9,9 +10,14 @@ export default function PopularAnime() {
 
   const FetchData = () => {
     fetch(`https://gogo-anime-api-sand.vercel.app/api/anime-api/popular?page=1`)
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        return Promise.reject(response);
+      })
       .then((data) => {
-        setData(data.list[0].episodes);
+        setData(data.episodes);
       })
       .catch((err) => {
         console.log("error", err.message);
