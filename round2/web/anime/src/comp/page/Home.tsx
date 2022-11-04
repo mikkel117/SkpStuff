@@ -37,28 +37,28 @@ export default function Home({ setGenre }: HomePorps) {
           </span>
         </div>
         <h3 className='title'>Recent episodes</h3>
-        <Link to='/RecentEpisodes' className='seeAll'>
+        <Link to='/recent-episodes' className='seeAll'>
           see all
         </Link>
         <RecentEpisodes animeType={animeTypeSubDub} />
       </div>
       <div className='animeWrapper'>
         <h3 className='title'>Top Airing</h3>
-        <Link to='/TopAiring' className='seeAll'>
+        <Link to='/top-airing' className='seeAll'>
           see all
         </Link>
         <TopAiring />
       </div>
       <div className='animeWrapper'>
         <h3 className='title'>Popular anime</h3>
-        <Link to='/Popular' className='seeAll'>
+        <Link to='/popular' className='seeAll'>
           see all
         </Link>
         <PopularAnime />
       </div>
       <div className='animeWrapper'>
         <h3 className='title'>Movies</h3>
-        <Link to='/Movies' className='seeAll'>
+        <Link to='/movies' className='seeAll'>
           see all
         </Link>
         <Movies />

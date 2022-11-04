@@ -14,41 +14,39 @@ import SeeAllTopAiring from "./comp/page/SeeAllTopAiring";
 import SeeAllSearch from "./comp/page/SeeAllSearch";
 import SeeAllMovies from "./comp/page/SeeAllMovies";
 import SeeGenre from "./comp/page/SeeGenre";
-
-import AnimeTypeProvider from "./context/SeeAllAnimeContext";
+import Profile from "./comp/page/Profile";
 
 function App() {
   const [userInput, setUserInput] = useState<string>("");
   const [genre, setGenre] = useState<string>("");
   return (
     <>
-      <AnimeTypeProvider>
-        <MyHeader userInput={userInput} setUserInput={setUserInput} />
-        {/* <Home /> */}
-        {/* <GridTest /> */}
-        {/* <UseContextTest /> */}
-        <Routes>
-          <Route path='/' element={<Home setGenre={setGenre} />} />
-          <Route path='/MovieSliderTest' element={<MovieSliderTest />} />
-          <Route path='/new-slider' element={<NewSlider />} />
-          <Route path='/Test' element={<GridTest />} />
-          <Route path='/RecentEpisodes' element={<SeeAllRecentEpisodes />} />
-          <Route path='/TopAiring' element={<SeeAllTopAiring />} />
-          <Route path='/Popular' element={<SeeAllPopular />} />
-          <Route
-            path='/see-all-search'
-            element={
-              <SeeAllSearch userInput={userInput} setUserInput={setUserInput} />
-            }
-          />
-          <Route path='/Movies' element={<SeeAllMovies />} />
-          <Route
-            path='/Genre'
-            element={<SeeGenre genre={genre} setGenre={setGenre} />}
-          />
-          <Route path='*' element={<PageNotFound />} />
-        </Routes>
-      </AnimeTypeProvider>
+      <MyHeader userInput={userInput} setUserInput={setUserInput} />
+      {/* <Home /> */}
+      {/* <GridTest /> */}
+      {/* <UseContextTest /> */}
+      <Routes>
+        <Route path='/' element={<Home setGenre={setGenre} />} />
+        <Route path='/movie-slider-test' element={<MovieSliderTest />} />
+        <Route path='/new-slider' element={<NewSlider />} />
+        <Route path='/test' element={<GridTest />} />
+        <Route path='/recent-episodes' element={<SeeAllRecentEpisodes />} />
+        <Route path='/top-airing' element={<SeeAllTopAiring />} />
+        <Route path='/popular' element={<SeeAllPopular />} />
+        <Route
+          path='/see-all-search'
+          element={
+            <SeeAllSearch userInput={userInput} setUserInput={setUserInput} />
+          }
+        />
+        <Route path='/movies' element={<SeeAllMovies />} />
+        <Route
+          path='/genre'
+          element={<SeeGenre genre={genre} setGenre={setGenre} />}
+        />
+        <Route path='/profile' element={<Profile />} />
+        <Route path='*' element={<PageNotFound />} />
+      </Routes>
     </>
   );
 }

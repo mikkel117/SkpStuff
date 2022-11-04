@@ -104,7 +104,9 @@ export default function MyHeader({ userInput, setUserInput }: MyHeaderProps) {
           {" "}
           <Link to='/'>Title</Link>
         </h1>
-        <CgProfile size={35} className='profile' />
+        <Link to='/profile' className='profile'>
+          <CgProfile size={35} />
+        </Link>
       </header>
       {isAnimeInfoPopUp ? (
         <AnimeInfoPopUp

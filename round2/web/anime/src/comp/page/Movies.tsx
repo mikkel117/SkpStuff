@@ -7,9 +7,14 @@ export default function Movies() {
     FetchData();
   }, []);
 
-  const FetchData = () => {
+  const FetchData = (): void => {
     fetch(`https://gogo-anime-api-sand.vercel.app/api/anime-api/movies?page=1`)
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        return Promise.reject(response);
+      })
       .then((data) => {
         setData(data.episodes);
       })

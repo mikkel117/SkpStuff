@@ -35,7 +35,7 @@ export default function Genres({ setGenre }: Genresprops) {
           ) {
             return (
               <Link
-                to='/Genre'
+                to='/genre'
                 key={item.genre}
                 onClick={() => {
                   setGenre(item.value);
