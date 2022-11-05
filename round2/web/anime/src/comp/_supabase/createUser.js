@@ -10,7 +10,6 @@ async function CreateUser(Email, Password) {
     console.log(error);
   }
   const user = await supabase.auth.getUser();
-  console.log(user);
 }
 
 export default CreateUser;
