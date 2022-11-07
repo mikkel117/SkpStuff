@@ -13,9 +13,9 @@ export default function AnimeSlider({ data }: AnimeSliderProps) {
     setIsAnimeInfoPopUp(true);
   };
 
-  useEffect(() => {
+  /* useEffect(() => {
     console.log(data);
-  }, [data]);
+  }, [data]); */
 
   return (
     <>

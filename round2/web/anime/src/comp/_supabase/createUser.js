@@ -7,9 +7,20 @@ async function CreateUser(Email, Password) {
     password: Password,
   });
   if (error) {
-    console.log(error);
+    return error;
   }
   const user = await supabase.auth.getUser();
+  createData(user);
+  return "signedUp";
 }
+
+const createData = async (user) => {
+  const { data, error } = await supabase
+    .from("animeUser")
+    .insert({ userId: user.data.user.id });
+  if (error) {
+    console.log(error);
+  }
+};
 
 export default CreateUser;

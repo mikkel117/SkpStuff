@@ -6,11 +6,10 @@ const SupabaseLogin = async (Email, Password) => {
     password: Password,
   });
   if (error) {
-    console.log(error);
+    return error;
   }
-  if (user) {
-    console.log(user);
-  }
+
+  return "logedin";
 };
 
 export default SupabaseLogin;

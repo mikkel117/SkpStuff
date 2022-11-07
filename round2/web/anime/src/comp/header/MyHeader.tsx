@@ -7,9 +7,14 @@ import { AiOutlineSearch } from "react-icons/ai";
 interface MyHeaderProps {
   userInput: string;
   setUserInput: Dispatch<SetStateAction<string>>;
+  user: any;
 }
 
-export default function MyHeader({ userInput, setUserInput }: MyHeaderProps) {
+export default function MyHeader({
+  userInput,
+  setUserInput,
+  user,
+}: MyHeaderProps) {
   const [data, setData] = useState<any[]>([]);
   const [pages, setPages] = useState<any[]>([]);
   const [animeId, setAnimeId] = useState<string>("");
@@ -19,7 +24,6 @@ export default function MyHeader({ userInput, setUserInput }: MyHeaderProps) {
     if (userInput.length > 2) {
       FetchData();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userInput]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -101,10 +105,9 @@ export default function MyHeader({ userInput, setUserInput }: MyHeaderProps) {
           <></>
         )}
         <h1 className='title'>
-          {" "}
           <Link to='/'>Title</Link>
         </h1>
-        <Link to='/profile' className='profile'>
+        <Link to='/login' className='profile'>
           <CgProfile size={35} />
         </Link>
       </header>

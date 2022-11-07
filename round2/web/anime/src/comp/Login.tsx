@@ -2,30 +2,46 @@ import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
 import CreateUser from "./_supabase/createUser";
 import GetUser from "./_supabase/getUser";
 import SupabaseLogin from "./_supabase/login";
+import { useNavigate } from "react-router-dom";
 
 interface loginProps {
   formvValue: string;
   setFormValue: Dispatch<SetStateAction<string>>;
+  setIsFormHidden: Dispatch<SetStateAction<boolean>>;
 }
 
-export default function Login({ formvValue, setFormValue }: loginProps) {
+export default function Login({
+  formvValue,
+  setFormValue,
+  setIsFormHidden,
+}: loginProps) {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [loginError, setLoginError] = useState<string>("");
+  const navigate = useNavigate();
 
-  const HandleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const HandleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (email === "" && password === "") {
       setLoginError("error");
     } else {
       if (formvValue === "login") {
-        SupabaseLogin(email, password);
-        console.log("login");
+        const login = await SupabaseLogin(email, password);
+        if (login === "logedin") {
+          navigate("/profile");
+        }
       } else {
-        CreateUser(email, password);
-        console.log("sing up");
+        const signup = await CreateUser(email, password);
+        if (signup === "signedUp") {
+          navigate("/profile");
+        }
       }
     }
+  };
+
+  const Cancle = () => {
+    setFormValue("");
+    setIsFormHidden(true);
   };
   return (
     <>
@@ -56,6 +72,12 @@ export default function Login({ formvValue, setFormValue }: loginProps) {
 
         <br />
         <input type='submit' />
+        <button
+          onClick={() => {
+            Cancle();
+          }}>
+          cancle
+        </button>
       </form>
     </>
   );

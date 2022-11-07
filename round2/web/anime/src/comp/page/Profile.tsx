@@ -4,25 +4,34 @@ import CreateUser from "../_supabase/createUser";
 import SupabaseLogin from "../_supabase/login";
 import GetUser from "../_supabase/getUser";
 import Login from "../Login";
+import SignOut from "../_supabase/signout";
 
-export default function Profile() {
+import { useNavigate } from "react-router-dom";
+
+interface ProfileProps {
+  user: any;
+}
+
+export default function Profile({ user }: ProfileProps) {
   const [isUserLogedin, setIsUserLogedin] = useState<boolean>(false);
   const [isFormHidden, setIsFormHidden] = useState<boolean>(true);
   const [formValue, setFormValue] = useState<string>("");
-  const [user, setUser] = useState<any>();
+  /* const [user, setUser] = useState<any>(); */
+  const navigate = useNavigate();
   useEffect(() => {
-    GetUser().then(setUser);
+    console.log(user);
   }, []);
 
   useEffect(() => {
     if (user) {
       if (user.data.user != null) {
         setIsUserLogedin(true);
+        navigate("/profile");
       } else {
         setIsUserLogedin(false);
       }
     }
-  }, [user]);
+  }, []);
 
   const showForm = (FormValue: string) => {
     setIsFormHidden(!isFormHidden);
@@ -31,7 +40,7 @@ export default function Profile() {
   return (
     <div className='profileContentWrapper'>
       {isUserLogedin ? (
-        <>test</>
+        <></>
       ) : (
         <>
           {isFormHidden ? (
@@ -50,7 +59,11 @@ export default function Profile() {
               </button>
             </>
           ) : (
-            <Login formvValue={formValue} setFormValue={setFormValue} />
+            <Login
+              formvValue={formValue}
+              setFormValue={setFormValue}
+              setIsFormHidden={setIsFormHidden}
+            />
           )}
         </>
       )}
