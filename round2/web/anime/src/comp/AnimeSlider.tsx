@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import AnimeInfoPopUp from "./AnimeInfoPopUp";
+import { AiOutlineStar, AiFillStar } from "react-icons/ai";
 interface AnimeSliderProps {
   data: any[];
 }
@@ -12,7 +13,8 @@ export default function AnimeSlider({ data }: AnimeSliderProps) {
     setAnimeId(animeId);
     setIsAnimeInfoPopUp(true);
   };
-
+  /* AiOutlineStar */
+  /* AiFillStar */
   /* useEffect(() => {
     console.log(data);
   }, [data]); */
@@ -33,6 +35,7 @@ export default function AnimeSlider({ data }: AnimeSliderProps) {
                 alt={item.animeTitle}
                 draggable={false}
               />
+              <AiOutlineStar className='addToFervervt' size={30} />
               <span className='animeTitle'>{item.animeTitle}</span>
             </div>
           );

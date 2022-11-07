@@ -9,20 +9,22 @@ interface ProfileContentProps {
   setUser: Dispatch<SetStateAction<any>>;
 }
 
-export default function ProfileContent({ user, setUser }: ProfileContentProps) {
+export default function ProfileContent() {
+  const [user, setUser] = useState<any>(null);
   const navigate = useNavigate();
   useEffect(() => {
-    /* const test = async () => {
-      const user = await supabase.auth.getUser();
-    }; */
+    const getUser = async () => {
+      let user = await GetUser();
+      setUser(user);
+      isLogedIn(user);
+    };
 
-    const isLogedIn = () => {
-      if (user === null) {
+    const isLogedIn = (user: any) => {
+      if (user.data.user === null) {
         navigate("/login");
       }
     };
-    isLogedIn();
-    console.log(user);
+    getUser();
   }, []);
 
   const Logout = () => {
@@ -31,9 +33,9 @@ export default function ProfileContent({ user, setUser }: ProfileContentProps) {
   };
   return (
     <>
-      {user != null ? (
+      {user ? (
         <>
-          {/* <div>{user.data.user.email}</div> */}
+          <div>{user.data.user.email}</div>
           <button
             onClick={() => {
               Logout();

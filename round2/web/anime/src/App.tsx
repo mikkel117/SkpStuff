@@ -24,16 +24,10 @@ import ProfileContent from "./comp/page/ProfileContent";
 function App() {
   const [userInput, setUserInput] = useState<string>("");
   const [genre, setGenre] = useState<string>("");
-  const [user, setUser] = useState<any>(null);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    GetUser().then(setUser);
-  }, []);
 
   return (
     <>
-      <MyHeader userInput={userInput} setUserInput={setUserInput} user={user} />
+      <MyHeader userInput={userInput} setUserInput={setUserInput} />
       <Routes>
         <Route path='/' element={<Home setGenre={setGenre} />} />
         <Route path='/movie-slider-test' element={<MovieSliderTest />} />
@@ -53,11 +47,8 @@ function App() {
           path='/genre'
           element={<SeeGenre genre={genre} setGenre={setGenre} />}
         />
-        <Route path='/login' element={<Profile user={user} />} />
-        <Route
-          path='/profile'
-          element={<ProfileContent user={user} setUser={setUser} />}
-        />
+        <Route path='/login' element={<Profile />} />
+        <Route path='/profile' element={<ProfileContent />} />
         <Route path='*' element={<PageNotFound />} />
       </Routes>
     </>

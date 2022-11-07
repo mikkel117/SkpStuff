@@ -8,29 +8,29 @@ import SignOut from "../_supabase/signout";
 
 import { useNavigate } from "react-router-dom";
 
-interface ProfileProps {
-  user: any;
-}
-
-export default function Profile({ user }: ProfileProps) {
+export default function Profile() {
   const [isUserLogedin, setIsUserLogedin] = useState<boolean>(false);
   const [isFormHidden, setIsFormHidden] = useState<boolean>(true);
   const [formValue, setFormValue] = useState<string>("");
-  /* const [user, setUser] = useState<any>(); */
   const navigate = useNavigate();
-  useEffect(() => {
-    console.log(user);
-  }, []);
 
   useEffect(() => {
-    if (user) {
-      if (user.data.user != null) {
-        setIsUserLogedin(true);
-        navigate("/profile");
-      } else {
-        setIsUserLogedin(false);
+    const getUser = async () => {
+      let user = await GetUser();
+      islogdin(user);
+    };
+
+    const islogdin = (user: any) => {
+      if (user) {
+        if (user.data.user != null) {
+          setIsUserLogedin(true);
+          navigate("/profile");
+        } else {
+          setIsUserLogedin(false);
+        }
       }
-    }
+    };
+    getUser();
   }, []);
 
   const showForm = (FormValue: string) => {

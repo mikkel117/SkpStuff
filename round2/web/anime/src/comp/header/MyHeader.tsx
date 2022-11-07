@@ -7,14 +7,9 @@ import { AiOutlineSearch } from "react-icons/ai";
 interface MyHeaderProps {
   userInput: string;
   setUserInput: Dispatch<SetStateAction<string>>;
-  user: any;
 }
 
-export default function MyHeader({
-  userInput,
-  setUserInput,
-  user,
-}: MyHeaderProps) {
+export default function MyHeader({ userInput, setUserInput }: MyHeaderProps) {
   const [data, setData] = useState<any[]>([]);
   const [pages, setPages] = useState<any[]>([]);
   const [animeId, setAnimeId] = useState<string>("");
