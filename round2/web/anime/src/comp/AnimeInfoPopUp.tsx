@@ -1,4 +1,12 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+  useLayoutEffect,
+  useRef,
+} from "react";
+import { AiOutlineStar, AiFillStar } from "react-icons/ai";
 
 interface AnimeInfoPopUpProps {
   animeId: string;
@@ -31,6 +39,8 @@ export default function AnimeInfoPopUp({
   const [genres, setGenres] = useState<any[]>([]);
   const [error, setError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const [showButton, setShowButton] = useState<boolean>(false);
+  const animeDescription = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
     setIsLoading(true);
@@ -43,6 +53,19 @@ export default function AnimeInfoPopUp({
       document.body.classList.add("notScrollable");
     }
   }, [isAnimeInfoPopUp]);
+
+  useLayoutEffect(() => {
+    if (animeDescription.current) {
+      const hasOverflow =
+        animeDescription.current.scrollHeight >
+        animeDescription.current.clientHeight;
+      if (hasOverflow) {
+        setShowButton(true);
+      } else {
+        setShowButton(false);
+      }
+    }
+  }, [data]);
 
   const RemoveBodyStyle = () => {
     document.body.classList.remove("notScrollable");
@@ -100,6 +123,7 @@ export default function AnimeInfoPopUp({
                   </p>
                   <img src={data?.animeImg} alt='' />
                   <div className='animeInfo'>
+                    <AiOutlineStar className='addToFervervt' size={30} />
                     <p className='animeInfoText'>
                       other names:
                       {otherNames.map((item: any) => {
@@ -124,15 +148,23 @@ export default function AnimeInfoPopUp({
                     <p className='animeInfoText'>
                       type: <span> {data?.type} </span>
                     </p>
-                    <div className={`animeSynopsis ${isOpen ? "open" : ""}`}>
-                      <p className='text'> {data?.synopsis}</p>
+                    <div
+                      className={`animeSynopsis ${isOpen ? "open" : ""}`}
+                      ref={animeDescription}>
+                      {/* <p className='text'> */}
+                      {data?.synopsis}
+                      {/* </p> */}
                     </div>
-                    <button
-                      onClick={() => {
-                        setIsOpen(!isOpen);
-                      }}>
-                      {isOpen ? "show less" : "show more"}
-                    </button>
+                    {showButton ? (
+                      <button
+                        onClick={() => {
+                          setIsOpen(!isOpen);
+                        }}>
+                        {isOpen ? "show less" : "show more"}
+                      </button>
+                    ) : (
+                      <></>
+                    )}
                   </div>
                 </>
               )}

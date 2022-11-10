@@ -1,103 +1,29 @@
-.wrapper {
+.box {
   margin: 0 auto;
-  width: 200px;
-  height: 300px;
-  border: 1px solid #ccc;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: minmax(0, auto) minmax(50px, auto) 10%;
+  width: 300px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
   .test {
-    grid-row: 1;
-    overflow: hidden;
+    /* display: none; */
+    background-color: #f1f1f1;
+    border: 5px solid black;
+    span {
+      display: block;
+      color: black;
+      padding: 12px 16px;
+      border: 1px solid black;
+      transition: opacity 0.5 ease-in-out;
+      &:hover {
+        opacity: 0.5;
+      }
+    }
   }
-  .testClose {
-    height: 6rem;
-  }
-}
-
-.animeSynopsisWrapper {
-  .animeSynopsis {
-    border: 1px solid gray;
-    padding: 5px;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    text-overflow: unset;
-  }
-}
-#expand-toggle {
-  display: none;
-}
-#expand-btn {
-  display: inline-block;
-  margin-top: 12px;
-  padding: 5px 11px;
-  border: 1px solid;
-  border-radius: 3px;
-  &::before {
-    content: "show more";
-  }
-}
-#expand-toggle:checked ~ .animeSynopsis {
-  -webkit-line-clamp: 7;
-  overflow-y: scroll;
-}
-#expand-toggle:checked ~ #expand-btn {
-  &::before {
-    content: "show less";
-  }
-}
-
-.wrapper {
-  .box {
-    max-height: 100px;
-    overflow: hidden;
-    transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    animation: close 0.1s linear 0.1s forwards;
-  }
-  .open {
-    max-height: 100rem;
-    transition: max-height 0.5s cubic-bezier(0.9, 0, 0.8, 0.2);
-    animation: open 0.1s linear 0.1s forwards;
-  }
-  .text {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    margin: 12px 0;
-    animation: close 0.1s linear 0.1s forwards;
-  }
-  .open .text {
-    animation: open 0.1s linear 0.1s forwards;
-    overflow-y: scroll;
-    border-top: 1px solid #ccc;
-    padding: 5px;
+  input:focus {
+    background-color: lightblue;
   }
 
-  button {
-    grid-row: 3;
-  }
-}
-
-@keyframes open {
-  from {
-    -webkit-line-clamp: 3;
-  }
-  to {
-    -webkit-line-clamp: 8;
-  }
-}
-
-@keyframes close {
-  from {
-    -webkit-line-clamp: 8;
-  }
-  to {
-    -webkit-line-clamp: 3;
+  input:focus + .test {
+    display: block;
   }
 }

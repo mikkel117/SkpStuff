@@ -15,12 +15,6 @@
     img {
       height: 100%;
     }
-    .addToFervervt {
-      display: none;
-      position: absolute;
-      top: 5px;
-      right: 5px;
-    }
     span {
       font-size: larger;
       padding: 5px;
@@ -34,9 +28,6 @@
     }
     &:hover {
       span {
-        display: block;
-      }
-      .addToFervervt {
         display: block;
       }
 

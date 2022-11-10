@@ -14,10 +14,17 @@ export default function MyHeader({ userInput, setUserInput }: MyHeaderProps) {
   const [pages, setPages] = useState<any[]>([]);
   const [animeId, setAnimeId] = useState<string>("");
   const [isAnimeInfoPopUp, setIsAnimeInfoPopUp] = useState<boolean>(false);
+  const [focused, setFocused] = useState(false);
 
   useEffect(() => {
-    if (userInput.length > 2) {
-      FetchData();
+    if (userInput.length > 1) {
+      const timer = setTimeout(() => {
+        FetchData();
+      }, 200);
+      return () => clearTimeout(timer);
+    } else if (userInput.length === 0) {
+      setData([]);
+      setPages([]);
     }
   }, [userInput]);
 
@@ -49,6 +56,20 @@ export default function MyHeader({ userInput, setUserInput }: MyHeaderProps) {
     setData([]);
     setPages([]);
   };
+
+  const focus = () => {
+    if (!focused) {
+      setFocused(true);
+    }
+  };
+
+  const blur = () => {
+    const timer = setTimeout(() => {
+      if (focused) setFocused(false);
+    }, 100);
+    return () => clearTimeout(timer);
+  };
+
   return (
     <>
       <header>
@@ -61,44 +82,39 @@ export default function MyHeader({ userInput, setUserInput }: MyHeaderProps) {
             placeholder='search anime'
             className='animeSearchInput'
             onChange={(e) => setUserInput(e.target.value)}
+            onFocus={focus}
+            onBlur={blur}
           />
-          <div className='dropinputContent'>
-            {data.map((post: any) => {
-              return (
-                <p
-                  key={post.animeId}
-                  onClick={() => {
-                    ChangeAnimePopUpOpen(post.animeId);
-                  }}>
-                  <span> {post.animeTitle}</span>
-                  <img src={post.animeImg} alt={post.animeId} />
-                </p>
-              );
-            })}
-            {pages.length > 0 ? (
-              <button className='seeAllSearch'>
-                <Link
-                  to='/see-all-search'
-                  onClick={() => {
-                    EmptyData();
-                  }}>
-                  see all
-                </Link>
-              </button>
-            ) : (
-              <></>
-            )}
-          </div>
+          {focused && (
+            <div className='dropinputContent'>
+              {data.map((post: any) => {
+                return (
+                  <p
+                    key={post.animeId}
+                    onClick={() => {
+                      ChangeAnimePopUpOpen(post.animeId);
+                    }}>
+                    <span> {post.animeTitle}</span>
+                    <img src={post.animeImg} alt={post.animeId} />
+                  </p>
+                );
+              })}
+              {pages.length > 0 ? (
+                <button className='seeAllSearch'>
+                  <Link
+                    to='/see-all-search'
+                    onClick={() => {
+                      EmptyData();
+                    }}>
+                    see all
+                  </Link>
+                </button>
+              ) : (
+                <></>
+              )}
+            </div>
+          )}
         </form>
-        {data.length > 0 ? (
-          <div
-            className='hiddingCover'
-            onClick={() => {
-              EmptyData();
-            }}></div>
-        ) : (
-          <></>
-        )}
         <h1 className='title'>
           <Link to='/'>Title</Link>
         </h1>
