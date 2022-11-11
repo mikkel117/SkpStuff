@@ -185,6 +185,28 @@ body::-webkit-scrollbar-thumb {
       }
     }
   }
+  .genresWrapper {
+    .genres {
+      width: 100%;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      justify-content: normal;
+      &::-webkit-scrollbar {
+        height: 10px;
+      }
+      &::-webkit-scrollbar-track {
+        background: white;
+      }
+      &::-webkit-scrollbar-thumb {
+        background-color: gray;
+      }
+      a {
+        display: flex;
+        align-items: center;
+        font-weight: bold;
+      }
+    }
+  }
   .SeeAllAnimeWrapper {
     .SearchInput {
       display: block;

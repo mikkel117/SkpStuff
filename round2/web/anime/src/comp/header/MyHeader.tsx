@@ -61,7 +61,7 @@ export default function MyHeader({ userInput, setUserInput }: MyHeaderProps) {
   const blur = () => {
     const timer = setTimeout(() => {
       if (focused) setFocused(false);
-    }, 100);
+    }, 200);
     return () => clearTimeout(timer);
   };
 
