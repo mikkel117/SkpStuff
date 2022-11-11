@@ -157,6 +157,16 @@ body::-webkit-scrollbar-thumb {
     }
   }
 
+  .SeeAllAnimeWrapper {
+    .animeImgWrapper {
+      .animeCard {
+        &:hover {
+          scale: 1;
+        }
+      }
+    }
+  }
+
   header {
     grid-template-columns: 2% 10% 1fr 10% 2%;
     .title {
