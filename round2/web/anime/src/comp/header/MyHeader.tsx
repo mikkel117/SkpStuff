@@ -28,10 +28,6 @@ export default function MyHeader({ userInput, setUserInput }: MyHeaderProps) {
     }
   }, [userInput]);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-  };
-
   async function FetchData() {
     await fetch(
       `https://gogo-anime-api-sand.vercel.app/api/anime-api/search?keyw=${userInput}`
@@ -52,7 +48,6 @@ export default function MyHeader({ userInput, setUserInput }: MyHeaderProps) {
   };
 
   const EmptyData = (): void => {
-    /* setUserInput(""); */
     setData([]);
     setPages([]);
   };
@@ -76,7 +71,7 @@ export default function MyHeader({ userInput, setUserInput }: MyHeaderProps) {
         <Link to='/see-all-search' className='phoneSearch'>
           <AiOutlineSearch size={30} />
         </Link>
-        <form className='animeSearch' onSubmit={handleSubmit}>
+        <div className='animeSearch'>
           <input
             type='text'
             placeholder='search anime'
@@ -114,7 +109,7 @@ export default function MyHeader({ userInput, setUserInput }: MyHeaderProps) {
               )}
             </div>
           )}
-        </form>
+        </div>
         <h1 className='title'>
           <Link to='/'>Title</Link>
         </h1>

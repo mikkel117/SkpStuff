@@ -39,14 +39,12 @@ export default function AnimeSlider({ data }: AnimeSliderProps) {
           );
         })}
       </div>
-      {isAnimeInfoPopUp ? (
+      {isAnimeInfoPopUp && (
         <AnimeInfoPopUp
           animeId={animeId}
           setIsAnimeInfoPopUp={setIsAnimeInfoPopUp}
           isAnimeInfoPopUp={isAnimeInfoPopUp}
         />
-      ) : (
-        <></>
       )}
     </>
   );

@@ -75,14 +75,12 @@ export default function SeeAllAnime({
           })}
         </div>
       )}
-      {isAnimeInfoPopUp ? (
+      {isAnimeInfoPopUp && (
         <AnimeInfoPopUp
           animeId={animeId}
           setIsAnimeInfoPopUp={setIsAnimeInfoPopUp}
           isAnimeInfoPopUp={isAnimeInfoPopUp}
         />
-      ) : (
-        <></>
       )}
     </>
   );

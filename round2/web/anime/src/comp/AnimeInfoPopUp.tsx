@@ -121,49 +121,70 @@ export default function AnimeInfoPopUp({
                     }}>
                     X
                   </p>
-                  <img src={data?.animeImg} alt='' />
+                  <div className='imageCover'>
+                    <img src={data?.animeImg} alt='' />
+                  </div>
                   <div className='animeInfo'>
                     <AiOutlineStar className='addToFervervt' size={30} />
-                    <p className='animeInfoText'>
-                      other names:
-                      {otherNames.map((item: any) => {
-                        return <span key={item}>{item},</span>;
-                      })}
-                    </p>
-                    <p className='animeInfoText'>
-                      genres:
-                      {genres.map((item: any) => {
-                        return <span key={item}>{item},</span>;
-                      })}
-                    </p>
-                    <p className='animeInfoText'>
-                      relesaed date: <span> {data?.releasedDate}</span>
-                    </p>
-                    <p className='animeInfoText'>
-                      status: <span> {data?.status}</span>{" "}
-                    </p>
-                    <p className='animeInfoText'>
-                      totale episodes: <span> {data?.totalEpisodes} </span>{" "}
-                    </p>
-                    <p className='animeInfoText'>
-                      type: <span> {data?.type} </span>
-                    </p>
+                    <div className='splitAnimeInfo'>
+                      <div className='animeInfoTextWrapper'>
+                        <p className='animeInfoText'>
+                          other names:
+                          {otherNames.map((item: any) => {
+                            return <span key={item}>{item},</span>;
+                          })}
+                        </p>
+                        <p className='animeInfoText'>
+                          genres:
+                          {genres.map((item: any) => {
+                            return <span key={item}>{item},</span>;
+                          })}
+                        </p>
+                        <p className='animeInfoText'>
+                          relesaed date: <span> {data?.releasedDate}</span>
+                        </p>
+                        <p className='animeInfoText'>
+                          status: <span> {data?.status}</span>{" "}
+                        </p>
+                        <p className='animeInfoText'>
+                          totale episodes: <span> {data?.totalEpisodes} </span>{" "}
+                        </p>
+                        <p className='animeInfoText'>
+                          type: <span> {data?.type} </span>
+                        </p>
+                      </div>
+                      {data?.totalEpisodes === "0" ? (
+                        <></>
+                      ) : (
+                        <div className='epWrapper'>
+                          <p className='epTitle'>episodesList</p>
+                          <div className={`eps`}>
+                            {data?.episodesList.map((item) => {
+                              return (
+                                <a
+                                  key={item.episodeId}
+                                  href={item.episodeUrl}
+                                  target='_blank'>
+                                  {item.episodeNum}
+                                </a>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      )}
+                    </div>
                     <div
                       className={`animeSynopsis ${isOpen ? "open" : ""}`}
                       ref={animeDescription}>
-                      {/* <p className='text'> */}
                       {data?.synopsis}
-                      {/* </p> */}
                     </div>
-                    {showButton ? (
+                    {showButton && (
                       <button
                         onClick={() => {
                           setIsOpen(!isOpen);
                         }}>
                         {isOpen ? "show less" : "show more"}
                       </button>
-                    ) : (
-                      <></>
                     )}
                   </div>
                 </>
