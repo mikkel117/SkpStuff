@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Dispatch, SetStateAction } from "react";
 import supabase from "../_supabase/supabase";
 import CreateUser from "../_supabase/createUser";
 import SupabaseLogin from "../_supabase/login";
@@ -8,10 +8,13 @@ import SignOut from "../_supabase/signout";
 
 import { useNavigate } from "react-router-dom";
 
-export default function Profile() {
+interface ProfileProps {
+  formValue: string;
+  setFormValue: Dispatch<SetStateAction<string>>;
+}
+
+export default function Profile({ formValue, setFormValue }: ProfileProps) {
   const [isUserLogedin, setIsUserLogedin] = useState<boolean>(false);
-  const [isFormHidden, setIsFormHidden] = useState<boolean>(true);
-  const [formValue, setFormValue] = useState<string>("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,38 +35,14 @@ export default function Profile() {
     };
     getUser();
   }, []);
-
-  const showForm = (FormValue: string) => {
-    setIsFormHidden(!isFormHidden);
-    setFormValue(FormValue);
-  };
   return (
     <div className='profileContentWrapper'>
       {isUserLogedin ? (
         <></>
       ) : (
         <>
-          {isFormHidden ? (
-            <>
-              <button
-                onClick={() => {
-                  showForm("login");
-                }}>
-                login
-              </button>
-              <button
-                onClick={() => {
-                  showForm("singUp");
-                }}>
-                sing up
-              </button>
-            </>
-          ) : (
-            <Login
-              formvValue={formValue}
-              setFormValue={setFormValue}
-              setIsFormHidden={setIsFormHidden}
-            />
+          {formValue != "" && (
+            <Login formvValue={formValue} setFormValue={setFormValue} />
           )}
         </>
       )}

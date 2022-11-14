@@ -6,14 +6,9 @@ import { useNavigate } from "react-router-dom";
 interface loginProps {
   formvValue: string;
   setFormValue: Dispatch<SetStateAction<string>>;
-  setIsFormHidden: Dispatch<SetStateAction<boolean>>;
 }
 
-export default function Login({
-  formvValue,
-  setFormValue,
-  setIsFormHidden,
-}: loginProps) {
+export default function Login({ formvValue, setFormValue }: loginProps) {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [loginError, setLoginError] = useState<string>("");
@@ -27,11 +22,13 @@ export default function Login({
       if (formvValue === "login") {
         const login = await SupabaseLogin(email, password);
         if (login === "logedin") {
+          setFormValue("");
           navigate("/profile");
         }
       } else {
         const signup = await CreateUser(email, password);
         if (signup === "signedUp") {
+          setFormValue("");
           navigate("/profile");
         }
       }
@@ -40,7 +37,7 @@ export default function Login({
 
   const Cancle = () => {
     setFormValue("");
-    setIsFormHidden(true);
+    navigate("/");
   };
   return (
     <>

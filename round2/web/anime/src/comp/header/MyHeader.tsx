@@ -3,18 +3,27 @@ import AnimeInfoPopUp from "../AnimeInfoPopUp";
 import { CgProfile } from "react-icons/cg";
 import { Link } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
+import GetUser from "../_supabase/getUser";
 
 interface MyHeaderProps {
   userInput: string;
   setUserInput: Dispatch<SetStateAction<string>>;
+  formValue: string;
+  setFormValue: Dispatch<SetStateAction<string>>;
 }
 
-export default function MyHeader({ userInput, setUserInput }: MyHeaderProps) {
+export default function MyHeader({
+  userInput,
+  setUserInput,
+  formValue,
+  setFormValue,
+}: MyHeaderProps) {
   const [data, setData] = useState<any[]>([]);
   const [pages, setPages] = useState<any[]>([]);
   const [animeId, setAnimeId] = useState<string>("");
   const [isAnimeInfoPopUp, setIsAnimeInfoPopUp] = useState<boolean>(false);
   const [focused, setFocused] = useState(false);
+  const [isLogedIn, setIsLogedIn] = useState(false);
 
   useEffect(() => {
     if (userInput.length > 1) {
@@ -27,6 +36,19 @@ export default function MyHeader({ userInput, setUserInput }: MyHeaderProps) {
       setPages([]);
     }
   }, [userInput]);
+
+  useEffect(() => {
+    const getUser = async () => {
+      let user = await GetUser();
+      console.log(user.data.user);
+      if (user.data.user === null) {
+        setIsLogedIn(false);
+      } else {
+        setIsLogedIn(true);
+      }
+    };
+    getUser();
+  }, [formValue]);
 
   async function FetchData() {
     await fetch(
@@ -113,9 +135,31 @@ export default function MyHeader({ userInput, setUserInput }: MyHeaderProps) {
         <h1 className='title'>
           <Link to='/'>Title</Link>
         </h1>
-        <Link to='/login' className='profile'>
-          <CgProfile size={35} />
-        </Link>
+        <div className='profile'>
+          {isLogedIn ? (
+            <Link to='/login'>
+              <CgProfile size={35} />
+            </Link>
+          ) : (
+            <>
+              <Link
+                to='/login'
+                onClick={() => {
+                  setFormValue("login");
+                }}>
+                login
+              </Link>
+              <br />
+              <Link
+                to='/login'
+                onClick={() => {
+                  setFormValue("singup");
+                }}>
+                singup
+              </Link>
+            </>
+          )}
+        </div>
       </header>
       {isAnimeInfoPopUp ? (
         <AnimeInfoPopUp

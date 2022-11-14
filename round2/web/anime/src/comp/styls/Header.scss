@@ -94,9 +94,12 @@ header {
   .profile {
     justify-self: end;
     align-self: center;
-    color: white;
-    &:hover {
-      opacity: 0.5;
+    a {
+      color: white;
+      text-decoration: none;
+      &:hover {
+        opacity: 0.5;
+      }
     }
   }
 }

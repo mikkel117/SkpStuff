@@ -7,6 +7,10 @@ import React, {
   useRef,
 } from "react";
 import { AiOutlineStar, AiFillStar } from "react-icons/ai";
+import GetUser from "../comp/_supabase/getUser";
+import AddToFavorite from "../comp/_supabase/addToFavorite";
+import GetData from "../comp/_supabase/getData";
+import DeleteData from "../comp/_supabase/deleteData";
 
 interface AnimeInfoPopUpProps {
   animeId: string;
@@ -35,24 +39,30 @@ export default function AnimeInfoPopUp({
   const [data, setData] = useState<AnimeInfoArray>();
   const [isloading, setIsLoading] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [otherNames, setOtherNames] = useState<any[]>([]);
-  const [genres, setGenres] = useState<any[]>([]);
+  const [otherNames, setOtherNames] = useState<string[]>([]);
+  const [genres, setGenres] = useState<string[]>([]);
   const [error, setError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [showButton, setShowButton] = useState<boolean>(false);
+  const [userId, setUserId] = useState<string>("");
+  const [isInFavorite, setIsInFavorite] = useState<boolean>(false);
   const animeDescription = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
     setIsLoading(true);
     FetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [animeId]);
-
-  useEffect(() => {
+    const getUser = async () => {
+      let user = await GetUser();
+      if (user.data.user != null) {
+        setUserId(user.data.user.id);
+        isInFavoriteCheck(user.data.user.id);
+      }
+    };
+    getUser();
     if (isAnimeInfoPopUp) {
       document.body.classList.add("notScrollable");
     }
-  }, [isAnimeInfoPopUp]);
+  }, [animeId]);
 
   useLayoutEffect(() => {
     if (animeDescription.current) {
@@ -96,6 +106,30 @@ export default function AnimeInfoPopUp({
         /* console.log("error", err.message); */
       });
   };
+
+  const isInFavoriteCheck = async (user: string) => {
+    let animeData = await GetData(user, animeId);
+    if (animeData.error === null && animeData.data != null) {
+      setIsInFavorite(true);
+    }
+  };
+
+  const AddToFervervrtF = async (id: string) => {
+    if (userId != "") {
+      let addTofavorite = await AddToFavorite(userId, id);
+      isInFavoriteCheck(userId);
+    }
+  };
+
+  const RemoveFromFavorite = async () => {
+    if (userId != "") {
+      let test = await DeleteData(userId, animeId);
+      if (test.error === null) {
+        setIsInFavorite(false);
+      }
+    }
+  };
+
   return (
     <>
       <section className='AnimeInfoPopUp'>
@@ -125,7 +159,24 @@ export default function AnimeInfoPopUp({
                     <img src={data?.animeImg} alt='' />
                   </div>
                   <div className='animeInfo'>
-                    <AiOutlineStar className='addToFervervt' size={30} />
+                    {isInFavorite ? (
+                      <AiFillStar
+                        className='addToFervervt'
+                        size={30}
+                        onClick={() => {
+                          RemoveFromFavorite();
+                        }}
+                      />
+                    ) : (
+                      <AiOutlineStar
+                        className='addToFervervt'
+                        size={30}
+                        onClick={() => {
+                          AddToFervervrtF(animeId);
+                        }}
+                      />
+                    )}
+
                     <div className='splitAnimeInfo'>
                       <div className='animeInfoTextWrapper'>
                         <p className='animeInfoText'>
@@ -173,11 +224,15 @@ export default function AnimeInfoPopUp({
                         </div>
                       )}
                     </div>
-                    <div
-                      className={`animeSynopsis ${isOpen ? "open" : ""}`}
-                      ref={animeDescription}>
-                      {data?.synopsis}
-                    </div>
+                    {data?.synopsis === undefined ? (
+                      <></>
+                    ) : (
+                      <div
+                        className={`animeSynopsis ${isOpen ? "open" : ""}`}
+                        ref={animeDescription}>
+                        {data?.synopsis}
+                      </div>
+                    )}
                     {showButton && (
                       <button
                         onClick={() => {

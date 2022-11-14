@@ -24,10 +24,16 @@ import ProfileContent from "./comp/page/ProfileContent";
 function App() {
   const [userInput, setUserInput] = useState<string>("");
   const [genre, setGenre] = useState<string>("");
+  const [formValue, setFormValue] = useState<string>("");
 
   return (
     <>
-      <MyHeader userInput={userInput} setUserInput={setUserInput} />
+      <MyHeader
+        userInput={userInput}
+        setUserInput={setUserInput}
+        formValue={formValue}
+        setFormValue={setFormValue}
+      />
       <Routes>
         <Route path='/' element={<Home setGenre={setGenre} />} />
         <Route path='/movie-slider-test' element={<MovieSliderTest />} />
@@ -47,7 +53,12 @@ function App() {
           path='/genre'
           element={<SeeGenre genre={genre} setGenre={setGenre} />}
         />
-        <Route path='/login' element={<Profile />} />
+        <Route
+          path='/login'
+          element={
+            <Profile formValue={formValue} setFormValue={setFormValue} />
+          }
+        />
         <Route path='/profile' element={<ProfileContent />} />
         <Route path='*' element={<PageNotFound />} />
       </Routes>
