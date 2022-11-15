@@ -40,7 +40,6 @@ export default function MyHeader({
   useEffect(() => {
     const getUser = async () => {
       let user = await GetUser();
-      console.log(user.data.user);
       if (user.data.user === null) {
         setIsLogedIn(false);
       } else {

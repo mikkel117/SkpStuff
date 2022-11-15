@@ -36,7 +36,7 @@ export default function Profile({ formValue, setFormValue }: ProfileProps) {
     getUser();
   }, []);
   return (
-    <div className='profileContentWrapper'>
+    <div className='loginWrapper'>
       {isUserLogedin ? (
         <></>
       ) : (

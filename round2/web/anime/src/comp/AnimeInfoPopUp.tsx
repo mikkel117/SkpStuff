@@ -114,9 +114,18 @@ export default function AnimeInfoPopUp({
     }
   };
 
-  const AddToFervervrtF = async (id: string) => {
+  const AddToFervervrtF = async () => {
     if (userId != "") {
-      let addTofavorite = await AddToFavorite(userId, id);
+      /* console.log(
+        `userId: ${userId} animeId: ${animeId}, animeTitle: ${data?.animeTitle}, animeImg: ${data?.animeImg}`
+      ); */
+
+      let addTofavorite = await AddToFavorite(
+        userId,
+        animeId,
+        data?.animeTitle,
+        data?.animeImg
+      );
       isInFavoriteCheck(userId);
     }
   };
@@ -172,7 +181,7 @@ export default function AnimeInfoPopUp({
                         className='addToFervervt'
                         size={30}
                         onClick={() => {
-                          AddToFervervrtF(animeId);
+                          AddToFervervrtF();
                         }}
                       />
                     )}

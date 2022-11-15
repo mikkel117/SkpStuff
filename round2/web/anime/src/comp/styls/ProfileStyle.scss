@@ -1,5 +1,48 @@
+.loginWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .profileContentWrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  .favortieWrapper {
+    width: 50%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-auto-rows: minmax(50px, auto-fil);
+    gap: 10px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    div {
+      transition: all 200ms ease-in-out;
+      position: relative;
+      text-align: center;
+      height: 100%;
+      span {
+        font-size: larger;
+        padding: 5px;
+        display: none;
+        position: absolute;
+        width: 100%;
+        top: 50%;
+        left: 50%;
+        background-color: #1e1f26;
+        transform: translate(-50%, -50%);
+      }
+      img {
+        width: 100%;
+      }
+      &:hover {
+        span {
+          display: block;
+        }
+
+        transform: scale(1.1);
+      }
+    }
+  }
 }

@@ -12,11 +12,6 @@ export default function AnimeSlider({ data }: AnimeSliderProps) {
     setAnimeId(animeId);
     setIsAnimeInfoPopUp(true);
   };
-  /* AiOutlineStar */
-  /* AiFillStar */
-  /* useEffect(() => {
-    console.log(data);
-  }, [data]); */
 
   return (
     <>

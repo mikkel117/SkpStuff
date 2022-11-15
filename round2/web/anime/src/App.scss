@@ -226,4 +226,19 @@ body::-webkit-scrollbar-thumb {
       grid-template-columns: 1fr 1fr;
     }
   }
+  .profileContentWrapper {
+    .favortieWrapper {
+      width: 90%;
+      grid-template-columns: 1fr 1fr;
+      div {
+        &:hover {
+          span {
+            display: block;
+          }
+
+          transform: none;
+        }
+      }
+    }
+  }
 }
