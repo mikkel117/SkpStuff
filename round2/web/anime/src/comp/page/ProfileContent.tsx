@@ -55,9 +55,13 @@ export default function ProfileContent() {
   }, [endChunk]);
 
   const HowManyPages = (data: favoriteAnimes[]) => {
-    console.log(data.length / ChunkSize);
-
-    let pagesSize = Math.round(data.length / ChunkSize);
+    let pagesSize = 0;
+    for (let index = 0; index < data.length; index = index + ChunkSize) {
+      pagesSize = pagesSize + 1;
+    }
+    if (pagesSize === 0) {
+      pagesSize = 1;
+    }
     setTotalPages(pagesSize);
   };
 
