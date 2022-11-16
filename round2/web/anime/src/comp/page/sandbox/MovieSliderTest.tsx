@@ -25,24 +25,7 @@ export default function MovieSliderTest() {
 
   return (
     <>
-      <div className='dropdown'>
-        <input
-          type='text'
-          className='dropInput'
-          onChange={(e) => setUserInput(e.target.value)}
-        />
-        <div className='dropinputContent'>
-          {data.length > 0 ? (
-            <a>
-              {data.map((item: any) => {
-                return <a href={item.animeUrl}>{item.animeTitle}</a>;
-              })}
-            </a>
-          ) : (
-            <></>
-          )}
-        </div>
-      </div>
+      <div></div>
     </>
   );
 }

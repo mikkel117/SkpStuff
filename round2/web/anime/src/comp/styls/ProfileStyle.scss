@@ -17,7 +17,33 @@
     gap: 10px;
     margin-bottom: 20px;
     margin-top: 20px;
-    div {
+    .profileEmail {
+      align-self: center;
+      grid-column: 1;
+      text-align: center;
+      font-size: 20px;
+    }
+    .favortieAnimesTitle {
+      align-self: center;
+      grid-column: 2;
+      text-align: center;
+      font-size: 20px;
+    }
+    .signOutBtn {
+      justify-self: end;
+      padding: 10px;
+      width: 50%;
+    }
+    .deleteUser {
+      background-color: red;
+      color: white;
+      border: none;
+      grid-column: 3;
+      justify-self: end;
+      padding: 10px;
+      width: 50%;
+    }
+    .animeCard {
       transition: all 200ms ease-in-out;
       position: relative;
       text-align: center;
@@ -43,6 +69,10 @@
 
         transform: scale(1.1);
       }
+    }
+    .pagesWrapper {
+      grid-column: 1/4;
+      justify-self: center;
     }
   }
 }

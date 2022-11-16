@@ -5,10 +5,6 @@ import SignOut from "../_supabase/signout";
 import GetAllAnime from "../_supabase/getAllAnime";
 import AnimeInfoPopUp from "../AnimeInfoPopUp";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
-interface ProfileContentProps {
-  user: any;
-  setUser: Dispatch<SetStateAction<any>>;
-}
 
 interface favoriteAnimes {
   animeId: string;
@@ -59,6 +55,8 @@ export default function ProfileContent() {
   }, [endChunk]);
 
   const HowManyPages = (data: favoriteAnimes[]) => {
+    console.log(data.length / ChunkSize);
+
     let pagesSize = Math.round(data.length / ChunkSize);
     setTotalPages(pagesSize);
   };
@@ -92,17 +90,20 @@ export default function ProfileContent() {
     <>
       {user && (
         <div className='profileContentWrapper'>
-          <div>email: {user.data.user.email}</div>
-          <button
-            onClick={() => {
-              Logout();
-            }}>
-            sign out
-          </button>
           <div className='favortieWrapper'>
+            <p className='profileEmail'>email: {user.data.user.email}</p>
+            <h3 className='favortieAnimesTitle'>favortie animes</h3>
+            <button
+              className='signOutBtn'
+              onClick={() => {
+                Logout();
+              }}>
+              sign out
+            </button>
             {dataUsed.map((item: favoriteAnimes) => {
               return (
                 <div
+                  className='animeCard'
                   key={item.animeId}
                   onClick={() => {
                     OpenModal(item.animeId);
@@ -112,21 +113,22 @@ export default function ProfileContent() {
                 </div>
               );
             })}
-          </div>
-          <div className='pagesWrapper'>
-            <AiOutlineArrowLeft
-              onClick={() => {
-                DecreaseChunkSize();
-              }}
-            />
-            <span>
-              {currentPage}/{totalPages}
-            </span>
-            <AiOutlineArrowRight
-              onClick={() => {
-                IncreaseChunkSize();
-              }}
-            />
+            <div className='pagesWrapper'>
+              <AiOutlineArrowLeft
+                onClick={() => {
+                  DecreaseChunkSize();
+                }}
+              />
+              <span>
+                {currentPage}/{totalPages}
+              </span>
+              <AiOutlineArrowRight
+                onClick={() => {
+                  IncreaseChunkSize();
+                }}
+              />
+            </div>
+            <button className='deleteUser'>delete user</button>
           </div>
         </div>
       )}
