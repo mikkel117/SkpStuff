@@ -1,0 +1,21 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.wrapper {
+  margin: 0 auto;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+}
+
+img {
+  margin-top: 20px;
+  transition: clip-path 1s ease-in-out;
+  clip-path: polygon(0 0, 0 100%, 100% 100%);
+}
+
+img:hover {
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
