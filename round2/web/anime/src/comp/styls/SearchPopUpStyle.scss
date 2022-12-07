@@ -1,0 +1,33 @@
+.searchModalBgClose {
+  position: fixed;
+  z-index: -1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.searchModal {
+  position: fixed;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  .searchModalContent {
+    z-index: 3;
+    background-color: #232946;
+    color: white;
+    margin: auto;
+    padding: 20px;
+    width: 100%;
+    height: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    input {
+      font-size: 1.5rem;
+    }
+  }
+}

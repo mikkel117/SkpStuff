@@ -3,7 +3,7 @@
   "comp/styls//sandboxStyle/NewSliderStyle.scss",
   "comp/styls/AnimeInfoStyle.scss", "comp/styls/Header.scss",
   "comp/styls/AnimeSliderStyle.scss", "comp/styls/SeeAllAnimeOfTypeStyle.scss",
-  "comp/styls/ProfileStyle.scss";
+  "comp/styls/ProfileStyle.scss", "comp/styls/SearchPopUpStyle.scss";
 * {
   margin: 0;
   padding: 0;
@@ -116,6 +116,9 @@ body::-webkit-scrollbar-thumb {
 }
 
 .genresWrapper {
+  .genresSearch {
+    margin-bottom: 10px;
+  }
   .title {
     margin: 10px;
     text-align: center;

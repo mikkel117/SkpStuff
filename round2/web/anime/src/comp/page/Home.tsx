@@ -5,6 +5,9 @@ import RecentEpisodes from "./RecentEpisodes";
 import TopAiring from "./TopAiring";
 import Movies from "./Movies";
 import Genres from "./Genres";
+import SearchPopUp from "../SearchPopUp";
+
+import { AiOutlineSearch } from "react-icons/ai";
 
 interface HomePorps {
   setGenre: Dispatch<SetStateAction<string>>;
@@ -12,7 +15,7 @@ interface HomePorps {
 
 export default function Home({ setGenre }: HomePorps) {
   const [animeTypeSubDub, setAnimeTypeSubDub] = useState<number>(1);
-
+  const [isSearchPopUpOpen, setIsSearchPopUpOpen] = useState<boolean>(false);
   return (
     <>
       <div className='animeWrapper'>
@@ -65,8 +68,21 @@ export default function Home({ setGenre }: HomePorps) {
       </div>
       <div className='genresWrapper'>
         <h3 className='title'>Genres</h3>
+        <AiOutlineSearch
+          size={30}
+          className='genresSearch'
+          onClick={() => {
+            setIsSearchPopUpOpen(true);
+          }}
+        />
         <Genres setGenre={setGenre} />
       </div>
+      {isSearchPopUpOpen && (
+        <SearchPopUp
+          setIsSearchPopUpOpen={setIsSearchPopUpOpen}
+          isSearchPopUpOpen={isSearchPopUpOpen}
+        />
+      )}
     </>
   );
 }
