@@ -92,8 +92,9 @@ header {
   }
 
   .profile {
-    justify-self: end;
+    justify-self: space-evenly;
     align-self: center;
+    display: flex;
     a {
       color: white;
       text-decoration: none;
