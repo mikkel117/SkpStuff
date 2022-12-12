@@ -117,6 +117,7 @@ body::-webkit-scrollbar-thumb {
 
 .genresWrapper {
   .genresSearch {
+    display: none;
     margin-bottom: 10px;
   }
   .title {
@@ -199,6 +200,10 @@ body::-webkit-scrollbar-thumb {
     }
   }
   .genresWrapper {
+    .genresSearch {
+      display: block;
+    }
+
     .genres {
       width: 100%;
       flex-wrap: nowrap;

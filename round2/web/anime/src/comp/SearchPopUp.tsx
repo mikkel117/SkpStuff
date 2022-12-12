@@ -21,6 +21,10 @@ export default function SearchPopUp({
     FetchData();
   }, [isSearchPopUpOpen]);
 
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
+
   const FetchData = () => {
     fetch(`https://gogo-anime-api-sand.vercel.app/api/anime-api/get-genres`)
       .then((response) => response.json())
@@ -64,7 +68,7 @@ export default function SearchPopUp({
                 if (userInput === "") {
                   return "";
                 } else if (
-                  post.value
+                  post.genre
                     .toLowerCase()
                     .includes(userInput?.toLowerCase() as string)
                 ) {
@@ -76,7 +80,8 @@ export default function SearchPopUp({
                   item.genre !== "Hentai" &&
                   item.genre !== "Yaoi" &&
                   item.genre !== "Yuri" &&
-                  item.genre !== "Erotica"
+                  item.genre !== "Erotica" &&
+                  item.genre !== "Ecchi"
                 ) {
                   /* return <p key={item.value}>{item.value}</p>; */
                   return (
