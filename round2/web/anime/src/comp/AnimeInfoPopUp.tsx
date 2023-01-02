@@ -92,6 +92,8 @@ export default function AnimeInfoPopUp({
           /* console.log(data.error); */
           setError(true);
           setErrorMessage("404");
+
+          setIsLoading(false);
         }
 
         setOtherNames(data.otherNames);
@@ -103,7 +105,6 @@ export default function AnimeInfoPopUp({
       .catch((err) => {
         setError(true);
         setErrorMessage(err.message);
-        /* console.log("error", err.message); */
       });
   };
 
@@ -119,14 +120,10 @@ export default function AnimeInfoPopUp({
       /* console.log(
         `userId: ${userId} animeId: ${animeId}, animeTitle: ${data?.animeTitle}, animeImg: ${data?.animeImg}`
       ); */
-
-      let addTofavorite = await AddToFavorite(
-        userId,
-        animeId,
-        data?.animeTitle,
-        data?.animeImg
-      );
+      await AddToFavorite(userId, animeId, data?.animeTitle, data?.animeImg);
       isInFavoriteCheck(userId);
+    } else if (userId === "") {
+      alert("Please login to at this to favorites");
     }
   };
 
