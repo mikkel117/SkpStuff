@@ -190,9 +190,9 @@
 
 @media only screen and (max-width: 600px) {
   .AnimeInfoPopUp {
-    overflow-y: auto;
     padding: 0;
     .AnimeInfoContent {
+      overflow-y: auto;
       width: 95%;
       height: 100%;
       .animeTitle {
