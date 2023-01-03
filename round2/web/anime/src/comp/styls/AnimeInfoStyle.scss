@@ -1,4 +1,4 @@
-.bgClose {
+/* .bgClose {
   position: fixed;
   z-index: -1;
   padding-top: 100px;
@@ -147,32 +147,68 @@
 
 @media only screen and (max-width: 1200px) {
   .AnimeInfoPopUp {
+    padding: 0;
     .AnimeInfoContent {
-      width: 99%;
+      width: 95%;
       height: 95%;
-      grid-template-columns: 1fr 1fr 10%;
-      padding: 10px;
-      .animeInfo {
-        .splitAnimeInfo {
-          flex-direction: column;
-          .epWrapper {
-            .eps {
-              height: auto;
-              overflow-y: hidden;
-              overflow-x: auto;
-              display: flex;
-              width: 100%;
-              max-width: 100%;
-              a {
-                padding: 10px;
-                border: 1px solid black;
-              }
-            }
-          }
-        }
+    }
+  }
+}
+ */
+
+.bgClose {
+  position: fixed;
+  z-index: -1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.AnimeInfoPopUp {
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  .AnimeInfoContent {
+    z-index: 3;
+    background-color: #232946;
+    color: white;
+    margin: auto;
+    padding: 20px;
+    width: 80%;
+    height: 80%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: minmax(30px, auto) 1fr;
+    overflow: hidden;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .AnimeInfoPopUp {
+    .AnimeInfoContent {
+      width: 95%;
+      height: 95%;
+      .animeTitle {
+        grid-column: 1/3;
+      }
+      .close {
+        grid-column: 3;
       }
       .imageCover {
-        padding: 50px;
+        grid-column: 2;
+        img {
+          width: 100%;
+        }
+      }
+      .animeInfoTextWrapper {
+        grid-column: 1;
+        grid-row: 2;
       }
     }
   }
