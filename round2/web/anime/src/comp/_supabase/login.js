@@ -6,7 +6,8 @@ const SupabaseLogin = async (Email, Password) => {
     password: Password,
   });
   if (error) {
-    return error;
+    let errorSplit = error.toString().split(":");
+    return errorSplit[1];
   }
 
   return "logedin";

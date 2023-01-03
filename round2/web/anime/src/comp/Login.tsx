@@ -17,19 +17,26 @@ export default function Login({ formvValue, setFormValue }: loginProps) {
   const HandleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (email === "" && password === "") {
-      setLoginError("error");
+      setLoginError("email and password must not be empty");
     } else {
       if (formvValue === "login") {
         const login = await SupabaseLogin(email, password);
+
         if (login === "logedin") {
           setFormValue("");
           navigate("/profile");
+        } else {
+          console.log(login);
+
+          setLoginError(login.toString());
         }
       } else {
         const signup = await CreateUser(email, password);
         if (signup === "signedUp") {
           setFormValue("");
           navigate("/profile");
+        } else {
+          setLoginError(signup.toString());
         }
       }
     }
@@ -44,15 +51,15 @@ export default function Login({ formvValue, setFormValue }: loginProps) {
       {formvValue === "login" ? <h3>login</h3> : <h3>sing up</h3>}
       <form onSubmit={HandleSubmit}>
         <label htmlFor='email'>email:</label>
-        <br />
+
         <input
           type='email'
           name='email'
           onChange={(e) => setEmail(e.target.value)}
         />
-        <br />
+
         <label htmlFor='password'>password:</label>
-        <br />
+
         <input
           type='password'
           name='password'
@@ -60,20 +67,20 @@ export default function Login({ formvValue, setFormValue }: loginProps) {
         />
         {loginError ? (
           <>
-            <br /> <span>{loginError}</span>
+            <span className='loginError'>{loginError}</span>
           </>
         ) : (
           <></>
         )}
-
-        <br />
-        <input type='submit' />
-        <button
-          onClick={() => {
-            Cancle();
-          }}>
-          cancle
-        </button>
+        <div>
+          <input type='submit' className='login' />
+          <button
+            onClick={() => {
+              Cancle();
+            }}>
+            cancle
+          </button>
+        </div>
       </form>
     </>
   );

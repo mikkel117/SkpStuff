@@ -20,12 +20,8 @@ header {
       border-radius: 10px;
       padding: 0 10px;
       z-index: 1;
-      /* &:focus ~ .dropinputContent {
-        display: block;
-      } */
     }
     .dropinputContent {
-      /* display: none; */
       top: 85%;
       position: absolute;
       background-color: #f1f1f1;
@@ -55,22 +51,25 @@ header {
         }
         &:hover {
           img {
-            /* opacity: 0.5; */
             box-shadow: 6px 6px 6px 6px black;
           }
         }
       }
       .seeAllSearch {
+        display: block;
         width: 100%;
-        background-color: green;
-        display: flex;
-        justify-content: center;
-        a {
-          margin: 10px;
-          color: black;
-          font-size: large;
-          font-weight: bold;
-          text-decoration: none;
+        border: 1px solid black;
+        text-align: center;
+        padding: 10px;
+        background-color: #eebbc3;
+        text-decoration: none;
+        font-size: large;
+        font-weight: bold;
+        color: black;
+
+        transition: all 250ms ease-in-out;
+        &:hover {
+          opacity: 0.5;
         }
       }
     }
@@ -92,8 +91,10 @@ header {
   }
 
   .profile {
-    justify-self: center;
+    display: flex;
+    justify-content: space-evenly;
     align-self: center;
+
     a {
       color: white;
       text-decoration: none;

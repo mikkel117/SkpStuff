@@ -1,6 +1,7 @@
 import React, { useEffect, useState, Dispatch, SetStateAction } from "react";
-import GetUser from "../_supabase/getUser";
 import { useNavigate } from "react-router-dom";
+import GetUser from "../_supabase/getUser";
+import SupabaseDeleteUser from "../_supabase/deleteUser";
 import SignOut from "../_supabase/signout";
 import GetAllAnime from "../_supabase/getAllAnime";
 import AnimeInfoPopUp from "../AnimeInfoPopUp";
@@ -13,7 +14,7 @@ interface favoriteAnimes {
 }
 
 export default function ProfileContent() {
-  const ChunkSize: number = 10;
+  const ChunkSize: number = 12;
   const [user, setUser] = useState<any>(null);
   const [data, setData] = useState<favoriteAnimes[]>([]);
   const [dataUsed, setDataUsed] = useState<favoriteAnimes[]>([]);
@@ -89,6 +90,11 @@ export default function ProfileContent() {
   const OpenModal = (animeId: string) => {
     setAnimeId(animeId);
     setIsAnimeInfoPopUp(true);
+  };
+
+  const Delete = async () => {
+    const user = await GetUser();
+    const test = await SupabaseDeleteUser(user);
   };
   return (
     <>

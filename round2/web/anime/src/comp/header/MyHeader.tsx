@@ -116,15 +116,14 @@ export default function MyHeader({
                 );
               })}
               {pages.length > 0 ? (
-                <button className='seeAllSearch'>
-                  <Link
-                    to='/see-all-search'
-                    onClick={() => {
-                      EmptyData();
-                    }}>
-                    see all
-                  </Link>
-                </button>
+                <Link
+                  to='/see-all-search'
+                  onClick={() => {
+                    EmptyData();
+                  }}
+                  className='seeAllSearch'>
+                  see all
+                </Link>
               ) : (
                 <></>
               )}
