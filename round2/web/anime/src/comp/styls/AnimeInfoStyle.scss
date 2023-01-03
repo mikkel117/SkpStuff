@@ -190,9 +190,10 @@
 
 @media only screen and (max-width: 600px) {
   .AnimeInfoPopUp {
+    padding: 0;
     .AnimeInfoContent {
       width: 95%;
-      height: 95%;
+      height: 100%;
       .animeTitle {
         grid-column: 1/3;
       }
