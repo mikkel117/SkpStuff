@@ -222,6 +222,9 @@
       }
       .addToFervervt {
         grid-column: 3;
+        &:hover {
+          opacity: 1;
+        }
       }
     }
   }

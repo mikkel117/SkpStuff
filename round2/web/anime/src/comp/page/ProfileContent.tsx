@@ -138,9 +138,7 @@ export default function ProfileContent() {
                 }}
               />
             </div>
-            <button className='deleteUser' onClick={() => Delete()}>
-              delete user
-            </button>
+            <button className='deleteUser'>delete user</button>
           </div>
         </div>
       )}
