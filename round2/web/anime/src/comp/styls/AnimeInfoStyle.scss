@@ -27,8 +27,11 @@
     display: grid;
     grid-template-columns: 1fr 5% 1fr 1fr;
     grid-template-rows: minmax(30px, auto) 1fr;
+    grid-row-gap: 5px;
     overflow: hidden;
-
+    .loader {
+      grid-column: 1/5;
+    }
     .animeTitle {
       grid-column: 1/4;
     }
