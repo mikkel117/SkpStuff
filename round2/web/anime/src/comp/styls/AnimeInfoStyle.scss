@@ -258,6 +258,9 @@
     line-height: 130%;
     -webkit-line-clamp: 3;
   }
+  button {
+    background-color: #eebbc3;
+  }
 
   .open {
     max-height: 100%;
@@ -309,6 +312,9 @@
       .animeSynopsis {
         grid-column: 1/4;
         min-height: 100px;
+      }
+      button {
+        grid-column: 1/4;
       }
       .open {
         min-height: 210px;
