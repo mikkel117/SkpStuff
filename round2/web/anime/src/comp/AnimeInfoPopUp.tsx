@@ -227,23 +227,25 @@ export default function AnimeInfoPopUp({
                       </div>
                     </div>
                   )}
-                  {data?.synopsis === undefined ? (
-                    <></>
-                  ) : (
-                    <div
-                      className={`animeSynopsis ${isOpen ? "open" : ""}`}
-                      ref={animeDescription}>
-                      {data?.synopsis}
-                    </div>
-                  )}
-                  {showButton && (
-                    <button
-                      onClick={() => {
-                        setIsOpen(!isOpen);
-                      }}>
-                      {isOpen ? "show less" : "show more"}
-                    </button>
-                  )}
+                  <div className='animeSynopsisWrapper'>
+                    {data?.synopsis === undefined ? (
+                      <></>
+                    ) : (
+                      <div
+                        className={`animeSynopsis ${isOpen ? "open" : ""}`}
+                        ref={animeDescription}>
+                        {data?.synopsis}
+                      </div>
+                    )}
+                    {showButton && (
+                      <button
+                        onClick={() => {
+                          setIsOpen(!isOpen);
+                        }}>
+                        {isOpen ? "show less" : "show more"}
+                      </button>
+                    )}
+                  </div>
                 </>
               )}
             </>
