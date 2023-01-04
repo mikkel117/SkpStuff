@@ -48,3 +48,11 @@ form {
     font-size: larger;
   }
 }
+
+@media only screen and (max-width: 600px) {
+  .loginWrapper {
+    form {
+      width: 50%;
+    }
+  }
+}
