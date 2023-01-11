@@ -36,7 +36,7 @@
       padding: 10px;
       width: 50%;
       transition: 200ms ease-in-out;
-      background-color: #eebbc3;
+      background-color: $buttomPrimary-color;
       font-size: larg;
       font-weight: bold;
       color: black;
@@ -46,38 +46,10 @@
     }
 
     .deleteUser {
-      background-color: red;
+      background-color: $buttomSecondary-color;
       color: white;
       grid-column: 3;
     }
-    /* .animeCard {
-      transition: all 200ms ease-in-out;
-      position: relative;
-      text-align: center;
-      height: 100%;
-      span {
-        font-size: larger;
-        padding: 5px;
-        display: none;
-        position: absolute;
-        width: 100%;
-        top: 50%;
-        left: 50%;
-        background-color: #1e1f26;
-        transform: translate(-50%, -50%);
-      }
-      img {
-        align-self: center;
-        width: 100%;
-      }
-      &:hover {
-        span {
-          display: block;
-        }
-
-        transform: scale(1.1);
-      }
-    } */
 
     .animeCard {
       display: grid;

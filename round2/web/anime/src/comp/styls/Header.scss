@@ -1,7 +1,7 @@
 header {
   width: 100%;
   min-height: 50px;
-  background-color: #161929;
+  background-color: $secondary-color;
   display: grid;
   grid-template-columns: 5% 20% 1fr 20% 5%;
   grid-template-rows: 1fr;

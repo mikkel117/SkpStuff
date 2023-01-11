@@ -19,7 +19,7 @@ form {
     justify-content: space-between;
   }
   .login {
-    background-color: #eebbc3;
+    background-color: $buttomPrimary-color;
     padding: 5px;
     border: 1px solid black;
     transition: 200ms ease-in-out;
@@ -27,8 +27,7 @@ form {
 
   button {
     font-size: large;
-    background-color: red;
-    color: white;
+    background-color: $buttomSecondary-color;
     border: 1px solid black;
     padding: 5px;
     transition: 200ms ease-in-out;

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
 import SeeAllAnime from "../SeeAllAnime";
+import Loading from "../Loading";
 
 interface SeeAllSearchProps {
   userInput: string;
@@ -46,7 +47,7 @@ export default function SeeAllSearch({
         onChange={(e) => setUserInput(e.target.value)}
       />
       {isloading ? (
-        <div className='loader SeeAllAnimeLoading'></div>
+        <Loading />
       ) : (
         <>
           <SeeAllAnime

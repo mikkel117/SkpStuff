@@ -101,7 +101,7 @@ export default function AnimeInfoPopUp({
         setGenres(data.genres);
 
         setData(data);
-        //setIsLoading(false);
+        setIsLoading(false);
       })
       .catch((err) => {
         setError(true);

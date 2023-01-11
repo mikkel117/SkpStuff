@@ -1,3 +1,7 @@
+$primary-color: #232946;
+$secondary-color: #484266;
+$buttomPrimary-color: #fab0db;
+$buttomSecondary-color: #ca93c1;
 @import "comp/styls/sandboxStyle/MovieSliderTest.scss",
   "comp/styls/sandboxStyle/GridTest.scss",
   "comp/styls//sandboxStyle/NewSliderStyle.scss",
@@ -18,7 +22,7 @@ html {
 }
 
 body {
-  background-color: #232946;
+  background-color: $primary-color;
   color: white;
 }
 
@@ -72,7 +76,7 @@ body {
     align-self: flex-end;
     padding-right: 10px;
     text-decoration: underline;
-    color: #eebbc3;
+    color: $buttomPrimary-color;
     font-weight: bold;
     transition: opacity 200ms ease-in-out;
     cursor: pointer;
