@@ -11,6 +11,7 @@ import GetUser from "../comp/_supabase/getUser";
 import AddToFavorite from "../comp/_supabase/addToFavorite";
 import GetData from "../comp/_supabase/getData";
 import DeleteData from "../comp/_supabase/deleteData";
+import Loading from "./Loading";
 
 interface AnimeInfoPopUpProps {
   animeId: string;
@@ -100,7 +101,7 @@ export default function AnimeInfoPopUp({
         setGenres(data.genres);
 
         setData(data);
-        setIsLoading(false);
+        //setIsLoading(false);
       })
       .catch((err) => {
         setError(true);
@@ -117,9 +118,6 @@ export default function AnimeInfoPopUp({
 
   const AddToFervervrtF = async () => {
     if (userId != "") {
-      /* console.log(
-        `userId: ${userId} animeId: ${animeId}, animeTitle: ${data?.animeTitle}, animeImg: ${data?.animeImg}`
-      ); */
       await AddToFavorite(userId, animeId, data?.animeTitle, data?.animeImg);
       isInFavoriteCheck(userId);
     } else if (userId === "") {
@@ -146,7 +144,7 @@ export default function AnimeInfoPopUp({
               RemoveBodyStyle();
             }}></div>
           {isloading ? (
-            <div className='loader'></div>
+            <Loading />
           ) : (
             <>
               {error ? (

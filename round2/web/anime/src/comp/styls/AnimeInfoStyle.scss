@@ -29,8 +29,10 @@
     grid-template-rows: minmax(30px, auto) 1fr;
     grid-row-gap: 5px;
     overflow: hidden;
-    .loader {
+    .loadingWrapper {
       grid-column: 1/5;
+      grid-row: 1/3;
+      align-self: center;
     }
     .animeTitle {
       grid-column: 1/4;

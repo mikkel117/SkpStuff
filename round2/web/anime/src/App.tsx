@@ -6,9 +6,6 @@ import MovieSliderTest from "./comp/page/sandbox/MovieSliderTest";
 import GridTest from "./comp/page/sandbox/GridTest";
 import NewSlider from "./comp/page/sandbox/NewSlider";
 
-import GetUser from "./comp/_supabase/getUser";
-import supabase from "./comp/_supabase/supabase";
-
 import MyHeader from "./comp/header/MyHeader";
 import PageNotFound from "./comp/page/PageNotFound";
 import Home from "./comp/page/Home";
