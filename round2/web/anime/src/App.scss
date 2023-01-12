@@ -157,6 +157,27 @@ body::-webkit-scrollbar-thumb {
 
 @media only screen and (max-width: 600px) {
   .animeWrapper {
+    margin-top: 20px;
+    text-align: center;
+    .seeAll {
+      font-size: 1.5rem;
+    }
+    .animeType {
+      span {
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+
+    .animeTypeActive,
+    .animeTypeDeactivated {
+      font-size: 1.5rem;
+      &:hover {
+        opacity: 1;
+      }
+    }
+
     .animeContaninger {
       scroll-snap-type: x mandatory;
       div {
@@ -177,6 +198,15 @@ body::-webkit-scrollbar-thumb {
   }
 
   .SeeAllAnimeWrapper {
+    .animeSubDub {
+      margin: 20px;
+      font-size: 1.5rem;
+      span {
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
     .animeImgWrapper {
       .animeCard {
         &:hover {
