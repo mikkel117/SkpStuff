@@ -112,15 +112,25 @@
       margin: 5px;
       text-decoration: underline;
       user-select: none;
-      &:hover {
-        opacity: 0.5;
-      }
     }
     .onPage {
       color: gray;
     }
     svg {
       height: 100%;
+    }
+    span,
+    .seeAllAnimeArrow {
+      transition: opacity 200ms ease-in-out;
+      &:hover {
+        opacity: 0.5;
+      }
+    }
+    .seeAllAnimeArrow {
+      align-self: center;
+      font-weight: bold;
+      font-size: 1.5rem;
+      margin: 5px;
     }
   }
 }

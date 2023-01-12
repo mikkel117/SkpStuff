@@ -1,12 +1,16 @@
 import React, { useState, Dispatch, SetStateAction } from "react";
-import { AiOutlineDoubleLeft } from "react-icons/ai";
+import {
+  AiOutlineDoubleLeft,
+  AiOutlineArrowLeft,
+  AiOutlineArrowRight,
+} from "react-icons/ai";
 import AnimeInfoPopUp from "./AnimeInfoPopUp";
 
 interface SeeAllAnimeProps {
   episodes: any[];
-  setEpisodes: Dispatch<SetStateAction<any[]>>;
+  setEpisodes: Dispatch<SetStateAction<undefined[]>>;
   pages: any[];
-  setPages: Dispatch<SetStateAction<any[]>>;
+  setPages: Dispatch<SetStateAction<undefined[]>>;
   pageNumber: number;
   setPageNumber: Dispatch<SetStateAction<number>>;
 }
@@ -23,7 +27,9 @@ export default function SeeAllAnime({
   const [isAnimeInfoPopUp, setIsAnimeInfoPopUp] = useState<boolean>(false);
 
   const updatePageNUmber = (pageNumber: number) => {
-    setPageNumber(pageNumber);
+    if (pageNumber > 0) {
+      setPageNumber(pageNumber);
+    }
   };
 
   const OpenModal = (animeId: string) => {
@@ -59,6 +65,12 @@ export default function SeeAllAnime({
               }}
             />
           </span>
+          <AiOutlineArrowLeft
+            className='seeAllAnimeArrow'
+            onClick={() => {
+              updatePageNUmber(pageNumber - 1);
+            }}
+          />
           {pages.map((item: any) => {
             return (
               <span
@@ -73,6 +85,12 @@ export default function SeeAllAnime({
               </span>
             );
           })}
+          <AiOutlineArrowRight
+            className='seeAllAnimeArrow'
+            onClick={() => {
+              updatePageNUmber(pageNumber + 1);
+            }}
+          />
         </div>
       )}
       {isAnimeInfoPopUp && (

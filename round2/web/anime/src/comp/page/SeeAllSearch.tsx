@@ -42,6 +42,7 @@ export default function SeeAllSearch({
       <h3 className='title'>Search</h3>
       <input
         type='text'
+        autoFocus
         placeholder='search anime'
         className='SearchInput'
         onChange={(e) => setUserInput(e.target.value)}

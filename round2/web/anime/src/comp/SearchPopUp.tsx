@@ -58,6 +58,7 @@ export default function SearchPopUp({
         <div className='searchModalContent'>
           <input
             type='text'
+            autoFocus
             onChange={(e) => {
               setUserInput(e.target.value);
             }}
