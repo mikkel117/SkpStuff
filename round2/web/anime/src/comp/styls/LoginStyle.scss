@@ -22,6 +22,8 @@ form {
     background-color: $buttomPrimary-color;
     padding: 5px;
     border: 1px solid black;
+    border-radius: 10%;
+    color: black;
     transition: 200ms ease-in-out;
   }
 
@@ -31,6 +33,7 @@ form {
     border: 1px solid black;
     color: black;
     padding: 5px;
+    border-radius: 10%;
     transition: 200ms ease-in-out;
   }
   .login:hover,
