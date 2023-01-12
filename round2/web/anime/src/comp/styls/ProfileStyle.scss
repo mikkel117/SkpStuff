@@ -104,11 +104,24 @@
         text-align: start;
       }
       .pagesWrapper {
+        margin-top: 10px;
         grid-column: 1/3;
         font-size: 1.5rem;
       }
       .deleteUser {
         grid-column: 2;
+      }
+      .animeCard {
+        &:hover {
+          scale: 1;
+        }
+      }
+      .deleteUser,
+      .signOutBtn {
+        &:hover {
+          opacity: 1;
+        }
+        border: 1px solid gray;
       }
     }
   }
