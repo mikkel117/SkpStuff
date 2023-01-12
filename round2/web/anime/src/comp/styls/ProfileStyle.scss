@@ -133,6 +133,8 @@
       button {
         padding: 20px;
         font-size: 1rem;
+        border: 1px solid black;
+        color: black;
         transition: opacity 200ms ease-in-out;
         &:hover {
           opacity: 0.5;
@@ -175,6 +177,9 @@
         &:hover {
           scale: 1;
         }
+      }
+      .signOutBtn {
+        grid-column: 2;
       }
       .deleteUser,
       .signOutBtn {
