@@ -92,9 +92,9 @@ export default function ProfileContent() {
     setIsAnimeInfoPopUp(true);
   };
 
-  const Delete = async () => {
+  const DeleteUser = async () => {
     const user = await GetUser();
-    const test = await SupabaseDeleteUser(user);
+    await SupabaseDeleteUser(user);
   };
   return (
     <>
@@ -138,7 +138,13 @@ export default function ProfileContent() {
                 }}
               />
             </div>
-            <button className='deleteUser'>delete user</button>
+            <button
+              className='deleteUser'
+              onClick={() => {
+                DeleteUser();
+              }}>
+              delete user
+            </button>
           </div>
         </div>
       )}
