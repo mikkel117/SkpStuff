@@ -50,8 +50,23 @@ form {
 
 @media only screen and (max-width: 600px) {
   .loginWrapper {
+    h3 {
+      font-size: 2.5rem;
+    }
     form {
-      width: 50%;
+      width: 80%;
+      div {
+        input {
+          &:hover {
+            opacity: 1;
+          }
+        }
+        div {
+          &:hover {
+            opacity: 1;
+          }
+        }
+      }
     }
   }
 }

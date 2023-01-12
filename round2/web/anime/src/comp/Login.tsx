@@ -73,7 +73,11 @@ export default function Login({ formvValue, setFormValue }: loginProps) {
           <></>
         )}
         <div>
-          <input type='submit' className='login' />
+          <input
+            type='submit'
+            value={formvValue === "login" ? "Login" : "Sing up"}
+            className='login'
+          />
           <button
             onClick={() => {
               Cancle();

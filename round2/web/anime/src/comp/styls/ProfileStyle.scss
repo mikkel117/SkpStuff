@@ -47,7 +47,6 @@
 
     .deleteUser {
       background-color: $buttomSecondary-color;
-      color: white;
       grid-column: 3;
     }
 
@@ -86,6 +85,31 @@
     .pagesWrapper {
       grid-column: 1/4;
       justify-self: center;
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .profileContentWrapper {
+    .favortieWrapper {
+      width: 90%;
+      grid-template-columns: 1fr 1fr;
+      .favortieAnimesTitle {
+        grid-column: 1/3;
+        grid-row: 1;
+        font-size: 2.5rem;
+      }
+      .profileEmail {
+        grid-column: 1;
+        text-align: start;
+      }
+      .pagesWrapper {
+        grid-column: 1/3;
+        font-size: 1.5rem;
+      }
+      .deleteUser {
+        grid-column: 2;
+      }
     }
   }
 }
