@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SeeAllAnime from "../SeeAllAnime";
+import Loading from "../Loading";
 
 export default function SeeAllPopular() {
   const [episodes, setEpisodes] = useState<any[]>([]);
@@ -29,7 +30,7 @@ export default function SeeAllPopular() {
     <div className='SeeAllAnimeWrapper'>
       <h3 className='title'>Popular</h3>
       {isloading ? (
-        <div className='loader SeeAllAnimeLoading'></div>
+        <Loading />
       ) : (
         <SeeAllAnime
           episodes={episodes}

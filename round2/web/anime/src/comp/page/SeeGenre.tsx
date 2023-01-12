@@ -1,5 +1,6 @@
 import React, { useEffect, useState, Dispatch, SetStateAction } from "react";
 import SeeAllAnime from "../SeeAllAnime";
+import Loading from "../Loading";
 
 interface SeeGenreProps {
   genre: string;
@@ -39,7 +40,7 @@ export default function SeeGenre({ genre, setGenre }: SeeGenreProps) {
     <div className='SeeAllAnimeWrapper'>
       <h3 className='title'>Genre: {genre}</h3>
       {isloading ? (
-        <div className='loader SeeAllAnimeLoading'></div>
+        <Loading />
       ) : (
         <SeeAllAnime
           episodes={episodes}

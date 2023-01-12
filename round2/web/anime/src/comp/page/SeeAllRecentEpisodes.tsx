@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SeeAllAnime from "../SeeAllAnime";
+import Loading from "../Loading";
 
 export default function SeeAllRecentEpisodes() {
   const [episodes, setEpisodes] = useState<any[]>([]);
@@ -58,7 +59,7 @@ export default function SeeAllRecentEpisodes() {
         </span>
       </div>
       {isloading ? (
-        <div className='loader SeeAllAnimeLoading'></div>
+        <Loading />
       ) : (
         <SeeAllAnime
           episodes={episodes}
