@@ -24,6 +24,7 @@ export default function ProfileContent() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [animeId, setAnimeId] = useState<string>("");
   const [isAnimeInfoPopUp, setIsAnimeInfoPopUp] = useState<boolean>(false);
+  const [isDeleteUserModal, setIsDeleteUserModal] = useState<boolean>(false);
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -141,7 +142,7 @@ export default function ProfileContent() {
             <button
               className='deleteUser'
               onClick={() => {
-                DeleteUser();
+                setIsDeleteUserModal(true);
               }}>
               delete user
             </button>
@@ -154,6 +155,23 @@ export default function ProfileContent() {
           setIsAnimeInfoPopUp={setIsAnimeInfoPopUp}
           isAnimeInfoPopUp={isAnimeInfoPopUp}
         />
+      )}
+      {isDeleteUserModal && (
+        <div className='deleteUserContainer'>
+          <div className='deleteUserContent'>
+            <p>are you sure you want to delete this user?</p>
+            <div>
+              <button className='yes' onClick={() => DeleteUser()}>
+                yes
+              </button>
+              <button
+                className='no'
+                onClick={() => setIsDeleteUserModal(false)}>
+                no
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </>
   );
