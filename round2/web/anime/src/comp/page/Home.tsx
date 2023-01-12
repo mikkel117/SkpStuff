@@ -18,72 +18,78 @@ export default function Home({ setGenre }: HomePorps) {
   const [isSearchPopUpOpen, setIsSearchPopUpOpen] = useState<boolean>(false);
   return (
     <>
-      <div className='animeWrapper'>
-        <div className='animeType'>
-          <span
-            className={`${
-              animeTypeSubDub === 1 ? "animeTypeActive" : "animeTypeDeactivated"
-            }`}
-            onClick={() => {
-              setAnimeTypeSubDub(1);
-            }}>
-            sub
-          </span>
-          <span
-            className={`${
-              animeTypeSubDub === 2 ? "animeTypeActive" : "animeTypeDeactivated"
-            }`}
-            onClick={() => {
-              setAnimeTypeSubDub(2);
-            }}>
-            dub
-          </span>
+      <div>
+        <div className='animeWrapper'>
+          <div className='animeType'>
+            <span
+              className={`${
+                animeTypeSubDub === 1
+                  ? "animeTypeActive"
+                  : "animeTypeDeactivated"
+              }`}
+              onClick={() => {
+                setAnimeTypeSubDub(1);
+              }}>
+              sub
+            </span>
+            <span
+              className={`${
+                animeTypeSubDub === 2
+                  ? "animeTypeActive"
+                  : "animeTypeDeactivated"
+              }`}
+              onClick={() => {
+                setAnimeTypeSubDub(2);
+              }}>
+              dub
+            </span>
+          </div>
+          <h3 className='title'>Recent episodes</h3>
+          <Link to='/recent-episodes' className='seeAll'>
+            see all
+          </Link>
+          <RecentEpisodes animeType={animeTypeSubDub} />
         </div>
-        <h3 className='title'>Recent episodes</h3>
-        <Link to='/recent-episodes' className='seeAll'>
-          see all
-        </Link>
-        <RecentEpisodes animeType={animeTypeSubDub} />
+        <div className='animeWrapper'>
+          <h3 className='title'>Top Airing</h3>
+          <Link to='/top-airing' className='seeAll'>
+            see all
+          </Link>
+          <TopAiring />
+        </div>
+        <div className='animeWrapper'>
+          <h3 className='title'>Popular anime</h3>
+          <Link to='/popular' className='seeAll'>
+            see all
+          </Link>
+          <PopularAnime />
+        </div>
+        <div className='animeWrapper'>
+          <h3 className='title'>Movies</h3>
+          <Link to='/movies' className='seeAll'>
+            see all
+          </Link>
+          <Movies />
+        </div>
+        <div className='genresWrapper'>
+          <h3 className='title'>Genres</h3>
+          <AiOutlineSearch
+            size={30}
+            className='genresSearch'
+            onClick={() => {
+              setIsSearchPopUpOpen(true);
+            }}
+          />
+          <Genres setGenre={setGenre} />
+        </div>
+        {isSearchPopUpOpen && (
+          <SearchPopUp
+            setIsSearchPopUpOpen={setIsSearchPopUpOpen}
+            isSearchPopUpOpen={isSearchPopUpOpen}
+            setGenre={setGenre}
+          />
+        )}
       </div>
-      <div className='animeWrapper'>
-        <h3 className='title'>Top Airing</h3>
-        <Link to='/top-airing' className='seeAll'>
-          see all
-        </Link>
-        <TopAiring />
-      </div>
-      <div className='animeWrapper'>
-        <h3 className='title'>Popular anime</h3>
-        <Link to='/popular' className='seeAll'>
-          see all
-        </Link>
-        <PopularAnime />
-      </div>
-      <div className='animeWrapper'>
-        <h3 className='title'>Movies</h3>
-        <Link to='/movies' className='seeAll'>
-          see all
-        </Link>
-        <Movies />
-      </div>
-      <div className='genresWrapper'>
-        <h3 className='title'>Genres</h3>
-        <AiOutlineSearch
-          size={30}
-          className='genresSearch'
-          onClick={() => {
-            setIsSearchPopUpOpen(true);
-          }}
-        />
-        <Genres setGenre={setGenre} />
-      </div>
-      {isSearchPopUpOpen && (
-        <SearchPopUp
-          setIsSearchPopUpOpen={setIsSearchPopUpOpen}
-          isSearchPopUpOpen={isSearchPopUpOpen}
-          setGenre={setGenre}
-        />
-      )}
     </>
   );
 }
