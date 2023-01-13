@@ -8,6 +8,7 @@ import Genres from "./Genres";
 import SearchPopUp from "../SearchPopUp";
 
 import { AiOutlineSearch } from "react-icons/ai";
+import Loading from "../Loading";
 
 interface HomePorps {
   setGenre: Dispatch<SetStateAction<string>>;
@@ -16,6 +17,7 @@ interface HomePorps {
 export default function Home({ setGenre }: HomePorps) {
   const [animeTypeSubDub, setAnimeTypeSubDub] = useState<number>(1);
   const [isSearchPopUpOpen, setIsSearchPopUpOpen] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   return (
     <>
       <div>
@@ -48,7 +50,11 @@ export default function Home({ setGenre }: HomePorps) {
           <Link to='/recent-episodes' className='seeAll'>
             see all
           </Link>
-          <RecentEpisodes animeType={animeTypeSubDub} />
+          <RecentEpisodes
+            animeType={animeTypeSubDub}
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
+          />
         </div>
         <div className='animeWrapper'>
           <h3 className='title'>Top Airing</h3>
@@ -90,6 +96,11 @@ export default function Home({ setGenre }: HomePorps) {
           />
         )}
       </div>
+      {isLoading && (
+        <div className='homeLoadingWrapper'>
+          <Loading />
+        </div>
+      )}
     </>
   );
 }

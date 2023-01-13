@@ -131,7 +131,7 @@ export default function MyHeader({
           )}
         </div>
         <h1 className='title'>
-          <Link to='/'>Title</Link>
+          <Link to='/'>AnimeNexus</Link>
         </h1>
         <div className='profile'>
           {isLogedIn ? (
