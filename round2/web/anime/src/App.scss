@@ -2,10 +2,7 @@ $primary-color: #232946;
 $secondary-color: #484266;
 $buttomPrimary-color: #fab0db;
 $buttomSecondary-color: #705c85;
-@import "comp/styls/sandboxStyle/MovieSliderTest.scss",
-  "comp/styls/sandboxStyle/GridTest.scss",
-  "comp/styls//sandboxStyle/NewSliderStyle.scss",
-  "comp/styls/AnimeInfoStyle.scss", "comp/styls/Header.scss",
+@import "comp/styls/AnimeInfoStyle.scss", "comp/styls/Header.scss",
   "comp/styls/AnimeSliderStyle.scss", "comp/styls/SeeAllAnimeOfTypeStyle.scss",
   "comp/styls/ProfileStyle.scss", "comp/styls/SearchPopUpStyle.scss",
   "comp/styls/LoginStyle.scss", "comp/styls/LoadingStyle.scss",
@@ -235,6 +232,9 @@ body::-webkit-scrollbar-thumb {
     .title {
       grid-column: 2;
       font-size: 2rem;
+      &:hover {
+        opacity: 1;
+      }
     }
     .phoneSearch {
       grid-column: 1;
