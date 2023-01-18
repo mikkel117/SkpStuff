@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Dispatch, SetStateAction } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import GetUser from "../_supabase/getUser";
 import SupabaseDeleteUser from "../_supabase/deleteUser";
@@ -13,8 +13,8 @@ interface favoriteAnimes {
   animeImg: string;
 }
 
+const ChunkSize: number = 12;
 export default function ProfileContent() {
-  const ChunkSize: number = 12;
   const [user, setUser] = useState<any>(null);
   const [data, setData] = useState<favoriteAnimes[]>([]);
   const [dataUsed, setDataUsed] = useState<favoriteAnimes[]>([]);
@@ -34,23 +34,24 @@ export default function ProfileContent() {
       isLogedIn(user);
     };
 
-    const isLogedIn = async (user: any) => {
-      if (user.data.user === null) {
-        navigate("/");
-      } else {
-        let anime = await GetAllAnime(user.data.user.id);
-        if (anime.data) {
-          setData(anime.data);
-          setDataUsed(anime.data.slice(startChunk, endChunk));
-          HowManyPages(anime.data);
-        }
-        if (anime.error) {
-          console.log(anime.error);
-        }
-      }
-    };
     getUser();
   }, []);
+
+  const isLogedIn = async (user: any) => {
+    if (user.data.user === null) {
+      navigate("/");
+    } else {
+      let anime = await GetAllAnime(user.data.user.id);
+      if (anime.data) {
+        setData(anime.data);
+        setDataUsed(anime.data.slice(startChunk, endChunk));
+        HowManyPages(anime.data);
+      }
+      if (anime.error) {
+        console.log(anime.error);
+      }
+    }
+  };
 
   useEffect(() => {
     setDataUsed(data.slice(startChunk, endChunk));
@@ -85,7 +86,6 @@ export default function ProfileContent() {
 
   const Logout = () => {
     SignOut();
-    setUser(null);
   };
 
   const OpenModal = (animeId: string) => {

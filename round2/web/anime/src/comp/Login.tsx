@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
+import React, { useState, Dispatch, SetStateAction } from "react";
 import CreateUser from "./_supabase/createUser";
 import SupabaseLogin from "./_supabase/login";
 import { useNavigate } from "react-router-dom";
@@ -26,8 +26,6 @@ export default function Login({ formvValue, setFormValue }: loginProps) {
           setFormValue("");
           navigate("/profile");
         } else {
-          console.log(login);
-
           setLoginError(login.toString());
         }
       } else {

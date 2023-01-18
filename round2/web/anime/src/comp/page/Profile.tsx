@@ -1,10 +1,6 @@
-import React, { useEffect, useState, Dispatch, SetStateAction } from "react";
-import supabase from "../_supabase/supabase";
-import CreateUser from "../_supabase/createUser";
-import SupabaseLogin from "../_supabase/login";
+import { useEffect, useState, Dispatch, SetStateAction } from "react";
 import GetUser from "../_supabase/getUser";
 import Login from "../Login";
-import SignOut from "../_supabase/signout";
 
 import { useNavigate } from "react-router-dom";
 

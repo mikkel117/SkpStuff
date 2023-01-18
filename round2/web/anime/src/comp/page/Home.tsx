@@ -1,4 +1,4 @@
-import React, { useState, Dispatch, SetStateAction } from "react";
+import { useState, Dispatch, SetStateAction } from "react";
 import { Link } from "react-router-dom";
 import PopularAnime from "./PopularAnime";
 import RecentEpisodes from "./RecentEpisodes";

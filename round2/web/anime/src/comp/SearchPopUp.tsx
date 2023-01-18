@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Dispatch, SetStateAction } from "react";
+import { useEffect, useState, Dispatch, SetStateAction } from "react";
 import { Link } from "react-router-dom";
 
 interface SearchPopUpProps {
@@ -20,10 +20,6 @@ export default function SearchPopUp({
     }
     FetchData();
   }, [isSearchPopUpOpen]);
-
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
 
   const FetchData = () => {
     fetch(`https://gogo-anime-api-sand.vercel.app/api/anime-api/get-genres`)

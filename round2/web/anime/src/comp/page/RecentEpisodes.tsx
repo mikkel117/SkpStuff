@@ -1,6 +1,5 @@
-import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
+import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import AnimeSlider from "../AnimeSlider";
-import Loading from "../Loading";
 
 interface RecentEpisodesProps {
   animeType: number;

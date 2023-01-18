@@ -1,6 +1,5 @@
-import React, { useEffect, useState, Dispatch, SetStateAction } from "react";
+import { useEffect, useState, Dispatch, SetStateAction } from "react";
 import { Link } from "react-router-dom";
-import { isTemplateExpression } from "typescript";
 
 interface Genresprops {
   setGenre: Dispatch<SetStateAction<string>>;
@@ -28,10 +27,10 @@ export default function Genres({ setGenre }: Genresprops) {
       <div className='genres'>
         {data.map((item: any) => {
           if (
-            item.genre != "Hentai" &&
-            item.genre != "Yaoi" &&
-            item.genre != "Yuri" &&
-            item.genre != "Erotica"
+            item.genre !== "Hentai" &&
+            item.genre !== "Yaoi" &&
+            item.genre !== "Yuri" &&
+            item.genre !== "Erotica"
           ) {
             return (
               <Link

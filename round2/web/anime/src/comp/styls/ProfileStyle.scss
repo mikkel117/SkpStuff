@@ -52,6 +52,7 @@
 
     .deleteUser {
       background-color: $buttomSecondary-color;
+      color: white;
       grid-column: 3;
     }
 
@@ -132,7 +133,8 @@
       align-items: center;
       button {
         padding: 20px;
-        font-size: 1rem;
+        font-size: larger;
+        font-weight: bolder;
         border: 1px solid black;
         color: black;
         transition: opacity 200ms ease-in-out;

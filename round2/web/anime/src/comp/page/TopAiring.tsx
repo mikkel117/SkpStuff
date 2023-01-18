@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import AnimeSlider from "../AnimeSlider";
 
 export default function TopAiring() {

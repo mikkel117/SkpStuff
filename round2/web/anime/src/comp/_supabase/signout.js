@@ -5,7 +5,6 @@ const SignOut = async () => {
   if (error) {
     console.log(error);
   } else {
-    console.log("loged out");
     window.location.reload();
   }
 };

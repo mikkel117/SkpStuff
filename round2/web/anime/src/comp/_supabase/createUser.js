@@ -1,5 +1,4 @@
 import supabase from "./supabase";
-import GetUser from "./getUser";
 
 async function CreateUser(Email, Password) {
   const { error } = await supabase.auth.signUp({

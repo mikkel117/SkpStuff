@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Dispatch, SetStateAction } from "react";
+import { useEffect, useState, Dispatch, SetStateAction } from "react";
 import SeeAllAnime from "../SeeAllAnime";
 import Loading from "../Loading";
 

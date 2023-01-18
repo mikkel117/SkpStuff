@@ -1,11 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import "./App.scss";
 import { Routes, Route } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import MovieSliderTest from "./comp/page/sandbox/MovieSliderTest";
-import GridTest from "./comp/page/sandbox/GridTest";
-import NewSlider from "./comp/page/sandbox/NewSlider";
-
+// imports all pages and some components
 import MyHeader from "./comp/header/MyHeader";
 import PageNotFound from "./comp/page/PageNotFound";
 import Home from "./comp/page/Home";
@@ -31,11 +27,9 @@ function App() {
         formValue={formValue}
         setFormValue={setFormValue}
       />
+      {/* sets a path to the pages */}
       <Routes>
         <Route path='/' element={<Home setGenre={setGenre} />} />
-        <Route path='/movie-slider-test' element={<MovieSliderTest />} />
-        <Route path='/new-slider' element={<NewSlider />} />
-        <Route path='/test' element={<GridTest />} />
         <Route path='/recent-episodes' element={<SeeAllRecentEpisodes />} />
         <Route path='/top-airing' element={<SeeAllTopAiring />} />
         <Route path='/popular' element={<SeeAllPopular />} />

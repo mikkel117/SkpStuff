@@ -18,12 +18,12 @@ export default function MyHeader({
   formValue,
   setFormValue,
 }: MyHeaderProps) {
-  const [data, setData] = useState<any[]>([]);
-  const [pages, setPages] = useState<any[]>([]);
+  const [data, setData] = useState<undefined[]>([]);
+  const [pages, setPages] = useState<undefined[]>([]);
   const [animeId, setAnimeId] = useState<string>("");
   const [isAnimeInfoPopUp, setIsAnimeInfoPopUp] = useState<boolean>(false);
-  const [focused, setFocused] = useState(false);
-  const [isLogedIn, setIsLogedIn] = useState(false);
+  const [focused, setFocused] = useState<boolean>(false);
+  const [isLogedIn, setIsLogedIn] = useState<boolean>(false);
 
   useEffect(() => {
     if (userInput.length > 1) {
@@ -63,7 +63,7 @@ export default function MyHeader({
       });
   }
 
-  const ChangeAnimePopUpOpen = (animeId: string) => {
+  const ChangeAnimePopUpOpen = (animeId: string): void => {
     setAnimeId(animeId);
     setIsAnimeInfoPopUp(true);
   };
@@ -73,7 +73,7 @@ export default function MyHeader({
     setPages([]);
   };
 
-  const focus = () => {
+  const focus = (): void => {
     if (!focused) {
       setFocused(true);
     }
@@ -170,17 +170,4 @@ export default function MyHeader({
       )}
     </>
   );
-}
-
-{
-  /* <div className='seeAllSearch'>
-  <Link
-    to='/see-all-search'
-    onClick={() => {
-      EmptyData();
-    }}>
-    see all
-  </Link>
-</div>;
- */
 }

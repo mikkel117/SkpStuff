@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import AnimeInfoPopUp from "./AnimeInfoPopUp";
 interface AnimeSliderProps {
   data: any[];

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import AnimeSlider from "../AnimeSlider";
 
 export default function PopularAnime() {
-  const [data, setData] = useState<any[]>([]);
+  const [data, setData] = useState<undefined[]>([]);
   useEffect(() => {
     FetchData();
   }, []);
@@ -25,9 +25,6 @@ export default function PopularAnime() {
   return (
     <>
       <AnimeSlider data={data} />
-      {/* <div>
-        <Link to='/AddCity'>click me</Link>
-      </div> */}
     </>
   );
 }
