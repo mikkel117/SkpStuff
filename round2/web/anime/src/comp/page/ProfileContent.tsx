@@ -16,7 +16,7 @@ interface favoriteAnimes {
 const ChunkSize: number = 12;
 export default function ProfileContent() {
   const [user, setUser] = useState<any>(null);
-  const [data, setData] = useState<favoriteAnimes[]>([]);
+  const [arrayFullLeanth, setArrayFullLeanth] = useState<favoriteAnimes[]>([]);
   const [dataUsed, setDataUsed] = useState<favoriteAnimes[]>([]);
   const [endChunk, setEndChunk] = useState<number>(ChunkSize);
   const [startChunk, setStartChunk] = useState<number>(0);
@@ -43,7 +43,7 @@ export default function ProfileContent() {
     } else {
       let anime = await GetAllAnime(user.data.user.id);
       if (anime.data) {
-        setData(anime.data);
+        setArrayFullLeanth(anime.data);
         setDataUsed(anime.data.slice(startChunk, endChunk));
         HowManyPages(anime.data);
       }
@@ -54,12 +54,12 @@ export default function ProfileContent() {
   };
 
   useEffect(() => {
-    setDataUsed(data.slice(startChunk, endChunk));
+    setDataUsed(arrayFullLeanth.slice(startChunk, endChunk));
   }, [endChunk]);
 
   const HowManyPages = (data: favoriteAnimes[]) => {
     let pagesSize = 0;
-    for (let index = 0; index < data.length; index = index + ChunkSize) {
+    for (let i = 0; i < data.length; i = i + ChunkSize) {
       pagesSize = pagesSize + 1;
     }
     if (pagesSize === 0) {
@@ -69,7 +69,10 @@ export default function ProfileContent() {
   };
 
   const IncreaseChunkSize = () => {
-    if (endChunk !== data.length && endChunk < data.length) {
+    if (
+      endChunk !== arrayFullLeanth.length &&
+      endChunk < arrayFullLeanth.length
+    ) {
       setCurrentPage(currentPage + 1);
       setStartChunk(startChunk + ChunkSize);
       setEndChunk(endChunk + ChunkSize);
@@ -94,7 +97,6 @@ export default function ProfileContent() {
   };
 
   const DeleteUser = async () => {
-    const user = await GetUser();
     await SupabaseDeleteUser(user);
   };
   return (

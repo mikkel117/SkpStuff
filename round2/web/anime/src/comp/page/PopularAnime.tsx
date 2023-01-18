@@ -1,27 +1,11 @@
-import { useState, useEffect } from "react";
 import AnimeSlider from "../AnimeSlider";
+import useHomeFetch from "../../hooks/useHomeFetch";
 
 export default function PopularAnime() {
-  const [data, setData] = useState<undefined[]>([]);
-  useEffect(() => {
-    FetchData();
-  }, []);
+  const data = useHomeFetch(
+    `https://gogo-anime-api-sand.vercel.app/api/anime-api/popular?page=1`
+  );
 
-  const FetchData = () => {
-    fetch(`https://gogo-anime-api-sand.vercel.app/api/anime-api/popular?page=1`)
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        }
-        return Promise.reject(response);
-      })
-      .then((data) => {
-        setData(data.episodes);
-      })
-      .catch((err) => {
-        console.log("error", err.message);
-      });
-  };
   return (
     <>
       <AnimeSlider data={data} />
