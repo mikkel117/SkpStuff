@@ -1,19 +1,21 @@
-import { useState } from "react";
 import "./App.scss";
-import { Routes, Route } from "react-router-dom";
-// imports all pages and some components
+
+import { useState } from "react";
+import { Route, Routes } from "react-router-dom";
+
 import MyHeader from "./comp/header/MyHeader";
-import PageNotFound from "./comp/page/PageNotFound";
 import Home from "./comp/page/Home";
-import SeeAllRecentEpisodes from "./comp/page/SeeAllRecentEpisodes";
-import SeeAllPopular from "./comp/page/SeeAllPopular";
-import SeeAllTopAiring from "./comp/page/SeeAllTopAiring";
-import SeeAllSearch from "./comp/page/SeeAllSearch";
-import SeeAllMovies from "./comp/page/SeeAllMovies";
-import SeeGenre from "./comp/page/SeeGenre";
+import PageNotFound from "./comp/page/PageNotFound";
 import Profile from "./comp/page/Profile";
 import ProfileContent from "./comp/page/ProfileContent";
+import SeeAllMovies from "./comp/page/SeeAllMovies";
+import SeeAllPopular from "./comp/page/SeeAllPopular";
+import SeeAllRecentEpisodes from "./comp/page/SeeAllRecentEpisodes";
+import SeeAllSearch from "./comp/page/SeeAllSearch";
+import SeeAllTopAiring from "./comp/page/SeeAllTopAiring";
+import SeeGenre from "./comp/page/SeeGenre";
 
+// imports all pages and some components
 function App() {
   const [userInput, setUserInput] = useState<string>("");
   const [genre, setGenre] = useState<string>("");

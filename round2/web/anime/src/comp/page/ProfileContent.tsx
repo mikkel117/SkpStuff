@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import GetUser from "../_supabase/getUser";
-import SupabaseDeleteUser from "../_supabase/deleteUser";
-import SignOut from "../_supabase/signout";
-import GetAllAnime from "../_supabase/getAllAnime";
-import AnimeInfoPopUp from "../AnimeInfoPopUp";
+import { useEffect, useState, useMemo } from "react";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
+
+import SupabaseDeleteUser from "../_supabase/deleteUser";
+import GetAllAnime from "../_supabase/getAllAnime";
+import GetUser from "../_supabase/getUser";
+import SignOut from "../_supabase/signout";
+import AnimeInfoPopUp from "../AnimeInfoPopUp";
 
 interface favoriteAnimes {
   animeId: string;
@@ -13,7 +14,7 @@ interface favoriteAnimes {
   animeImg: string;
 }
 
-const ChunkSize: number = 12;
+const ChunkSize: number = 2;
 export default function ProfileContent() {
   const [user, setUser] = useState<any>(null);
   const [arrayFullLeanth, setArrayFullLeanth] = useState<favoriteAnimes[]>([]);
@@ -53,9 +54,14 @@ export default function ProfileContent() {
     }
   };
 
+  const memoizedData = useMemo(
+    () => arrayFullLeanth.slice(startChunk, endChunk),
+    [endChunk]
+  );
   useEffect(() => {
-    setDataUsed(arrayFullLeanth.slice(startChunk, endChunk));
-  }, [endChunk]);
+    //setDataUsed(arrayFullLeanth.slice(startChunk, endChunk));
+    setDataUsed(memoizedData);
+  }, [memoizedData]);
 
   const HowManyPages = (data: favoriteAnimes[]) => {
     let pagesSize = 0;

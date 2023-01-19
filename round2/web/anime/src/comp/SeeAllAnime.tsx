@@ -17,9 +17,7 @@ interface SeeAllAnimeProps {
 
 export default function SeeAllAnime({
   episodes,
-  setEpisodes,
   pages,
-  setPages,
   pageNumber,
   setPageNumber,
 }: SeeAllAnimeProps) {

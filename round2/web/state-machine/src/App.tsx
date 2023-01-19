@@ -2,7 +2,8 @@ import React, { useState, useMemo } from "react";
 import logo from "./logo.svg";
 import "./App.scss";
 import useFetch from "./useFetch";
-import useIsOpen from "./useIsOpen";
+import useModal from "./useModal";
+import Modal from "./Modal";
 
 interface useIsOpenprops {
   isOpenTest: boolean;
@@ -10,23 +11,16 @@ interface useIsOpenprops {
 
 function App() {
   //const [data]: any = useFetch("https://jsonplaceholder.typicode.com/todos");
-  const [id, setId] = useState<number>(0);
-  const { isOpenTest }: useIsOpenprops = useIsOpen(id);
+  const modal = useModal();
   return (
     <>
       <div className='App'>
-        <button
-          onClick={() => {
-            setId(id + 1);
-          }}>
-          open
-        </button>
-        <p>{isOpenTest ? "open" : "close"}</p>
-
         {/* {data &&
           data.map((item: any) => {
             return <p key={item.id}>{item.title}</p>;
           })} */}
+        <button onClick={modal.openModal}>open modal</button>
+        {modal.isOpen && <Modal modalClose={modal.closeModal} />}
       </div>
     </>
   );
