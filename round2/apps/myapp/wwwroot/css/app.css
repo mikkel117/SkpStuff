@@ -7,18 +7,14 @@ html {
   font-size: 100%;
 }
 
-nav {
-  width: 100%;
-  background-color: blue;
-  height: 2.5rem;
-  padding: 10px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-content: center;
+body {
+  background-color: #232946;
+  color: white;
 }
 
-.fa {
-  grid-column: 2;
-  justify-self: end;
-  color: white;
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

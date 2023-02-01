@@ -1,6 +1,32 @@
-﻿@page "/"
+﻿
+@page "/"
+@using myapp.classes;
 
-<h1>hello</h1>
+<div class="wrapper">
+    <p>todo</p> <br>
+        <input type="text" @oninput="@((e) => { inputValue=(string)e.Value;})" @onkeydown="@idk">
+     <div>
+        @foreach (var item in @todoList)
+        {
+         <div>
+            <p> @item.Title </p>
+            <p>@item.Id</p>
+            </div>   
+        }
+     </div> 
+</div>
 
-Welcome to your new app.
+@code{
+    private string inputValue;
+    private string test;
+   List<Todos> todoList = new List<Todos>();
+
+public void idk(KeyboardEventArgs args) {
+    if(args.Key == "Enter"){
+        todoList.Add(new Todos(inputValue, false) );
+    }
+
+}
+}
+
 
