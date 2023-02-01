@@ -14,7 +14,7 @@ interface favoriteAnimes {
   animeImg: string;
 }
 
-const ChunkSize: number = 2;
+const ChunkSize: number = 12;
 export default function ProfileContent() {
   const [user, setUser] = useState<any>(null);
   const [arrayFullLeanth, setArrayFullLeanth] = useState<favoriteAnimes[]>([]);
