@@ -1,3 +1,5 @@
+import Fetch from "~/components/fetch/Fetch";
+
 export default function about() {
   return (
     <main>
