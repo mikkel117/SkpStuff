@@ -15,3 +15,8 @@ export type AnimeDataType = {
   episodes: episodesType[];
   pages: pagesType[];
 };
+
+export type genreType = {
+  genre: string;
+  value: string;
+};

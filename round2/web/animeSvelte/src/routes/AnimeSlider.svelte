@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount, afterUpdate } from "svelte";
+  import { onMount } from "svelte";
   import type { AnimeDataType } from "../../tsTypes/Types";
   export let name: string = "";
 
@@ -9,13 +9,16 @@
     episodes: [],
     pages: [],
   };
-  const getData = async () => {
-    const res = await fetch(endpoint);
-    if (res.ok) {
-      return await res.json();
-    } else {
-      throw new Error("error fetching");
-    }
+  let error: string = "";
+  const getData: any = async () => {
+    fetch(endpoint)
+      .then((res) => res.json())
+      .then((data) => {
+        return data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   $: {
     if (isMounted) {
@@ -25,19 +28,18 @@
       };
       fetch(endpoint)
         .then((res) => res.json())
-        .then((fetchData) => (data = fetchData));
+        .then((fetchData) => (data = fetchData))
+        .catch((error) => (error = error.message));
     }
   }
 
   onMount(async () => {
     data = await getData();
-    console.log(data);
-
     isMounted = true;
   });
 </script>
 
-<h2>{name}</h2>
+<h3>{name}</h3>
 <div class="animeSlider">
   {#each data.episodes as items}
     <div class="animecard">
@@ -50,9 +52,10 @@
     </div>
   {/each}
 </div>
+<a href={`/seeAll/${name}`} class="seeAll">see all</a>
 
 <style lang="scss">
-  h2 {
+  h3 {
     grid-column: 2;
   }
   .loadingWrapper {
@@ -101,6 +104,21 @@
         }
         transform: scale(1.1);
       }
+    }
+  }
+  .seeAll {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: end;
+    align-self: flex-end;
+    padding-right: 10px;
+    text-decoration: underline;
+    color: #fab0db;
+    font-weight: bold;
+    transition: opacity 200ms ease-in-out;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.5;
     }
   }
 </style>
