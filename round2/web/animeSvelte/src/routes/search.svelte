@@ -9,6 +9,7 @@
   let data: AnimeDataType = {
     episodes: [],
     pages: [],
+    aphList: [],
   };
 
   const FetchSearch: any = () => {

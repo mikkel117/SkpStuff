@@ -8,12 +8,18 @@ type episodesType = {
 };
 
 type pagesType = {
-  pages: string;
+  page: string;
+};
+
+type aphType = {
+  aph: string;
+  value: string;
 };
 
 export type AnimeDataType = {
   episodes: episodesType[];
   pages: pagesType[];
+  aphList: aphType[];
 };
 
 export type genreType = {

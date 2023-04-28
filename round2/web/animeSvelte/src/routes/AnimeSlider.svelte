@@ -8,6 +8,7 @@
   let data: AnimeDataType = {
     episodes: [],
     pages: [],
+    aphList: [],
   };
   let error: string = "";
   const getData: any = async () => {
@@ -25,6 +26,7 @@
       data = {
         episodes: [],
         pages: [],
+        aphList: [],
       };
       fetch(endpoint)
         .then((res) => res.json())
