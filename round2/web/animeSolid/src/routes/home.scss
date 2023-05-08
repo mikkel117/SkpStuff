@@ -1,0 +1,54 @@
+.animeWrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  height: 350px;
+  .title {
+    grid-column: 2;
+    justify-self: center;
+    align-self: center;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  .animeType {
+    justify-self: start;
+    align-self: flex-end;
+    margin-left: 20px;
+    color: white;
+    font-weight: bold;
+    span {
+      user-select: none;
+      padding: 5px;
+      border: 1px solid #eebbc3;
+      background-color: gray;
+      transition: opacity 200ms ease-in-out;
+      &:hover {
+        opacity: 0.5;
+      }
+      &:nth-child(2) {
+        margin-left: 5px;
+      }
+    }
+    .animeTypeActive {
+      background-color: gray;
+      font-weight: bold;
+      opacity: 1;
+    }
+    .animeTypeDeactivated {
+      opacity: 0.2;
+    }
+  }
+  .seeAll {
+    justify-self: end;
+    align-self: flex-end;
+    padding-right: 10px;
+    text-decoration: underline;
+    /* color: $buttomPrimary-color; */
+    font-weight: bold;
+    transition: opacity 200ms ease-in-out;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+}

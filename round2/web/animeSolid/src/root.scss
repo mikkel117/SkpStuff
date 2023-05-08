@@ -1,0 +1,50 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #232946;
+  color: white;
+}
+nav {
+  width: 100%;
+  min-height: 50px;
+  background-color: #484266;
+  display: grid;
+  grid-template-columns: 5% 20% 1fr 20% 5%;
+  grid-template-rows: 1fr;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  .title {
+    grid-column: 3;
+    user-select: none;
+    justify-self: center;
+    align-self: center;
+    font-weight: bold;
+    font-size: 2.5rem;
+    transition: opacity 250ms ease-in-out;
+    a {
+      text-decoration: none;
+      color: white;
+    }
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+  a {
+    grid-column: 3;
+    color: white;
+  }
+}
+
+::-webkit-scrollbar {
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: white;
+}
+::-webkit-scrollbar-thumb {
+  background-color: gray;
+}

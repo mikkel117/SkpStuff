@@ -1,5 +1,5 @@
 import { createResource, createSignal, Show, createEffect } from "solid-js";
-import LoadingComponent from "~/components/LoadingComponent";
+import LoadingComponent from "./LoadingComponent";
 async function fetchUser(id: number) {
   const slow = await new Promise((res) => setTimeout(res, 3000));
   const test = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`);
@@ -15,12 +15,14 @@ function Fetch() {
   const [user] = createResource(id, fetchUser);
   return (
     <div>
+      <input
+        type='number'
+        min='1'
+        placeholder='Enter Numeric Id'
+        onInput={(e) => setId(parseInt(e.currentTarget.value))}
+      />
       <Show when={!user.loading} fallback={<LoadingComponent />}>
-        <div>Name : {user().name}</div>
-        <div>Username : {user().username}</div>
-        <div>Email : {user().email}</div>
-        <div>Phone : {user().phone}</div>
-        <div>Website : {user().website}</div>
+        <pre>{JSON.stringify(user(), null, 2)}</pre>
       </Show>
     </div>
   );

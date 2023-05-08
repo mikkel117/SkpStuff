@@ -1,0 +1,56 @@
+h3 {
+  grid-column: 2;
+  text-align: center;
+  font-size: 1.5em;
+}
+.animeSlider {
+  grid-column: 1/5;
+  display: flex;
+  gap: 10px;
+  margin: 0 10px 10px 10px;
+  padding: 10px;
+  height: 300px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  div:not(.loadingWrapper) {
+    transition: all 200ms ease-in-out;
+    position: relative;
+    text-align: center;
+    img {
+      height: 100%;
+      -webkit-user-drag: none;
+    }
+    span {
+      font-size: larger;
+      padding: 5px;
+      display: none;
+      position: absolute;
+      width: 100%;
+      top: 50%;
+      left: 50%;
+      background-color: #1e1f26;
+      transform: translate(-50%, -50%);
+    }
+    &:hover {
+      span {
+        display: block;
+      }
+      transform: scale(1.1);
+    }
+  }
+}
+.seeAll {
+  grid-column: 3;
+  grid-row: 1;
+  justify-self: end;
+  align-self: flex-end;
+  padding-right: 10px;
+  text-decoration: underline;
+  color: #fab0db;
+  font-weight: bold;
+  transition: opacity 200ms ease-in-out;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.5;
+  }
+}
