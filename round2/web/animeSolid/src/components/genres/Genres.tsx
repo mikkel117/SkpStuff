@@ -9,14 +9,14 @@ const Fetch = async () => {
   ).json();
 };
 function AnimeSlider() {
-  const [data] = createResource(Fetch);
+  const [data] = createResource<genreType>(Fetch);
   return (
     <>
       <h3>Genres</h3>
       <div class='genres'>
         <Show when={!data.loading} fallback={<div>loading...</div>}>
           <>
-            <For each={data().genres}>
+            <For each={data()?.genres}>
               {(item) => (
                 <>
                   <Show
@@ -33,10 +33,6 @@ function AnimeSlider() {
             </For>
           </>
         </Show>
-        {data() &&
-          {
-            /* <button onClick={() => console.log(data().genres)}> click</button> */
-          }}
       </div>
     </>
   );

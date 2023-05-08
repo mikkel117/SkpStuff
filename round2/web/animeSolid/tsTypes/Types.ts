@@ -7,22 +7,12 @@ type episodesType = {
   subOrDub: string;
 };
 
-type pagesType = {
-  page: string;
-};
-
-type aphType = {
-  aph: string;
-  value: string;
-};
-
 export type AnimeDataType = {
   episodes: episodesType[];
-  pages: pagesType[];
-  aphList: aphType[];
+  pages: [{ page: string }];
+  aphList: [{ aph: string; value: string }];
 };
 
 export type genreType = {
-  genre: string;
-  value: string;
+  genres: [{ genre: string; value: string }];
 };
