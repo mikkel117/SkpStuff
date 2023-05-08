@@ -1,6 +1,7 @@
 import { Title } from "solid-start";
 import { createSignal } from "solid-js";
-import AnimeSlider from "~/components/AnimeSlider";
+import AnimeSlider from "~/components/animeSlider/AnimeSlider";
+import Genres from "~/components/genres/Genres";
 import "./home.scss";
 
 export default function Home() {
@@ -32,14 +33,16 @@ export default function Home() {
           name='Popular anime'
         />
       </div>
-      /*{" "}
+
       <div class='animeWrapper'>
         <AnimeSlider
           endpoint='https://gogo-anime-api-sand.vercel.app/api/anime-api/movies?page=1'
           name='movies'
         />
-      </div>{" "}
-      */
+      </div>
+      <div class='genresWrapper'>
+        <Genres />
+      </div>
     </main>
   );
 }

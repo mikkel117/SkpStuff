@@ -38,17 +38,4 @@
       opacity: 0.2;
     }
   }
-  .seeAll {
-    justify-self: end;
-    align-self: flex-end;
-    padding-right: 10px;
-    text-decoration: underline;
-    /* color: $buttomPrimary-color; */
-    font-weight: bold;
-    transition: opacity 200ms ease-in-out;
-    cursor: pointer;
-    &:hover {
-      opacity: 0.5;
-    }
-  }
 }

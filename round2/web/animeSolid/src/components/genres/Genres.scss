@@ -1,0 +1,20 @@
+.genres {
+  margin: 0 auto;
+  padding: 10px;
+  width: 90%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  background-color: #161929;
+  justify-content: center;
+  a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    background-color: #232946;
+    transition: opacity 100ms ease-in-out;
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+}

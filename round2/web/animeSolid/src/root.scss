@@ -6,6 +6,9 @@
 body {
   background-color: #232946;
   color: white;
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
 }
 nav {
   width: 100%;

@@ -1,13 +1,6 @@
 import type { AnimeDataType } from "tsTypes/Types";
 import "./animeSlider.scss";
-import {
-  createResource,
-  createEffect,
-  Show,
-  createSignal,
-  Accessor,
-  For,
-} from "solid-js";
+import { createResource, Show, For } from "solid-js";
 type AnimeSliderProps = {
   endpoint: string;
   name: string;
@@ -15,10 +8,7 @@ type AnimeSliderProps = {
 const Fetch = async (endpoint: any) => {
   return (await fetch(endpoint)).json();
 };
-/* (await fetch(endpoint)).json(); */
 function AnimeSlider(props: AnimeSliderProps) {
-  //  const [data, setData] = createSignal<AnimeDataType>();
-  //const [user] = createResource(userId, Fetch);
   const [data] = createResource<AnimeDataType, string>(
     () => props.endpoint,
     Fetch
@@ -43,6 +33,9 @@ function AnimeSlider(props: AnimeSliderProps) {
           </For>
         </Show>
       </div>
+      <a class='seeAll' href='#'>
+        see all
+      </a>
     </>
   );
 }
