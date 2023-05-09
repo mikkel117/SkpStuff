@@ -1,0 +1,135 @@
+.loadingWrapper {
+  grid-column: 1/5;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .loading {
+    text-align: center;
+    font-size: 40px;
+  }
+}
+.title {
+  margin: 10px;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+}
+.animeImgWrapper {
+  margin: 0 auto;
+  width: 50%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 10px;
+  .animeCard {
+    display: grid;
+    /* transition: opacity 250ms ease-in-out; */
+    transition: scale 250ms ease-in-out;
+    grid-template-columns: 100%;
+    grid-template-rows: 100%;
+    span {
+      grid-row: 1;
+      grid-column: 1;
+      justify-self: center;
+      align-self: center;
+      text-align: center;
+      background-color: #1e1f26;
+      width: 100%;
+      display: none;
+    }
+    img {
+      -webkit-user-drag: none;
+      grid-column: 1;
+      grid-row: 1;
+      width: 100%;
+      height: auto;
+      align-self: center;
+    }
+    &:hover {
+      span {
+        display: block;
+      }
+      scale: 1.1;
+    }
+  }
+}
+
+.animePages {
+  margin-top: 5px;
+  display: flex;
+  justify-content: center;
+  span {
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin: 5px;
+    text-decoration: underline;
+    user-select: none;
+  }
+  .onPage {
+    color: gray;
+  }
+}
+.seeAllAnimeArrow {
+  transition: opacity 200ms ease-in-out;
+  align-self: center;
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin: 5px;
+  &:hover {
+    opacity: 0.5;
+  }
+}
+
+.animeType {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 10px 0 10px 0;
+  color: white;
+  font-weight: bold;
+  button {
+    user-select: none;
+    padding: 5px;
+    border: 1px solid #eebbc3;
+    color: white;
+    background-color: gray;
+    transition: opacity 200ms ease-in-out;
+    &:hover {
+      opacity: 0.5;
+    }
+    &:nth-child(2) {
+      margin-left: 5px;
+    }
+  }
+  .animeTypeActive {
+    background-color: gray;
+    font-weight: bold;
+    opacity: 1;
+  }
+  .animeTypeDeactivated {
+    opacity: 0.2;
+  }
+}
+
+.aphContainer {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: #161929;
+  margin-bottom: 20px;
+  overflow: hidden;
+  p {
+    margin: 10px;
+    cursor: default;
+    transition: opacity 100ms ease-in-out;
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+  .active {
+    opacity: 0.2;
+  }
+}

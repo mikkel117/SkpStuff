@@ -7,9 +7,13 @@ type episodesType = {
   subOrDub: string;
 };
 
+type pagesType = {
+  page: string;
+};
+
 export type AnimeDataType = {
   episodes: episodesType[];
-  pages: [{ page: string }];
+  pages: pagesType[];
   aphList: [{ aph: string; value: string }];
 };
 

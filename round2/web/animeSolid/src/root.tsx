@@ -8,10 +8,12 @@ import {
   Head,
   Html,
   Meta,
+  Route,
   Routes,
   Scripts,
   Title,
 } from "solid-start";
+import AnimeSearch from "./components/search/AnimeSearch";
 import "./root.scss";
 
 export default function Root() {
@@ -26,6 +28,7 @@ export default function Root() {
         <Suspense>
           <ErrorBoundary>
             <nav>
+              <AnimeSearch />
               <h1 class='title'>
                 <A href='/'>AnimeNexus</A>
               </h1>
