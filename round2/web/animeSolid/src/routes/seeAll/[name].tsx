@@ -48,7 +48,6 @@ export default function Index() {
           `https://gogo-anime-api-sand.vercel.app/api/anime-api/movies?aph=${aph}&page=${pageNumber}`
         );
         break;
-
       default:
         console.log("something else");
 
@@ -93,74 +92,59 @@ export default function Index() {
   return (
     <div>
       <h3 class={styles.title}>{title()}</h3>
-      <Show when={params.name === "Recentrelease"}>
-        <div class={styles.animeType}>
-          <button
-            class={`${
-              subOrDub() === 1
-                ? styles.animeTypeActive
-                : styles.animeTypeDeactivated
-            }`}
-            onClick={() => ChangeSubDub()}>
-            sub
-          </button>
-          <button
-            class={`${
-              subOrDub() === 2
-                ? styles.animeTypeActive
-                : styles.animeTypeDeactivated
-            }`}
-            onClick={() => ChangeSubDub()}>
-            dub
-          </button>
-        </div>
-      </Show>
-      <Show when={params.name === "movies"}>
-        <div class={styles.aphContainer}>
-          <For each={data()?.aphList}>
-            {(item) => (
-              <p
-                class={`${aph() === item.aph ? styles.active : ""}`}
-                onClick={() => ChangeAph(item.value)}>
-                {item.aph}
-              </p>
-            )}
-          </For>
-          {/* {#each animeData.aphList as item}
-        <p
-          class={`${
-            aph === item.aph ? "active" : aph === item.value ? "active" : ""
-          }`}
-          on:click={() => {
-            changeAph(item.value);
-          }}
-          on:keypress={() => {
-            changeAph(item.value);
-          }}
-        >
-          {item.aph}
-        </p>
-      {/each} */}
-        </div>
-      </Show>
-      <div class={styles.animeImgWrapper}>
-        <Show when={!data.loading} fallback={<div>loading...</div>}>
-          <For each={data()?.episodes}>
-            {(item) => (
-              <div class={styles.animeCard}>
-                <img
-                  src={item.animeImg}
-                  alt={item.animeTitle}
-                  elementtiming={""}
-                  fetchpriority={"high"}
-                />
-                <span>{item.animeTitle}</span>
-              </div>
-            )}
-          </For>
-        </Show>
-      </div>
       <Show when={data()} fallback={<div>nothing is here</div>}>
+        <Show when={params.name === "Recentrelease"}>
+          <div class={styles.animeType}>
+            <button
+              class={`${
+                subOrDub() === 1
+                  ? styles.animeTypeActive
+                  : styles.animeTypeDeactivated
+              }`}
+              onClick={() => ChangeSubDub()}>
+              sub
+            </button>
+            <button
+              class={`${
+                subOrDub() === 2
+                  ? styles.animeTypeActive
+                  : styles.animeTypeDeactivated
+              }`}
+              onClick={() => ChangeSubDub()}>
+              dub
+            </button>
+          </div>
+        </Show>
+        <Show when={params.name === "movies"}>
+          <div class={styles.aphContainer}>
+            <For each={data()?.aphList}>
+              {(item) => (
+                <p
+                  class={`${aph() === item.aph ? styles.active : ""}`}
+                  onClick={() => ChangeAph(item.value)}>
+                  {item.aph}
+                </p>
+              )}
+            </For>
+          </div>
+        </Show>
+        <div class={styles.animeImgWrapper}>
+          <Show when={!data.loading} fallback={<div>loading...</div>}>
+            <For each={data()?.episodes}>
+              {(item) => (
+                <div class={styles.animeCard}>
+                  <img
+                    src={item.animeImg}
+                    alt={item.animeTitle}
+                    elementtiming={""}
+                    fetchpriority={"high"}
+                  />
+                  <span>{item.animeTitle}</span>
+                </div>
+              )}
+            </For>
+          </Show>
+        </div>
         <Show when={data()!.pages.length > 0}>
           <div class={styles.animePages}>
             <div class={styles.seeAllAnimeArrow} onClick={() => prePage()}>

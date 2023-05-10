@@ -14,6 +14,7 @@ import {
   Title,
 } from "solid-start";
 import AnimeSearch from "./components/search/AnimeSearch";
+import Result from "./routes/Resoults";
 import "./root.scss";
 
 export default function Root() {
