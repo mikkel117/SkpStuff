@@ -1,0 +1,32 @@
+:root {
+  background-color: #232946;
+  color: white;
+  a {
+    color: white;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+}
+
+::-webkit-scrollbar {
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: white;
+}
+::-webkit-scrollbar-thumb {
+  background-color: gray;
+}
