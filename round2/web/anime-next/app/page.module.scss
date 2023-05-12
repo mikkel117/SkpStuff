@@ -1,0 +1,38 @@
+.animeWrapper {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  height: 350px;
+  text-align: center;
+}
+
+.animeType {
+  justify-self: start;
+  align-self: flex-end;
+  margin-left: 20px;
+  color: white;
+  font-weight: bold;
+  button {
+    user-select: none;
+    padding: 5px;
+    border: 1px solid #eebbc3;
+    color: white;
+    background-color: gray;
+    transition: opacity 200ms ease-in-out;
+    &:hover {
+      opacity: 0.5;
+    }
+    &:nth-child(2) {
+      margin-left: 5px;
+    }
+  }
+  .animeTypeActive {
+    background-color: gray;
+    font-weight: bold;
+    opacity: 1;
+  }
+  .animeTypeDeactivated {
+    opacity: 0.2;
+  }
+}
