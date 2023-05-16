@@ -364,3 +364,15 @@ FodyWeavers.xsd
 .vscode/tasks.json
 .vscode/launch.json
 .env
+
+
+
+
+debug/
+target/
+
+Cargo.lock
+
+**/*.rs.bk
+
+*.pdb
