@@ -18,9 +18,9 @@ fn main() -> std::io::Result<()> {
     println!("do you want to see all todo(1), or write a new todo(2)? ");
     stdin().read_line(&mut user_chose).expect("failed to read");
     if user_chose.trim() == "1" {
-        read(args.path)
+        let foo: Vec<&str> = read(&args.path);
     } else if user_chose.trim() == "2" {
-        write();
+        write(&args.path);
     }
 
     //fs::write(&args.path, "hello world").expect("Failed to write to file");
@@ -34,18 +34,16 @@ fn main() -> std::io::Result<()> {
     Ok(())
 }
 
-fn read(args: PathBuf) {
-    println!("{:?}", args);
+fn read(args: &PathBuf) -> Vec<&str> {
     let mut data = vec![];
-    let contents = fs::read_to_string(&args).expect("Failed to read from file");
+    let mut contents = fs::read_to_string(&args).expect("Failed to read from file");
     for line in contents.lines() {
         data.push(line);
     }
-    println!("{:?}", data);
+    return data;
 }
 
-fn write() {
+fn write(args: &PathBuf) {
     let mut user_input = String::new();
     stdin().read_line(&mut user_input).expect("failed to read");
-    println!("{}", user_input);
 }
