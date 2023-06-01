@@ -53,7 +53,7 @@ fn write(args: &PathBuf) {
     }
     new_vec.push(user_input.to_string());
     let mut file = fs::File::open(args);
-    for item in new_vec {
+    /* for item in new_vec {
         &file.unwrap().write(item.as_bytes());
-    }
+    } */
 }
