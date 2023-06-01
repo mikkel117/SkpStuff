@@ -1,3 +1,5 @@
+//https://yew.rs/docs/tutorial
+
 use yew::prelude::*;
 
 #[function_component(App)]
