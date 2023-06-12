@@ -3,8 +3,11 @@ use yew::prelude::*;
 use yew_router::components::Link;
 use yew_router::*;
 mod counter;
+/* #[path = "./components/list_of_pokemon.rs"]
+mod list_of_pokemon; */
+mod anyhow_test;
+mod test;
 mod test_component;
-
 #[derive(Clone, Routable, PartialEq)]
 enum Route {
     #[at("/")]
@@ -32,7 +35,7 @@ fn about() -> Html {
 
 fn switch(routes: Route) -> Html {
     match routes {
-        Route::Home => html! { <div>{" home "}</div> },
+        Route::Home => html! { <test::Test /> },
         Route::About => html! { <About/> },
         Route::News { id } => html! { format!("news {}", id) },
         Route::NotFound => html! { <div>{" not found "}</div> },

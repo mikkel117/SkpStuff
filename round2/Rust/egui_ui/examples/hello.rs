@@ -3,7 +3,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug)]
 struct EpisodesStruct {
-    #[serde(rename = "animeId")]
     anime_id: String,
     #[serde(rename = "animeImg")]
     anime_img: String,
