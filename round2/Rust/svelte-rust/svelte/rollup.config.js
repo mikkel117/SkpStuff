@@ -42,7 +42,7 @@ export default {
 		rust({
 			verbose: true,
 			serverPath: "build/"
-		})
+		}),
 		svelte({
 			compilerOptions: {
 				// enable run-time checks when not in production
