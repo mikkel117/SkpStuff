@@ -1,26 +1,15 @@
-use std::fmt::Result;
-
-use js_sys::Array;
 use wasm_bindgen::prelude::*;
 use wasm_bindgen_futures::JsFuture;
 use web_sys::{Request, RequestInit, RequestMode, Response};
 
-/* #[derive(Serialize, Deserialize, Debug, Clone)]
-struct TodoStruct {
-    #[serde(rename = "userId")]
-    user_id: i32,
-    id: i32,
-    title: String,
-    completed: bool,
-} */
-
 #[wasm_bindgen(js_name = "vecTest")]
-pub async fn vec_test() ->  {
-    let opts = RequestInit::new();
+
+pub async fn vec_test() -> std::result::Result<JsValue, JsValue> {
+    let mut opts = RequestInit::new();
     opts.method("GET");
     opts.mode(RequestMode::Cors);
 
-    let url = "https://jsonplaceholder.typicode.com/todos";
+    let url = "https://pokeapi.co/api/v2/pokemon";
 
     let request = Request::new_with_str_and_init(&url, &opts)?;
 

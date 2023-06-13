@@ -2,9 +2,20 @@
   export let bindings;
   import { Content } from "carbon-components-svelte";
   let { Car, color, vecTest } = bindings;
-  console.log(vecTest());
+  import { onMount } from "svelte";
+  let data = null;
+  onMount(async () => {
+    /* vecTest().then((value) => {
+      data = value;
+      console.log(value);
+    }); */
+
+    data = await vecTest();
+  });
 </script>
 
-<Content>
-  <h1 />
-</Content>
+{#if data === null}
+  <p>loading</p>
+{:else}
+  <p>{data.results[0].name}</p>
+{/if}
