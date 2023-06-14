@@ -1,6 +1,5 @@
 import App from './App.svelte';
 import wasm from '../../rust/Cargo.toml';
-import "carbon-components-svelte/css/g80.css";
 
 /* const app = new App({
 	target: document.body,
