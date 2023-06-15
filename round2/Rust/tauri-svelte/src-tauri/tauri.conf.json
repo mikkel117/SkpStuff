@@ -11,8 +11,15 @@
   },
   "tauri": {
     "allowlist": {
-      "all": false
-    },
+      "all": false,
+      "http": {
+        "all": true,
+        "request": true
+      },
+      "fs": {
+        "all": true
+      }
+      },
     "bundle": {
       "active": true,
       "category": "DeveloperTool",
