@@ -12,7 +12,8 @@
     console.log(homeDirPath.toString());
 
     await invoke("foo_bar", { homeDirPath }); */
-    await invoke("foo_bar");
+    let dir = "VideoDir";
+    await invoke("get_dir", { dir });
   }
 </script>
 
