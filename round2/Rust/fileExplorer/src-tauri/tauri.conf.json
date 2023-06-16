@@ -64,10 +64,10 @@
     "windows": [
       {
         "fullscreen": false,
-        "height": 600,
+        "height": 500,
         "resizable": true,
         "title": "fileExplorer",
-        "width": 1154
+        "width": 1000
       }
     ]
   }
