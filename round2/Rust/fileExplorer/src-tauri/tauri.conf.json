@@ -20,7 +20,25 @@
       },
       "window": {
 				"all": true
-			}
+			},
+      "shell": {
+        "open": true,
+        "all": true,
+        "execute": true,
+        "sidecar": true,
+        "scope": [
+          {
+            "name": "sh",
+            "cmd": "sh",
+            "args": ["-c", { "validator": "\\S+" }]
+          },
+          {
+            "name": "cmd",
+            "cmd": "cmd",
+            "args": ["/C", { "validator": "\\S+" }]
+          }
+        ]
+      }
     },
     "bundle": {
       "active": true,

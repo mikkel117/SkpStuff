@@ -21,6 +21,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@tauri-apps/api": "^1.4.0"
+		"@tauri-apps/api": "^1.4.0",
+		"svelte-terminal": "github:candywater/svelte-terminal#main"
 	}
 }
