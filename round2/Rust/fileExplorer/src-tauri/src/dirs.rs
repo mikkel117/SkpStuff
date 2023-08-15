@@ -1,4 +1,6 @@
+use byte_unit::{Byte, ByteUnit};
 use chrono::prelude::*;
+use fs_extra::dir::get_size;
 use std::{
     fs::{self, DirEntry},
     io,
@@ -51,6 +53,13 @@ impl TryFrom<DirEntry> for FileData {
         let modified = metadata.modified()?;
         let meta_date_time = DateTime::<Local>::from(modified);
         let is_dir = metadata.is_dir();
+        /* let byte = Byte::from_bytes(len.into());
+
+        let adjusted_byte = byte.get_adjusted_unit(ByteUnit::MB); */
+        /* if is_dir {
+            let folder_size = get_size(&path);
+            println!("{}: {:?}", name, folder_size);
+        } */
         Ok(Self {
             name,
             path: path.to_string_lossy().to_string(),

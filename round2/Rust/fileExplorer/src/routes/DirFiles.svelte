@@ -28,12 +28,40 @@
   });
   export async function getDir(dir: string) {
     files = await invoke("get_dir", { dir: dir });
-    console.log(files);
+    console.log(files[0].name);
   }
 </script>
 
-{#each files as item}
-  <p>{item.name}</p>
-{:else}
-  <p>loading</p>
-{/each}
+<div class="container">
+  {#each files as item}
+    <div>
+      <p>{item.name}</p>
+    </div>
+  {:else}
+    <p>loading</p>
+  {/each}
+</div>
+
+<style>
+  .container {
+    width: 100%;
+    max-width: 100%;
+    height: calc(100% -20px);
+    overflow-y: scroll;
+    /* display: flex;
+    flex-wrap: wrap; */
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 5px;
+  }
+  div {
+    width: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    /* overflow: hidden;
+    text-overflow: ellipsis; */
+  }
+  div:last-child > p {
+    padding-bottom: 15px;
+  }
+</style>
