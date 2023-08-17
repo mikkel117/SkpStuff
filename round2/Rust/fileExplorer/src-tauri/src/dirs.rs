@@ -19,6 +19,7 @@ pub enum Dirs {
 #[derive(Debug, serde::Serialize)]
 pub struct Times {
     day: u32,
+    month: u32,
     hour: u32,
     minute: u32,
     seconds: u32,
@@ -65,6 +66,7 @@ impl TryFrom<DirEntry> for FileData {
             path: path.to_string_lossy().to_string(),
             created: Times {
                 day: created_date_time.day(),
+                month: created_date_time.month(),
                 hour: created_date_time.hour(),
                 minute: created_date_time.minute(),
                 seconds: created_date_time.second(),
@@ -73,6 +75,7 @@ impl TryFrom<DirEntry> for FileData {
             //modified: DateTime::<Local>::from(modified),
             modified: Times {
                 day: meta_date_time.day(),
+                month: meta_date_time.month(),
                 hour: meta_date_time.hour(),
                 minute: meta_date_time.minute(),
                 seconds: meta_date_time.second(),
