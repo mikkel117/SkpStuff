@@ -4,5 +4,8 @@
     ],
     "cSpell.words": [
         "teenyicons"
-    ]
+    ],
+    "css.customData": [
+        "./.vscode/containerCss.json"
+     ],
 }

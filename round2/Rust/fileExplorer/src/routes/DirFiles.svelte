@@ -62,6 +62,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    container-type: inline-size;
   }
 
   .container > h1 {
