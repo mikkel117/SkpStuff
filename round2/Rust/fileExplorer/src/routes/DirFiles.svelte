@@ -14,6 +14,7 @@
   type dirsTypes = {
     len: Number;
     modified: timeTypes;
+    is_dir: boolean;
     name: string;
     path: string;
     created: timeTypes;
@@ -33,6 +34,7 @@
   export async function getDir(dir: string) {
     files = await invoke("get_dir", { dir: dir });
     currentDir = dir;
+    console.log(files);
   }
 </script>
 
@@ -40,31 +42,16 @@
   <h1>{currentDir.slice(0, -3)}</h1>
   {#each files as item}
     <div>
-      <Icon icon="teenyicons:pdf-solid" width="50" />
+      {#if item.is_dir}
+        <Icon icon="material-symbols:folder" width="70" />
+      {:else}
+        <Icon icon="teenyicons:pdf-solid" width="70" />
+      {/if}
       <p>{item.name}</p>
     </div>
   {:else}
     <p>loading</p>
   {/each}
-
-  <!-- {#if files.length !== 0}
-    <div>
-      <Icon icon="teenyicons:pdf-solid" width="50" />
-      <p>{files[0].name}</p>
-    </div>
-    <div>
-      <Icon icon="teenyicons:pdf-solid" width="50" />
-      <p>{files[1].name}</p>
-    </div>
-    <div>
-      <Icon icon="teenyicons:pdf-solid" width="50" />
-      <p>{files[2].name}</p>
-    </div>
-    <div>
-      <Icon icon="teenyicons:pdf-solid" width="50" />
-      <p>{files[3].name}</p>
-    </div>
-  {/if} -->
 </div>
 
 <style>
@@ -82,15 +69,16 @@
     max-height: 50px;
   }
   .container > div {
-    /* flex: 1 1 30%; */
-    font-size: 15px;
-    width: 30%;
+    font-size: 20px;
+    width: 25%;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     flex-direction: column;
     background-color: #242631;
     margin: 10px;
+    padding: 10px;
+    border-radius: 1rem;
   }
   div > p {
     white-space: nowrap;
@@ -101,5 +89,27 @@
   }
   div:last-child {
     padding-bottom: 15px;
+  }
+
+  /* width */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 1rem;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 1rem;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
   }
 </style>

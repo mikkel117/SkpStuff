@@ -1,6 +1,6 @@
-use byte_unit::{Byte, ByteUnit};
+//use byte_unit::{Byte, ByteUnit};
 use chrono::prelude::*;
-use fs_extra::dir::get_size;
+//use fs_extra::dir::get_size;
 use std::{
     fs::{self, DirEntry},
     io,
@@ -29,6 +29,7 @@ pub struct Times {
 pub struct FileData {
     name: String,
     path: String,
+    file_extension: String,
     created: Times,
     modified: Times,
     //: chrono::format::DelayedFormat<chrono::format::StrftimeItems<'a>>,
@@ -54,6 +55,18 @@ impl TryFrom<DirEntry> for FileData {
         let modified = metadata.modified()?;
         let meta_date_time = DateTime::<Local>::from(modified);
         let is_dir = metadata.is_dir();
+        let binding = entry.path();
+        let extension = binding.extension();
+        let file_extension: String;
+        if extension == None {
+            file_extension = "None".to_string();
+        } else {
+            file_extension = extension
+                .ok_or(io::Error::new(io::ErrorKind::NotFound, "you fked up"))?
+                .to_string_lossy()
+                .to_string();
+        }
+
         /* let byte = Byte::from_bytes(len.into());
 
         let adjusted_byte = byte.get_adjusted_unit(ByteUnit::MB); */
@@ -64,6 +77,7 @@ impl TryFrom<DirEntry> for FileData {
         Ok(Self {
             name,
             path: path.to_string_lossy().to_string(),
+            file_extension,
             created: Times {
                 day: created_date_time.day(),
                 month: created_date_time.month(),

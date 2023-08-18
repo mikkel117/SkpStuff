@@ -2,8 +2,8 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 //use chrono::{DateTime, Utc};
-use chrono::prelude::*;
-use std::process::Command;
+//use chrono::prelude::*;
+//use std::process::Command;
 use std::str;
 
 mod dirs;
@@ -23,7 +23,7 @@ fn greet(name: &str) -> String {
     format!("Hello, {}!", name)
 }
 
-#[tauri::command]
+/* #[tauri::command]
 fn my_shell_test() -> String {
     let mut log = String::new();
 
@@ -38,4 +38,4 @@ fn my_shell_test() -> String {
     });
     /* println!("{}", log) */
     log
-}
+} */
