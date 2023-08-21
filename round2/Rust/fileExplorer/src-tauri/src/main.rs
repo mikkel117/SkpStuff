@@ -12,7 +12,8 @@ fn main() {
         .invoke_handler(tauri::generate_handler![
             greet,
             dirs::get_dir,
-            dirs::list_of_dir
+            dirs::list_of_dir,
+            dirs::open_file
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

@@ -2,46 +2,55 @@
   import { invoke } from "@tauri-apps/api/tauri";
   import { onMount } from "svelte";
   import Icon from "@iconify/svelte";
-
-  type timeTypes = {
-    day: number;
-    month: number;
-    hour: number;
-    minute: number;
-    second: number;
-    year: number;
-  };
-  type dirsTypes = {
-    len: Number;
-    modified: timeTypes;
-    is_dir: boolean;
-    name: string;
-    path: string;
-    created: timeTypes;
-  };
-
+  import FileInfo from "./FileInfo.svelte";
+  import type { dirsTypes } from "$lib/Types";
   let currentDir: string = "";
 
   let files: dirsTypes[] = [];
+  let isOpen: boolean = false;
+  let fileInfoContent: dirsTypes;
   onMount(async () => {
     currentDir = "HomeDir";
     getDir(currentDir);
-    /* for (let index = 0; index < files.length; index++) {
-      files[index].modified = new Date(files[index].modified);
-      files[index].time = new Date(files[index].time);
-    } */
   });
   export async function getDir(dir: string) {
     files = await invoke("get_dir", { dir: dir });
     currentDir = dir;
     console.log(files);
   }
+
+  let clicked: boolean = false;
+  let to: NodeJS.Timeout | null = null;
+
+  function handleClick() {
+    if (clicked && to != null) {
+      clearTimeout(to);
+      clicked = false;
+      return;
+    }
+    clicked = true;
+
+    to = setTimeout(() => {
+      clicked = false;
+      isOpen = true;
+    }, 150);
+  }
+
+  async function handleDoubleClick(file_Path: string, isDir: boolean) {
+    if (!isDir) {
+      await invoke("open_file", { filePath: file_Path });
+    }
+  }
 </script>
 
 <div class="container">
   <h1>{currentDir.slice(0, -3)}</h1>
   {#each files as item}
-    <div>
+    <div
+      on:click={(e) => handleClick()}
+      on:keydown={(e) => handleClick()}
+      on:dblclick={() => handleDoubleClick(item.path, item.is_dir)}
+    >
       {#if item.is_dir}
         <Icon icon="material-symbols:folder" width="70" />
       {:else}
@@ -53,6 +62,9 @@
     <p>loading</p>
   {/each}
 </div>
+{#if isOpen}
+  <FileInfo bind:isOpen />
+{/if}
 
 <style>
   .container {
@@ -62,7 +74,6 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    container-type: inline-size;
   }
 
   .container > h1 {

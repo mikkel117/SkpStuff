@@ -6,6 +6,8 @@ use std::{
     io,
 };
 
+use open;
+
 #[derive(serde::Deserialize, serde::Serialize, Debug)]
 pub enum Dirs {
     HomeDir,
@@ -106,7 +108,7 @@ impl TryFrom<DirEntry> for FileData {
 pub fn get_dir(dir: Dirs) -> Vec<FileData> {
     let read_dir = match dir {
         Dirs::HomeDir => dirs::home_dir(),
-        Dirs::PictureDir => dirs::picture_dir(),
+        Dirs::PictureDir => dirs::picture_dir(), // ToDO sort Download and check if the others needs to be sorted also,
         Dirs::DownloadDir => dirs::download_dir(),
         Dirs::DocumentDir => dirs::document_dir(),
         Dirs::DesktopDir => dirs::desktop_dir(),
@@ -129,4 +131,8 @@ pub fn list_of_dir() -> Vec<Dirs> {
         Dirs::DesktopDir,
         Dirs::VideoDir,
     ]
+}
+#[tauri::command]
+pub fn open_file(file_path: String) {
+    open::that(file_path).unwrap();
 }

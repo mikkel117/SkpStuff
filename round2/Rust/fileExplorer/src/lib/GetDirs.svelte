@@ -46,6 +46,7 @@
   section {
     width: 10%;
     overflow-y: auto;
+    min-width: 10%;
   }
 
   section div {
