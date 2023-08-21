@@ -2,7 +2,7 @@
 use chrono::prelude::*;
 //use fs_extra::dir::get_size;
 use std::{
-    fs::{self, DirEntry},
+    fs::{self, DirEntry, File},
     io,
 };
 
@@ -117,6 +117,12 @@ pub fn get_dir(dir: Dirs) -> Vec<FileData> {
     .unwrap();
 
     let path = fs::read_dir(format!("{}", read_dir.display())).unwrap();
+    path.map(|e| e.unwrap().try_into().unwrap()).collect()
+}
+
+#[tauri::command]
+pub fn get_files_in_dir(file_path: String) -> Vec<FileData> {
+    let path = fs::read_dir(file_path).unwrap();
 
     path.map(|e| e.unwrap().try_into().unwrap()).collect()
 }

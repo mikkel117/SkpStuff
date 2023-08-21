@@ -13,7 +13,8 @@ fn main() {
             greet,
             dirs::get_dir,
             dirs::list_of_dir,
-            dirs::open_file
+            dirs::open_file,
+            dirs::get_files_in_dir
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

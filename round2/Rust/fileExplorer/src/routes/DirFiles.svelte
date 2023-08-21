@@ -33,12 +33,14 @@
     to = setTimeout(() => {
       clicked = false;
       isOpen = true;
-    }, 150);
+    }, 200);
   }
 
   async function handleDoubleClick(file_Path: string, isDir: boolean) {
     if (!isDir) {
       await invoke("open_file", { filePath: file_Path });
+    } else {
+      files = await invoke("get_files_in_dir", { filePath: file_Path });
     }
   }
 </script>
