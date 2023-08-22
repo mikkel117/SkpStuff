@@ -31,5 +31,6 @@
   section {
     display: flex;
     height: 100%;
+    overflow-x: hidden;
   }
 </style>

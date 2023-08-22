@@ -9,6 +9,7 @@
   let files: dirsTypes[] = [];
   let isOpen: boolean = false;
   let fileInfoContent: dirsTypes;
+  let clicked: boolean = false;
   onMount(async () => {
     currentDir = "HomeDir";
     getDir(currentDir);
@@ -16,13 +17,12 @@
   export async function getDir(dir: string) {
     files = await invoke("get_dir", { dir: dir });
     currentDir = dir;
-    console.log(files);
+    /* console.log(files); */
   }
 
-  let clicked: boolean = false;
   let to: NodeJS.Timeout | null = null;
 
-  function handleClick() {
+  function handleClick(fileInfo: dirsTypes) {
     if (clicked && to != null) {
       clearTimeout(to);
       clicked = false;
@@ -32,6 +32,7 @@
 
     to = setTimeout(() => {
       clicked = false;
+      fileInfoContent = fileInfo;
       isOpen = true;
     }, 200);
   }
@@ -49,8 +50,8 @@
   <h1>{currentDir.slice(0, -3)}</h1>
   {#each files as item}
     <div
-      on:click={(e) => handleClick()}
-      on:keydown={(e) => handleClick()}
+      on:click={(e) => handleClick(item)}
+      on:keydown={(e) => handleClick(item)}
       on:dblclick={() => handleDoubleClick(item.path, item.is_dir)}
     >
       {#if item.is_dir}
@@ -64,15 +65,17 @@
     <p>loading</p>
   {/each}
 </div>
-{#if isOpen}
-  <FileInfo bind:isOpen />
-{/if}
+<!-- {#if isOpen} -->
+<FileInfo bind:isOpen bind:fileInfoContent />
+
+<!-- {/if} -->
 
 <style>
   .container {
     width: 100%;
     height: calc(100% -20px);
     overflow-y: auto;
+    overflow-x: hidden;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;

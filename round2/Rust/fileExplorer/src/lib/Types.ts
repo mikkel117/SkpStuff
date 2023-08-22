@@ -13,4 +13,5 @@ type timeTypes = {
     name: string;
     path: string;
     created: timeTypes;
+    file_extension: string;
   };
