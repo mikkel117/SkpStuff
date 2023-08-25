@@ -3,18 +3,18 @@
   import "../global.css";
   import DirFiles from "./DirFiles.svelte";
   import GetDirs from "../lib/GetDirs.svelte";
-
+  import Nav from "../components/Nav.svelte";
+  import type { dirsTypes } from "$lib/Types";
   let getDir: any;
+  let files: dirsTypes[] = [];
 </script>
 
 <div class="Container">
-  <div class="nav">
-    <a href="/Taps">taps</a>
-  </div>
+  <Nav bind:files />
   <section>
     <GetDirs bind:getFiles={getDir} />
 
-    <DirFiles bind:this={getDir} />
+    <DirFiles bind:this={getDir} {files} />
   </section>
 </div>
 
@@ -24,9 +24,6 @@
     overflow-y: clip;
     display: flex;
     flex-direction: column;
-  }
-  .nav {
-    height: 30px;
   }
   section {
     display: flex;

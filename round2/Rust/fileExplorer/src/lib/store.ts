@@ -1,12 +1,9 @@
 import { writable, type Writable } from "svelte/store";
 
+export const stackHistory: Writable<string[]> = writable([
+]);
 
-type arrayType = {
-    id: number,
-    checked: boolean,
-}
-
-
-export const arrayTest: Writable<arrayType[]> = writable([]);
-
-arrayTest.update = (value) => console.log("test ", value);
+stackHistory.subscribe((value) => {
+    console.log(value);
+    
+})

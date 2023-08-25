@@ -1,12 +1,12 @@
 <script lang="ts">
   import { invoke } from "@tauri-apps/api/tauri";
   import { onMount } from "svelte";
+  import { stackHistory } from "$lib/Store";
   import Icon from "@iconify/svelte";
   import FileInfo from "./FileInfo.svelte";
   import type { dirsTypes } from "$lib/Types";
   let currentDir: string = "";
 
-  let files: dirsTypes[] = [];
   let isOpen: boolean = false;
   let fileInfoContent: dirsTypes;
   let clicked: boolean = false;
@@ -14,6 +14,7 @@
     currentDir = "HomeDir";
     getDir(currentDir);
   });
+  export let files: dirsTypes[] = [];
   export async function getDir(dir: string) {
     files = await invoke("get_dir", { dir: dir });
     currentDir = dir;
@@ -42,6 +43,7 @@
       await invoke("open_file", { filePath: file_Path });
     } else {
       files = await invoke("get_files_in_dir", { filePath: file_Path });
+      $stackHistory.push(file_Path);
     }
   }
 </script>

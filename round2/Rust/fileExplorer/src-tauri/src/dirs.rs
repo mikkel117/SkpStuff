@@ -108,13 +108,14 @@ impl TryFrom<DirEntry> for FileData {
 pub fn get_dir(dir: Dirs) -> Vec<FileData> {
     let read_dir = match dir {
         Dirs::HomeDir => dirs::home_dir(),
-        Dirs::PictureDir => dirs::picture_dir(), // ToDO sort Download and check if the others needs to be sorted also,
+        Dirs::PictureDir => dirs::picture_dir(), // ToDO sort Download and check if the others also needs to be sorted,
         Dirs::DownloadDir => dirs::download_dir(),
         Dirs::DocumentDir => dirs::document_dir(),
         Dirs::DesktopDir => dirs::desktop_dir(),
         Dirs::VideoDir => dirs::video_dir(),
     }
     .unwrap();
+    println!("{:?}", dirs::home_dir());
 
     let path = fs::read_dir(format!("{}", read_dir.display())).unwrap();
     path.map(|e| e.unwrap().try_into().unwrap()).collect()

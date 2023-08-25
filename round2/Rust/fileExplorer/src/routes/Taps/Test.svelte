@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { arrayTest } from "$lib/store.ts";
+  import { arrayTest } from "$lib/storeTest";
   import { onDestroy, onMount } from "svelte";
   export let number: number = 1;
 

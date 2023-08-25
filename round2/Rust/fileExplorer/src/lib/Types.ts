@@ -3,7 +3,7 @@ type timeTypes = {
     month: number;
     hour: number;
     minute: number;
-    second: number;
+    seconds: number;
     year: number;
   };
   export type dirsTypes = {
