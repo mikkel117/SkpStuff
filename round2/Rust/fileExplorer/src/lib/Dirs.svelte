@@ -16,9 +16,11 @@
   });
 
   async function handleClick(item: any) {
-    $stackHistory.push(item);
-    files = await invoke("get_dir", { dir: item });
-    currentDir = item;
+    if (currentDir != item) {
+      $stackHistory.push(item);
+      files = await invoke("get_dir", { dir: item });
+      currentDir = item;
+    }
   }
 </script>
 

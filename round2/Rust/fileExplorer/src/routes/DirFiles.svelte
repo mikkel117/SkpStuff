@@ -35,13 +35,12 @@
     } else {
       files = await invoke("get_files_in_dir", { filePath: file_Path });
       $stackHistory.push(file_Path);
-      console.log($stackHistory);
     }
   }
 </script>
 
 <div class="container">
-  <BackButton {currentDir} bind:files />
+  <BackButton bind:currentDir bind:files />
   {#each files as item}
     <div
       on:click={(e) => handleClick(item)}

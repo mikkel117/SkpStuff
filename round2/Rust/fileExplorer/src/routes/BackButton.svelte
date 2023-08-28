@@ -10,6 +10,7 @@
     files = await invoke("get_dir", {
       dir: $stackHistory[$stackHistory.length - 1],
     });
+    currentDir = $stackHistory[$stackHistory.length - 1];
   }
 
   async function handleBackClick() {
@@ -40,6 +41,9 @@
         files = await invoke("get_files_in_dir", {
           filePath: $stackHistory[$stackHistory.length - 1],
         });
+        if ($stackHistory[$stackHistory.length - 1] === "C:\\Users\\rumbo") {
+          currentDir = "HomeDir";
+        }
         break;
     }
   }

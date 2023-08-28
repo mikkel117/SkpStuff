@@ -12,9 +12,9 @@
 <div class="Container">
   <Nav />
   <section>
-    <Dirs {currentDir} bind:files />
+    <Dirs bind:currentDir bind:files />
 
-    <DirFiles bind:files {currentDir} />
+    <DirFiles bind:files bind:currentDir />
   </section>
 </div>
 
