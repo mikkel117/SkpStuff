@@ -9,10 +9,7 @@ html{
 
 body{
   height: 100%;
+  user-select: none;
+  background-color: #232947;
+  color: white;
 }
-
-
-  body {
-    background-color: #232946;
-    color: white;
-  }

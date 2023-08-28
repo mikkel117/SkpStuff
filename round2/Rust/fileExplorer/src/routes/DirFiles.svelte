@@ -1,25 +1,16 @@
 <script lang="ts">
+  import BackButton from "./BackButton.svelte";
   import { invoke } from "@tauri-apps/api/tauri";
-  import { onMount } from "svelte";
   import { stackHistory } from "$lib/Store";
   import Icon from "@iconify/svelte";
   import FileInfo from "./FileInfo.svelte";
   import type { dirsTypes } from "$lib/Types";
-  let currentDir: string = "";
 
   let isOpen: boolean = false;
   let fileInfoContent: dirsTypes;
   let clicked: boolean = false;
-  onMount(async () => {
-    currentDir = "HomeDir";
-    getDir(currentDir);
-  });
-  export let files: dirsTypes[] = [];
-  export async function getDir(dir: string) {
-    files = await invoke("get_dir", { dir: dir });
-    currentDir = dir;
-    /* console.log(files); */
-  }
+  export let currentDir: string;
+  export let files: dirsTypes[];
 
   let to: NodeJS.Timeout | null = null;
 
@@ -44,12 +35,13 @@
     } else {
       files = await invoke("get_files_in_dir", { filePath: file_Path });
       $stackHistory.push(file_Path);
+      console.log($stackHistory);
     }
   }
 </script>
 
 <div class="container">
-  <h1>{currentDir.slice(0, -3)}</h1>
+  <BackButton {currentDir} bind:files />
   {#each files as item}
     <div
       on:click={(e) => handleClick(item)}
@@ -83,10 +75,10 @@
     justify-content: center;
   }
 
-  .container > h1 {
+  /* .container > h1 {
     width: 100%;
     max-height: 50px;
-  }
+  } */
   .container > div {
     font-size: 20px;
     width: 25%;

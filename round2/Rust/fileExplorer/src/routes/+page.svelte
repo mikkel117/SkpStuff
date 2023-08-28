@@ -2,19 +2,19 @@
   //import Taps from "./Taps/+page.svelte";
   import "../global.css";
   import DirFiles from "./DirFiles.svelte";
-  import GetDirs from "../lib/GetDirs.svelte";
+  import Dirs from "../lib/Dirs.svelte";
   import Nav from "../components/Nav.svelte";
   import type { dirsTypes } from "$lib/Types";
-  let getDir: any;
   let files: dirsTypes[] = [];
+  let currentDir: string = "HomeDir";
 </script>
 
 <div class="Container">
-  <Nav bind:files />
+  <Nav />
   <section>
-    <GetDirs bind:getFiles={getDir} />
+    <Dirs {currentDir} bind:files />
 
-    <DirFiles bind:this={getDir} {files} />
+    <DirFiles bind:files {currentDir} />
   </section>
 </div>
 

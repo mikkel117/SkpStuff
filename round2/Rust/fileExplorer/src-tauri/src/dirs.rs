@@ -115,7 +115,6 @@ pub fn get_dir(dir: Dirs) -> Vec<FileData> {
         Dirs::VideoDir => dirs::video_dir(),
     }
     .unwrap();
-    println!("{:?}", dirs::home_dir());
 
     let path = fs::read_dir(format!("{}", read_dir.display())).unwrap();
     path.map(|e| e.unwrap().try_into().unwrap()).collect()
