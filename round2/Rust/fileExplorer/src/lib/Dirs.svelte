@@ -1,7 +1,7 @@
 <!-- svelte icons https://iconify.design/ -->
 
 <script lang="ts">
-  import { stackHistory } from "$lib/Store";
+  import { stackHistory, addToStackHistory } from "$lib/Store";
   import { invoke } from "@tauri-apps/api/tauri";
   import { onMount } from "svelte";
   import Icon from "@iconify/svelte";
@@ -17,7 +17,7 @@
 
   async function handleClick(item: any) {
     if (currentDir != item) {
-      $stackHistory.push(item);
+      addToStackHistory(item);
       files = await invoke("get_dir", { dir: item });
       currentDir = item;
     }

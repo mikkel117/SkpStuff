@@ -3,14 +3,16 @@
   import "../global.css";
   import DirFiles from "./DirFiles.svelte";
   import Dirs from "../lib/Dirs.svelte";
-  import Nav from "../components/Nav.svelte";
   import type { dirsTypes } from "$lib/Types";
+  import Tabs from "../components/tabs.svelte";
+  import Nav from "../components/Nav.svelte";
   let files: dirsTypes[] = [];
   let currentDir: string = "HomeDir";
 </script>
 
 <div class="Container">
-  <Nav />
+  <Tabs />
+  <Nav bind:files bind:currentDir />
   <section>
     <Dirs bind:currentDir bind:files />
 

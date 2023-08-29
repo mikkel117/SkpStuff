@@ -2,7 +2,7 @@
   import { invoke } from "@tauri-apps/api/tauri";
   import Icon from "@iconify/svelte";
   import type { dirsTypes } from "$lib/Types";
-  import { stackHistory } from "$lib/Store";
+  import { stackHistory, removeLastPath } from "$lib/Store";
   export let files: dirsTypes[] = [];
   export let currentDir: string;
 
@@ -15,9 +15,9 @@
 
   async function handleBackClick() {
     if ($stackHistory.length > 1) {
-      $stackHistory.pop();
+      /* $stackHistory.pop(); */
+      removeLastPath();
     }
-    console.log($stackHistory.length);
 
     switch ($stackHistory[$stackHistory.length - 1]) {
       case "HomeDir":
@@ -47,32 +47,27 @@
   }
 </script>
 
-<div class="backArrowContainer">
-  {#if $stackHistory.length === 1}
-    <span
-      class="backArrow cantGoBack"
-      on:click={() => handleBackClick()}
-      on:keydown={() => handleBackClick()}
-    >
-      <Icon icon="icon-park-outline:back" width="20" />
-    </span>
-  {:else}
-    <span
-      class="backArrow"
-      on:click={() => handleBackClick()}
-      on:keydown={() => handleBackClick()}
-    >
-      <Icon icon="icon-park-outline:back" width="20" />
-    </span>
-  {/if}
-</div>
+{#if $stackHistory.length === 1}
+  <span
+    class="backArrow cantGoBack"
+    on:click={() => handleBackClick()}
+    on:keydown={() => handleBackClick()}
+  >
+    <Icon icon="icon-park-outline:back" width="20" />
+  </span>
+{:else}
+  <span
+    class="backArrow"
+    on:click={() => handleBackClick()}
+    on:keydown={() => handleBackClick()}
+  >
+    <Icon icon="icon-park-outline:back" width="20" />
+  </span>
+{/if}
 
 <style>
   .cantGoBack {
     opacity: 0.2;
-  }
-  .backArrowContainer {
-    width: 100%;
   }
   .backArrow {
     transition: opacity 0.5s;

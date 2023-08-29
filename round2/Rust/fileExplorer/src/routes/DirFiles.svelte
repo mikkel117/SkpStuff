@@ -1,7 +1,6 @@
 <script lang="ts">
-  import BackButton from "./BackButton.svelte";
   import { invoke } from "@tauri-apps/api/tauri";
-  import { stackHistory } from "$lib/Store";
+  import { stackHistory, addToStackHistory } from "$lib/Store";
   import Icon from "@iconify/svelte";
   import FileInfo from "./FileInfo.svelte";
   import type { dirsTypes } from "$lib/Types";
@@ -34,13 +33,14 @@
       await invoke("open_file", { filePath: file_Path });
     } else {
       files = await invoke("get_files_in_dir", { filePath: file_Path });
-      $stackHistory.push(file_Path);
+      /* $stackHistory.push(file_Path); */
+      addToStackHistory(file_Path);
     }
   }
 </script>
 
 <div class="container">
-  <BackButton bind:currentDir bind:files />
+  <!-- <BackButton bind:currentDir bind:files /> -->
   {#each files as item}
     <div
       on:click={(e) => handleClick(item)}
