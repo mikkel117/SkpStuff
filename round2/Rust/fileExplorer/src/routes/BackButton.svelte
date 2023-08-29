@@ -17,6 +17,7 @@
     if ($stackHistory.length > 1) {
       $stackHistory.pop();
     }
+    console.log($stackHistory.length);
 
     switch ($stackHistory[$stackHistory.length - 1]) {
       case "HomeDir":
@@ -41,25 +42,39 @@
         files = await invoke("get_files_in_dir", {
           filePath: $stackHistory[$stackHistory.length - 1],
         });
-        if ($stackHistory[$stackHistory.length - 1] === "C:\\Users\\rumbo") {
-          currentDir = "HomeDir";
-        }
         break;
     }
   }
 </script>
 
-<div
-  class="backArrow"
-  on:click={() => handleBackClick()}
-  on:keydown={() => handleBackClick()}
->
-  <Icon icon="icon-park-outline:back" width="20" />
+<div class="backArrowContainer">
+  {#if $stackHistory.length === 1}
+    <span
+      class="backArrow cantGoBack"
+      on:click={() => handleBackClick()}
+      on:keydown={() => handleBackClick()}
+    >
+      <Icon icon="icon-park-outline:back" width="20" />
+    </span>
+  {:else}
+    <span
+      class="backArrow"
+      on:click={() => handleBackClick()}
+      on:keydown={() => handleBackClick()}
+    >
+      <Icon icon="icon-park-outline:back" width="20" />
+    </span>
+  {/if}
 </div>
 
 <style>
-  .backArrow {
+  .cantGoBack {
+    opacity: 0.2;
+  }
+  .backArrowContainer {
     width: 100%;
+  }
+  .backArrow {
     transition: opacity 0.5s;
   }
 
