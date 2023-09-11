@@ -14,7 +14,9 @@ fn main() {
             dirs::get_dir,
             dirs::list_of_dir,
             dirs::open_file,
-            dirs::get_files_in_dir
+            dirs::get_files_in_dir,
+            dirs::get_dir_path,
+            dirs::search_suggestion
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

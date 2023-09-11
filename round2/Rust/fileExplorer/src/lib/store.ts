@@ -1,5 +1,5 @@
 import { writable, type Writable } from "svelte/store";
-
+  import { invoke } from "@tauri-apps/api/tauri";
 export const stackHistory: Writable<string[]> = writable([
     "HomeDir"
 ]);

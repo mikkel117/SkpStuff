@@ -1,7 +1,11 @@
 //use byte_unit::{Byte, ByteUnit};
 use chrono::prelude::*;
 //use fs_extra::dir::get_size;
+use std::collections::BTreeMap;
+
+use std::path::{Path, PathBuf};
 use std::{
+    f32::consts::E,
     fs::{self, DirEntry, File},
     io,
 };
@@ -18,7 +22,7 @@ pub enum Dirs {
     VideoDir,
 }
 
-#[derive(Debug, serde::Serialize)]
+#[derive(Debug, serde::Serialize, Eq, Ord, PartialEq, PartialOrd, serde::Deserialize)]
 pub struct Times {
     day: u32,
     month: u32,
@@ -27,7 +31,7 @@ pub struct Times {
     seconds: u32,
     year: i32,
 }
-#[derive(Debug, serde::Serialize)]
+#[derive(Debug, serde::Serialize, Eq, Ord, PartialEq, PartialOrd, serde::Deserialize)]
 pub struct FileData {
     name: String,
     path: String,
@@ -38,6 +42,12 @@ pub struct FileData {
     len: u64,
     is_dir: bool,
 }
+/* #[derive(serde::Deserialize, Debug, Eq, Ord, PartialEq, PartialOrd, Clone)]
+pub struct foo {
+    name: String,
+    path: String,
+    is_dir: bool,
+} */
 
 impl TryFrom<DirEntry> for FileData {
     type Error = std::io::Error;
@@ -115,7 +125,6 @@ pub fn get_dir(dir: Dirs) -> Vec<FileData> {
         Dirs::VideoDir => dirs::video_dir(),
     }
     .unwrap();
-
     let path = fs::read_dir(format!("{}", read_dir.display())).unwrap();
     path.map(|e| e.unwrap().try_into().unwrap()).collect()
 }
@@ -125,6 +134,21 @@ pub fn get_files_in_dir(file_path: String) -> Vec<FileData> {
     let path = fs::read_dir(file_path).unwrap();
 
     path.map(|e| e.unwrap().try_into().unwrap()).collect()
+}
+
+#[tauri::command]
+pub fn get_dir_path(dir_path: Dirs) -> String {
+    let read_dir = match dir_path {
+        Dirs::HomeDir => dirs::home_dir(),
+        Dirs::PictureDir => dirs::picture_dir(),
+        Dirs::DownloadDir => dirs::download_dir(),
+        Dirs::DocumentDir => dirs::document_dir(),
+        Dirs::DesktopDir => dirs::desktop_dir(),
+        Dirs::VideoDir => dirs::video_dir(),
+    }
+    .unwrap();
+    let path: String = read_dir.into_os_string().into_string().unwrap();
+    path
 }
 
 #[tauri::command]
@@ -141,4 +165,50 @@ pub fn list_of_dir() -> Vec<Dirs> {
 #[tauri::command]
 pub fn open_file(file_path: String) {
     open::that(file_path).unwrap();
+}
+
+#[tauri::command]
+pub fn search_suggestion(mut data: Vec<FileData>, key_word: String) {
+    //let mut paths: Vec<PathBuf> = data.iter().map(|d| d.path.clone().into()).collect();
+    /* let suggestions: Vec<foo>;
+    for item in data.iter() {
+        if item.is_dir {
+            println!("{:?}", item.path.split("\\"));
+        }
+    } */
+    let search: Vec<&str> = key_word.split("\\").flat_map(|s| s.split("/")).collect();
+    /* let mut v = vec!["aps", "aba", "abp", "apa", "www", "a"];
+    let user_input = search[search.len() - 1];
+    v.sort_by(|a, b| {
+        if a.contains(user_input) && !b.contains(user_input) {
+            std::cmp::Ordering::Less
+        } else if !a.contains(user_input) && b.contains(user_input) {
+            std::cmp::Ordering::Greater
+        } else {
+            a.cmp(b)
+        }
+    });
+    println!("{:?}", v); */
+
+    //let mut v = vec!["aps", "aba", "abp", "apa", "www", "a"];
+    //let user_input = search[search.len() - 1];
+    let user_input = search[search.len() - 1];
+    data.sort_by(|a, b| {
+        if a.name.to_lowercase().contains(user_input) && !b.name.to_lowercase().contains(user_input)
+        {
+            std::cmp::Ordering::Less
+        } else if !a.name.to_lowercase().contains(user_input)
+            && b.name.to_lowercase().contains(user_input)
+        {
+            std::cmp::Ordering::Greater
+        } else {
+            a.name.cmp(&b.name)
+        }
+    });
+    for item in data {
+        println!("{:?}", item.name);
+    }
+    println!("{:?}", user_input);
+    //println!("{:?}", v[v.len() - 1]);
+    println!(" ");
 }
