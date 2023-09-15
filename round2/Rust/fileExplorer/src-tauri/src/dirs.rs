@@ -5,7 +5,6 @@ use std::collections::BTreeMap;
 
 use std::path::{Path, PathBuf};
 use std::{
-    f32::consts::E,
     fs::{self, DirEntry, File},
     io,
 };

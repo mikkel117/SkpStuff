@@ -7,6 +7,8 @@
 use std::str;
 
 mod dirs;
+mod fuzzy_search;
+
 fn main() {
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![
@@ -16,7 +18,8 @@ fn main() {
             dirs::open_file,
             dirs::get_files_in_dir,
             dirs::get_dir_path,
-            dirs::search_suggestion
+            dirs::search_suggestion,
+            fuzzy_search::fuzzy_finder
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
