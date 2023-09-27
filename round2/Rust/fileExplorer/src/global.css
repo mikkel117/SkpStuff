@@ -1,6 +1,12 @@
+:root{
+  --main-bg-color: #232947;
+  --secondary-bg-color: #242631;
+}
+
 *{
   margin: 0;
   padding: 0;
+    box-sizing: border-box;
 }
 
 html{
@@ -10,6 +16,6 @@ html{
 body{
   height: 100%;
   user-select: none;
-  background-color: #232947;
+  background-color: var(--main-bg-color);
   color: white;
 }

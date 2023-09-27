@@ -1,16 +1,17 @@
 <script lang="ts">
   import { invoke } from "@tauri-apps/api/tauri";
   import Icon from "@iconify/svelte";
-  import type { dirsTypes } from "$lib/Types";
-  import { stackHistory, removeLastPath } from "$lib/Store";
-  export let files: dirsTypes[] = [];
-  export let currentDir: string;
+  import { stackHistory, removeLastPath } from "$lib/store/stackHistoryStore";
+  import { updateFiles } from "$lib/store/filesStore";
+  import { updateCurrentDir } from "$lib/store/currentDirStore";
 
   async function changeDirectory() {
-    files = await invoke("get_dir", {
-      dir: $stackHistory[$stackHistory.length - 1],
-    });
-    currentDir = $stackHistory[$stackHistory.length - 1];
+    updateFiles(
+      await invoke("get_dir", {
+        dir: $stackHistory[$stackHistory.length - 1],
+      })
+    );
+    updateCurrentDir($stackHistory[$stackHistory.length - 1]);
   }
 
   async function handleBackClick() {
@@ -39,9 +40,11 @@
         changeDirectory();
         break;
       default:
-        files = await invoke("get_files_in_dir", {
-          filePath: $stackHistory[$stackHistory.length - 1],
-        });
+        updateFiles(
+          await invoke("get_files_in_dir", {
+            filePath: $stackHistory[$stackHistory.length - 1],
+          })
+        );
         break;
     }
   }

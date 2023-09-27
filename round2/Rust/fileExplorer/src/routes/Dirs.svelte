@@ -1,25 +1,26 @@
 <!-- svelte icons https://iconify.design/ -->
 
 <script lang="ts">
-  import { stackHistory, addToStackHistory } from "$lib/Store";
+  import { addToStackHistory } from "$lib/store/stackHistoryStore";
+  import { updateFiles } from "$lib/store/filesStore";
+
+  import { currentDir, updateCurrentDir } from "$lib/store/currentDirStore";
   import { invoke } from "@tauri-apps/api/tauri";
   import { onMount } from "svelte";
   import Icon from "@iconify/svelte";
-  import type { dirsTypes } from "$lib/Types";
   export let dirs: any[] = [];
-  export let currentDir: string;
-  export let files: dirsTypes[] = [];
-
   onMount(async () => {
     dirs = await invoke("list_of_dir");
-    files = await invoke("get_dir", { dir: currentDir });
+
+    updateFiles(await invoke("get_dir", { dir: $currentDir }));
   });
 
   async function handleClick(item: any) {
     if (currentDir != item) {
       addToStackHistory(item);
-      files = await invoke("get_dir", { dir: item });
-      currentDir = item;
+      updateCurrentDir(item);
+
+      updateFiles(await invoke("get_dir", { dir: item }));
     }
   }
 </script>
@@ -33,7 +34,7 @@
       on:keydown={() => {
         handleClick(item);
       }}
-      class:CurrentDir={item === currentDir}
+      class:CurrentDir={item === $currentDir}
     >
       {#if item === "HomeDir"}
         <Icon icon="material-symbols:home" width="30" />

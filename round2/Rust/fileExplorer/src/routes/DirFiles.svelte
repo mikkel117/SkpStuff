@@ -1,19 +1,18 @@
 <script lang="ts">
   import { invoke } from "@tauri-apps/api/tauri";
-  import { stackHistory, addToStackHistory } from "$lib/Store";
+  import { addToStackHistory } from "$lib/store/stackHistoryStore";
+  import { files, updateFiles } from "$lib/store/filesStore";
   import Icon from "@iconify/svelte";
   import FileInfo from "./FileInfo.svelte";
-  import type { dirsTypes } from "$lib/Types";
+  import type { dirsType } from "$lib/Types";
 
   let isOpen: boolean = false;
-  let fileInfoContent: dirsTypes;
+  let fileInfoContent: dirsType;
   let clicked: boolean = false;
-  export let currentDir: string;
-  export let files: dirsTypes[];
 
   let to: NodeJS.Timeout | null = null;
 
-  function handleClick(fileInfo: dirsTypes) {
+  function handleClick(fileInfo: dirsType) {
     if (clicked && to != null) {
       clearTimeout(to);
       clicked = false;
@@ -32,16 +31,15 @@
     if (!isDir) {
       await invoke("open_file", { filePath: file_Path });
     } else {
-      files = await invoke("get_files_in_dir", { filePath: file_Path });
-      /* $stackHistory.push(file_Path); */
+      updateFiles(await invoke("get_files_in_dir", { filePath: file_Path }));
+
       addToStackHistory(file_Path);
     }
   }
 </script>
 
 <div class="container">
-  <!-- <BackButton bind:currentDir bind:files /> -->
-  {#each files as item}
+  {#each $files as item}
     <div
       on:click={(e) => handleClick(item)}
       on:keydown={(e) => handleClick(item)}
@@ -58,10 +56,7 @@
     <p>loading</p>
   {/each}
 </div>
-<!-- {#if isOpen} -->
 <FileInfo bind:isOpen bind:fileInfoContent />
-
-<!-- {/if} -->
 
 <style>
   .container {
@@ -73,11 +68,6 @@
     flex-wrap: wrap;
     justify-content: center;
   }
-
-  /* .container > h1 {
-    width: 100%;
-    max-height: 50px;
-  } */
   .container > div {
     font-size: 20px;
     width: 25%;
@@ -85,7 +75,7 @@
     flex-wrap: wrap;
     align-items: center;
     flex-direction: column;
-    background-color: #242631;
+    background-color: var(--secondary-bg-color);
     margin: 10px;
     padding: 10px;
     border-radius: 1rem;

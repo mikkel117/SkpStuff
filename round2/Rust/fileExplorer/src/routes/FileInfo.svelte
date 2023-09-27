@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { fade, fly, slide } from "svelte/transition";
-  import { quintOut } from "svelte/easing";
-  import type { dirsTypes } from "$lib/Types";
+  /*   import { fade, fly, slide } from "svelte/transition";
+  import { quintOut } from "svelte/easing"; */
+  import type { dirsType } from "$lib/Types";
   import { convertFileSrc } from "@tauri-apps/api/tauri";
   import Icon from "@iconify/svelte";
   export let isOpen: boolean = false;
-  export let fileInfoContent: dirsTypes | null;
+  export let fileInfoContent: dirsType | null;
   let infoWidth = "0";
   let convertedFilePath: string = "";
   $: {
@@ -14,6 +14,7 @@
       if (convertedFilePath != null) {
         convertedFilePath = convertFileSrc(fileInfoContent!.path);
       }
+
       infoWidth = "50%";
     } else {
       fileInfoContent = null;
