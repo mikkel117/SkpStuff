@@ -31,9 +31,8 @@
       path: path,
     });
     console.log(searchSuggestion); */
-    searchSuggestion = await invoke("new_fuzzy_finder_test", {
+    searchSuggestion = await invoke("fuzzy_finder", {
       fullPath: inputTxt,
-      path: path,
     });
     console.log(searchSuggestion);
   }
