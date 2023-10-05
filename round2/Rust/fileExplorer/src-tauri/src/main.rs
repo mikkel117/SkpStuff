@@ -18,8 +18,8 @@ fn main() {
             dirs::open_file,
             dirs::get_files_in_dir,
             dirs::get_dir_path,
-            dirs::search_suggestion,
-            fuzzy_search::fuzzy_finder
+            fuzzy_search::fuzzy_finder,
+            fuzzy_search::new_fuzzy_finder_test
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

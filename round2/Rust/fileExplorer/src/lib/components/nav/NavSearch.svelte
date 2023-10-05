@@ -25,9 +25,14 @@
   }
 
   async function callSearchSuggestion() {
-    searchSuggestion = await invoke("fuzzy_finder", {
+    /* searchSuggestion = await invoke("fuzzy_finder", {
       searchWord: inputTxt,
       arrayOfWords: $files,
+      path: path,
+    });
+    console.log(searchSuggestion); */
+    searchSuggestion = await invoke("new_fuzzy_finder_test", {
+      fullPath: inputTxt,
       path: path,
     });
     console.log(searchSuggestion);
@@ -120,5 +125,6 @@
 
   li:hover {
     background-color: var(--main-bg-color);
+    opacity: 0.5;
   }
 </style>

@@ -1,3 +1,5 @@
+use crate::dirs::{get_files_in_dir, FileData};
+
 #[derive(Debug, PartialEq, serde::Serialize, serde::Deserialize)]
 pub struct SearchResult {
     word: String,
@@ -5,28 +7,93 @@ pub struct SearchResult {
     path: String,
 }
 
-#[derive(Debug, serde::Serialize, Eq, Ord, PartialEq, PartialOrd, serde::Deserialize)]
-pub struct Times {
-    day: u32,
-    month: u32,
-    hour: u32,
-    minute: u32,
-    seconds: u32,
-    year: i32,
-}
-#[derive(Debug, serde::Serialize, Eq, Ord, PartialEq, PartialOrd, serde::Deserialize)]
-pub struct FileData {
-    name: String,
-    path: String,
-    file_extension: String,
-    created: Times,
-    modified: Times,
-    //: chrono::format::DelayedFormat<chrono::format::StrftimeItems<'a>>,
-    len: u64,
-    is_dir: bool,
+type FuzzyRule = dyn Fn(String, String) -> usize;
+
+#[derive(serde::Serialize, Debug)]
+struct ListFilesResponse {
+    files: Vec<FileData>,
 }
 
-type FuzzyRule = dyn Fn(String, String) -> usize;
+#[tauri::command]
+pub fn new_fuzzy_finder_test(full_path: String, path: String) -> Vec<SearchResult> {
+    let rules: Vec<Box<FuzzyRule>> = vec![
+        Box::new(whole_word),
+        Box::new(contains_word),
+        Box::new(word_starts_with),
+        Box::new(shortened_words),
+        Box::new(match_chars),
+    ];
+
+    let mut splitted_search_word: Vec<&str> =
+        full_path.split("\\").flat_map(|s| s.split("/")).collect();
+    let mut search_query: &str = "";
+    let mut array_of_words: Vec<FileData> = Vec::new();
+    let mut sorted_array_of_words: Vec<SearchResult> = Vec::new();
+    /* let test = full_path.split_whitespace(); */
+    match get_files_in_dir(&full_path) {
+        Ok(files) => {
+            let response = ListFilesResponse { files };
+            /* for item in response.files {
+                println!("{:?}", item.name);
+
+            } */
+            for item in response.files {
+                if item.is_dir {
+                    let sorted_array_of_words_item = SearchResult {
+                        word: item.name.to_string(),
+                        value: 0,
+                        path: item.path,
+                    };
+                    sorted_array_of_words.push(sorted_array_of_words_item);
+                }
+            }
+
+            sorted_array_of_words.sort_by(|a, b| a.word.cmp(&b.word));
+        }
+        Err(e) => {
+            let last_index = splitted_search_word.len() - 1;
+            search_query = splitted_search_word[last_index];
+            splitted_search_word.remove(last_index);
+            let joined = splitted_search_word.join("/");
+            match get_files_in_dir(&joined) {
+                Ok(files) => {
+                    let response = ListFilesResponse { files };
+                    sorted_array_of_words = test(response.files, search_query, rules);
+
+                    sorted_array_of_words.sort_by(|a, b| b.value.cmp(&a.value));
+                }
+                Err(e) => println!("{}", e),
+            }
+            //println!("error {}", e);
+        }
+    }
+    sorted_array_of_words
+}
+
+fn test(
+    array_of_words: Vec<FileData>,
+    search_query: &str,
+    rules: Vec<Box<FuzzyRule>>,
+) -> Vec<SearchResult> {
+    let mut sorted_array_of_words: Vec<SearchResult> = Vec::new();
+    for item in array_of_words {
+        if item.is_dir {
+            let mut score = 0;
+            for rule in rules.iter() {
+                score += rule(item.name.to_lowercase(), search_query.to_lowercase());
+            }
+            if score > 0 {
+                let sorted_array_of_words_item = SearchResult {
+                    word: item.name.to_string(),
+                    value: score,
+                    path: item.path,
+                };
+                sorted_array_of_words.push(sorted_array_of_words_item);
+            }
+        }
+    }
+    sorted_array_of_words
+}
 
 #[tauri::command]
 pub fn fuzzy_finder(
@@ -41,9 +108,10 @@ pub fn fuzzy_finder(
         Box::new(shortened_words),
         Box::new(match_chars),
     ];
-
     let search: Vec<&str> = search_word.split("\\").flat_map(|s| s.split("/")).collect();
+    println!("{:?}", search);
     let user_input = search[search.len() - 1];
+    println!("{}", user_input);
     let mut sorted_array_of_words: Vec<SearchResult> = Vec::new();
     for item in array_of_words {
         if item.is_dir {

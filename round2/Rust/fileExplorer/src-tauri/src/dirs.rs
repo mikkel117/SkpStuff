@@ -1,11 +1,14 @@
+/* use anyhow::Ok; */
 //use byte_unit::{Byte, ByteUnit};
 use chrono::prelude::*;
+//use fs_extra::file;
 //use fs_extra::dir::get_size;
-use std::collections::BTreeMap;
+//use std::collections::BTreeMap;
 
-use std::path::{Path, PathBuf};
+use std::convert::TryInto;
+//use std::path::{Path, PathBuf};
 use std::{
-    fs::{self, DirEntry, File},
+    fs::{self, DirEntry},
     io,
 };
 
@@ -23,23 +26,23 @@ pub enum Dirs {
 
 #[derive(Debug, serde::Serialize, Eq, Ord, PartialEq, PartialOrd, serde::Deserialize)]
 pub struct Times {
-    day: u32,
-    month: u32,
-    hour: u32,
-    minute: u32,
-    seconds: u32,
-    year: i32,
+    pub day: u32,
+    pub month: u32,
+    pub hour: u32,
+    pub minute: u32,
+    pub seconds: u32,
+    pub year: i32,
 }
 #[derive(Debug, serde::Serialize, Eq, Ord, PartialEq, PartialOrd, serde::Deserialize)]
 pub struct FileData {
-    name: String,
-    path: String,
-    file_extension: String,
-    created: Times,
-    modified: Times,
+    pub name: String,
+    pub path: String,
+    pub file_extension: String,
+    pub created: Times,
+    pub modified: Times,
     //: chrono::format::DelayedFormat<chrono::format::StrftimeItems<'a>>,
-    len: u64,
-    is_dir: bool,
+    pub len: u64,
+    pub is_dir: bool,
 }
 /* #[derive(serde::Deserialize, Debug, Eq, Ord, PartialEq, PartialOrd, Clone)]
 pub struct foo {
@@ -128,11 +131,33 @@ pub fn get_dir(dir: Dirs) -> Vec<FileData> {
     path.map(|e| e.unwrap().try_into().unwrap()).collect()
 }
 
-#[tauri::command]
-pub fn get_files_in_dir(file_path: String) -> Vec<FileData> {
+/* #[tauri::command]
+//Vec<FileData>
+pub fn s_get_files_in_dir(file_path: String) -> Vec<FileData> {
     let path = fs::read_dir(file_path).unwrap();
 
-    path.map(|e| e.unwrap().try_into().unwrap()).collect()
+    let test = path.map(|e| e.unwrap().try_into().unwrap()).collect();
+    test
+} */
+
+#[tauri::command]
+pub fn get_files_in_dir(file_path: &str) -> Result<Vec<FileData>, String> {
+    let mut file_data_list = Vec::new();
+
+    let dir = match fs::read_dir(&file_path) {
+        Ok(dir) => dir,
+        Err(e) => return Err(e.to_string()),
+    };
+
+    for entry in dir {
+        let entry = match entry {
+            Ok(entry) => entry,
+            Err(e) => return Err(e.to_string()),
+        };
+        let file_data = FileData::try_from(entry).map_err(|e| e.to_string())?;
+        file_data_list.push(file_data);
+    }
+    Ok(file_data_list)
 }
 
 #[tauri::command]
@@ -164,50 +189,4 @@ pub fn list_of_dir() -> Vec<Dirs> {
 #[tauri::command]
 pub fn open_file(file_path: String) {
     open::that(file_path).unwrap();
-}
-
-#[tauri::command]
-pub fn search_suggestion(mut data: Vec<FileData>, key_word: String) {
-    //let mut paths: Vec<PathBuf> = data.iter().map(|d| d.path.clone().into()).collect();
-    /* let suggestions: Vec<foo>;
-    for item in data.iter() {
-        if item.is_dir {
-            println!("{:?}", item.path.split("\\"));
-        }
-    } */
-    let search: Vec<&str> = key_word.split("\\").flat_map(|s| s.split("/")).collect();
-    /* let mut v = vec!["aps", "aba", "abp", "apa", "www", "a"];
-    let user_input = search[search.len() - 1];
-    v.sort_by(|a, b| {
-        if a.contains(user_input) && !b.contains(user_input) {
-            std::cmp::Ordering::Less
-        } else if !a.contains(user_input) && b.contains(user_input) {
-            std::cmp::Ordering::Greater
-        } else {
-            a.cmp(b)
-        }
-    });
-    println!("{:?}", v); */
-
-    //let mut v = vec!["aps", "aba", "abp", "apa", "www", "a"];
-    //let user_input = search[search.len() - 1];
-    let user_input = search[search.len() - 1];
-    data.sort_by(|a, b| {
-        if a.name.to_lowercase().contains(user_input) && !b.name.to_lowercase().contains(user_input)
-        {
-            std::cmp::Ordering::Less
-        } else if !a.name.to_lowercase().contains(user_input)
-            && b.name.to_lowercase().contains(user_input)
-        {
-            std::cmp::Ordering::Greater
-        } else {
-            a.name.cmp(&b.name)
-        }
-    });
-    for item in data {
-        println!("{:?}", item.name);
-    }
-    println!("{:?}", user_input);
-    //println!("{:?}", v[v.len() - 1]);
-    println!(" ");
 }
