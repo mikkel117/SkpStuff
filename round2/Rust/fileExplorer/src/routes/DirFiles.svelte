@@ -80,6 +80,12 @@
     padding: 10px;
     border-radius: 1rem;
   }
+
+  .container > div:hover {
+    opacity: 0.7;
+    cursor: pointer;
+  }
+
   div > p {
     white-space: nowrap;
     text-overflow: ellipsis;

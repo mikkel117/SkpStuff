@@ -6,7 +6,6 @@
   } from "$lib/store/stackHistoryStore";
   import { files, updateFiles } from "$lib/store/filesStore";
   import type { dirsType, SearchSuggestionType } from "$lib/Types";
-  //export let files: dirsType[];
   let inputTxt: string = "";
   let path: string = "";
   let searchSuggestion: SearchSuggestionType[] = [];
@@ -25,12 +24,6 @@
   }
 
   async function callSearchSuggestion() {
-    /* searchSuggestion = await invoke("fuzzy_finder", {
-      searchWord: inputTxt,
-      arrayOfWords: $files,
-      path: path,
-    });
-    console.log(searchSuggestion); */
     searchSuggestion = await invoke("fuzzy_finder", {
       fullPath: inputTxt,
     });
