@@ -187,6 +187,21 @@ pub fn list_of_dir() -> Vec<Dirs> {
     ]
 }
 #[tauri::command]
-pub fn open_file(file_path: String) {
-    open::that(file_path).unwrap();
+pub fn open_file(file_path: String) -> Result<String, String> {
+    match open::that(file_path.clone()) {
+        Ok(_) => Ok("opened file".to_string()),
+        Err(_) => Err("failed to open file".to_string()),
+    }
+}
+
+#[test]
+fn test_get_dir_path_get_home() {
+    let dir_path = get_dir_path(Dirs::HomeDir);
+    assert_eq!(dir_path, "C:\\Users\\rumbo".to_string());
+}
+
+#[test]
+fn test_open_file_file_opens() {
+    let result = open_file("C:\\Users\\rumbo\\test\\foo1.txt".to_string()).unwrap();
+    assert_eq!(result, "opened file");
 }

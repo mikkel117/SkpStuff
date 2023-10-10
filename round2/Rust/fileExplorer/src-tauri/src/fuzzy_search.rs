@@ -75,7 +75,7 @@ fn sort_words(
             for rule in rules.iter() {
                 score += rule(item.name.to_lowercase(), search_query.to_lowercase());
             }
-            if score > 0 {
+            if score > 2 {
                 let sorted_array_of_words_item = SearchResult {
                     word: item.name.to_string(),
                     value: score,
@@ -113,8 +113,8 @@ fn word_starts_with(item: String, query: String) -> usize {
 }
 
 fn shortened_words(item: String, query: String) -> usize {
-    let test: String = item.split("_").flat_map(|s| s.chars().nth(0)).collect();
-    if test == query {
+    let shortened_word: String = item.split("_").flat_map(|s| s.chars().nth(0)).collect();
+    if shortened_word == query {
         15
     } else if item.starts_with(&query) {
         16
@@ -139,4 +139,28 @@ fn match_chars(item: String, query: String) -> usize {
     } else {
         0
     }
+}
+
+#[test]
+fn test_fuzzy_finder_no_match() {
+    let result = fuzzy_finder("C:\\Users\\rumbo\\idk".to_string());
+    assert_eq!(result, Vec::<SearchResult>::new());
+}
+
+#[test]
+fn test_shortened_word_equal_query() {
+    let score = shortened_words("hello_earth_from_rust".to_string(), "hefr".to_string());
+    assert_eq!(score, 15);
+}
+
+#[test]
+fn test_shortened_word_starts_with_query() {
+    let score = shortened_words("hello_earth_from_rust".to_string(), "he".to_string());
+    assert_eq!(score, 16);
+}
+
+#[test]
+fn test_shortened_word_no_match() {
+    let score = shortened_words("hello_earth_from_rust".to_string(), "hf".to_string());
+    assert_eq!(score, 0);
 }
