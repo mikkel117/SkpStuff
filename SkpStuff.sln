@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "round3", "round3", "{A2A2E617-590C-4BD9-8DA9-7DC77E0BD023}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "csharp", "csharp", "{2CFCFBBB-5841-41FD-BB4E-C4290A049069}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EFCore", "EFCore", "{F67F896B-0C1F-4DA4-90FF-B8250DE2C1E1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFGetStarted", "round3\csharp\EFCore\EFGetStarted\EFGetStarted.csproj", "{1053247F-D50E-4141-AB37-E4FD5D0E196D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1053247F-D50E-4141-AB37-E4FD5D0E196D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1053247F-D50E-4141-AB37-E4FD5D0E196D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1053247F-D50E-4141-AB37-E4FD5D0E196D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1053247F-D50E-4141-AB37-E4FD5D0E196D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2CFCFBBB-5841-41FD-BB4E-C4290A049069} = {A2A2E617-590C-4BD9-8DA9-7DC77E0BD023}
+		{F67F896B-0C1F-4DA4-90FF-B8250DE2C1E1} = {2CFCFBBB-5841-41FD-BB4E-C4290A049069}
+		{1053247F-D50E-4141-AB37-E4FD5D0E196D} = {F67F896B-0C1F-4DA4-90FF-B8250DE2C1E1}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C5FE7F16-3C84-4191-8177-E11F8C1E9A03}
+	EndGlobalSection
+EndGlobal
