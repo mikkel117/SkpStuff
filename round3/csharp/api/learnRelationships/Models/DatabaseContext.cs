@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace learnRelationships.Models
 {
-    public class TodoContext : DbContext
+    public class DatabaseContext : DbContext
     {
-        public TodoContext(DbContextOptions<TodoContext> options)
+        public DatabaseContext(DbContextOptions<DatabaseContext> options)
             : base(options)
         {
         }

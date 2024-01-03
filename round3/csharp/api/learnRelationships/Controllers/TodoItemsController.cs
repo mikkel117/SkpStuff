@@ -13,9 +13,9 @@ namespace learnRelationships.Controllers
     [ApiController]
     public class TodoItemsController : ControllerBase
     {
-        private readonly TodoContext _context;
+        private readonly DatabaseContext _context;
 
-        public TodoItemsController(TodoContext context)
+        public TodoItemsController(DatabaseContext context)
         {
             _context = context;
         }
@@ -80,8 +80,7 @@ namespace learnRelationships.Controllers
             _context.TodoItems.Add(todoItem);
             await _context.SaveChangesAsync();
 
-            //return CreatedAtAction("GetTodoItem", new { id = todoItem.Id }, todoItem);
-            return CreatedAtAction(nameof(GetTodoItem), new { id = todoItem.Id }, todoItem);
+            return CreatedAtAction("GetTodoItem", new { id = todoItem.Id }, todoItem);
         }
 
         // DELETE: api/TodoItems/5
