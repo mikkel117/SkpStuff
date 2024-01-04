@@ -24,6 +24,9 @@ namespace learnRelationships.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<string>("Title")
+                        .HasColumnType("longtext");
+
                     b.HasKey("BlogId");
 
                     b.ToTable("Blog");
