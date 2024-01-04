@@ -10,7 +10,7 @@ using learnRelationships.Models;
 namespace learnRelationships.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240103122716_InitialCreate1")]
+    [Migration("20240104124114_InitialCreate1")]
     partial class InitialCreate1
     {
         /// <inheritdoc />
@@ -40,6 +40,14 @@ namespace learnRelationships.Migrations
 
                     b.Property<int>("BlogId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.HasKey("PostId");
 

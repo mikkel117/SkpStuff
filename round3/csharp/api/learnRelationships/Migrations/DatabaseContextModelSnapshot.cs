@@ -38,6 +38,14 @@ namespace learnRelationships.Migrations
                     b.Property<int>("BlogId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.HasKey("PostId");
 
                     b.HasIndex("BlogId");

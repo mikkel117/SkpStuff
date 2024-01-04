@@ -11,14 +11,14 @@ namespace learnRelationships.Models
     {
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        /* protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Blog>()
                 .HasMany(e => e.Posts)
                 .WithOne(e => e.Blog)
                 .HasForeignKey(e => e.BlogId)
                 .IsRequired();
-        }
+        } */
 
         public DbSet<TodoItem> TodoItems { get; set; }
 
