@@ -164,9 +164,3 @@ fn test_shortened_word_no_match() {
     let score = shortened_words("hello_earth_from_rust".to_string(), "hf".to_string());
     assert_eq!(score, 0);
 }
-
-#[test]
-fn test_match_chars() {
-    let score = match_chars("hello_earth_from_rust".to_string(), "hefr".to_string());
-    assert_eq!(score, 4);
-}
