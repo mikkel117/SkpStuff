@@ -16,6 +16,7 @@ struct ListFilesResponse {
 
 #[tauri::command]
 pub fn fuzzy_finder(full_path: String) -> Vec<SearchResult> {
+    //println!("full_path: {}", full_path);
     let rules: Vec<Box<FuzzyRule>> = vec![
         Box::new(whole_word),
         Box::new(contains_word),
@@ -48,7 +49,10 @@ pub fn fuzzy_finder(full_path: String) -> Vec<SearchResult> {
             let last_index = splitted_search_word.len() - 1;
             let search_query = splitted_search_word[last_index];
             splitted_search_word.remove(last_index);
-            let joined = splitted_search_word.join("/");
+            let mut joined = splitted_search_word.join("/");
+            if splitted_search_word.len() == 1 {
+                joined.push_str("/");
+            }
             match get_files_in_dir(&joined) {
                 Ok(files) => {
                     let response = ListFilesResponse { files };
