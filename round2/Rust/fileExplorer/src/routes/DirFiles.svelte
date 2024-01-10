@@ -10,7 +10,8 @@
   let fileInfoContent: dirsType;
   let clicked: boolean = false;
 
-  let to: NodeJS.Timeout | null = null;
+  //let to: NodeJS.Timeout | null = null;
+  let to: any = null;
 
   function handleClick(fileInfo: dirsType) {
     if (clicked && to != null) {

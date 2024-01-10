@@ -40,16 +40,9 @@ pub struct FileData {
     pub file_extension: String,
     pub created: String,
     pub modified: String,
-    //: chrono::format::DelayedFormat<chrono::format::StrftimeItems<'a>>,
     pub len: u64,
     pub is_dir: bool,
 }
-/* #[derive(serde::Deserialize, Debug, Eq, Ord, PartialEq, PartialOrd, Clone)]
-pub struct foo {
-    name: String,
-    path: String,
-    is_dir: bool,
-} */
 
 impl TryFrom<DirEntry> for FileData {
     type Error = std::io::Error;
