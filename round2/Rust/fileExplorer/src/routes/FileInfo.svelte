@@ -3,6 +3,7 @@
   import { quintOut } from "svelte/easing"; */
   import type { dirsType } from "$lib/Types";
   import { convertFileSrc } from "@tauri-apps/api/tauri";
+
   import Icon from "@iconify/svelte";
   export let isOpen: boolean = false;
   export let fileInfoContent: dirsType | null;
@@ -10,15 +11,60 @@
   let convertedFilePath: string = "";
   $: {
     if (isOpen === true) {
-      console.log(fileInfoContent);
       if (convertedFilePath != null) {
         convertedFilePath = convertFileSrc(fileInfoContent!.path);
       }
+      console.log(fileInfoContent);
 
       infoWidth = "50%";
     } else {
       fileInfoContent = null;
     }
+  }
+
+  function close() {
+    isOpen = false;
+    loaded = new Map();
+  }
+
+  let loaded = new Map();
+
+  function lazyLoadImage(node: any, data: any) {
+    if (loaded.has(data.src)) {
+      node.setAttribute("src", data.src);
+    } else {
+      setTimeout(() => {
+        const img = new Image();
+        img.src = data.src;
+        img.onload = () => {
+          node.setAttribute("src", data.src);
+          loaded.set(data.src, true);
+        };
+      }, 450);
+    }
+    return {
+      destroy() {},
+    };
+  }
+
+  function lazyLoadIframe(node: any, data: any) {
+    if (loaded.has(data.src)) {
+      node.setAttribute("src", data.src);
+    } else {
+      setTimeout(() => {
+        const iframe = document.createElement("iframe");
+        iframe.src = data.src;
+        iframe.onload = () => {
+          node.setAttribute("src", data.src);
+          loaded.set(data.src, true);
+        };
+
+        node.appendChild(iframe);
+      }, 700);
+    }
+    return {
+      destroy() {},
+    };
   }
 </script>
 
@@ -29,30 +75,35 @@
   style="--info-width: {infoWidth}"
 >
   {#if fileInfoContent}
-    <div
-      class="close"
-      on:click={() => (isOpen = false)}
-      on:keydown={() => (isOpen = false)}
-    >
+    <div class="close" on:click={() => close()} on:keydown={() => close()}>
       X
     </div>
-    {#if fileInfoContent.file_extension === "png" || fileInfoContent.file_extension === "jpg"}
-      <img src={convertedFilePath} alt="" />
-    {:else if fileInfoContent.file_extension === "pdf" || fileInfoContent.file_extension === "txt"}
-      <iframe
-        src={convertedFilePath}
-        frameborder="0"
-        title={fileInfoContent.name}
-      />
-    {:else if fileInfoContent.is_dir}
-      <div class="iconWrapper">
-        <Icon icon="material-symbols:folder" width="100%" />
-      </div>
-    {:else}
-      <div class="iconWrapper">
-        <Icon icon="teenyicons:pdf-solid" width="100%" />
-      </div>
-    {/if}
+    <div class="fileInfoHeader">
+      {#if fileInfoContent.file_extension === "jpg" || fileInfoContent.file_extension === "png" || fileInfoContent.file_extension === "jpeg" || fileInfoContent.file_extension === "gif"}
+        <img
+          use:lazyLoadImage={{
+            src: convertedFilePath,
+          }}
+          alt={fileInfoContent.name}
+        />
+      {:else if fileInfoContent.file_extension === "pdf" || fileInfoContent.file_extension === "txt"}
+        <iframe
+          use:lazyLoadIframe={{
+            src: convertedFilePath,
+          }}
+          frameborder="0"
+          title={fileInfoContent.name}
+        />
+      {:else if fileInfoContent.is_dir}
+        <div class="iconWrapper">
+          <Icon icon="material-symbols:folder" width="100%" />
+        </div>
+      {:else}
+        <div class="iconWrapper">
+          <Icon icon="pepicons-pencil:file" width="100%" />
+        </div>
+      {/if}
+    </div>
     <div class="border" />
     <p class="fileName">{fileInfoContent.name}</p>
     <div class="border" />
@@ -63,24 +114,10 @@
     <div class="border" />
     <div>
       <p>
-        Created : <span>
-          {fileInfoContent.created.day}.
-          {fileInfoContent.created.month}.
-          {fileInfoContent.created.year}.
-          {fileInfoContent.created.hour}:
-          {fileInfoContent.created.minute}:
-          {fileInfoContent.created.seconds}
-        </span>
+        Created : <span>{fileInfoContent.created}</span>
       </p>
       <p>
-        Modified : <span>
-          {fileInfoContent.modified.day}.
-          {fileInfoContent.modified.month}.
-          {fileInfoContent.modified.year}.
-          {fileInfoContent.modified.hour}:
-          {fileInfoContent.modified.minute}:
-          {fileInfoContent.modified.seconds}
-        </span>
+        Modified : <span>{fileInfoContent.modified}</span>
       </p>
     </div>
     <div class="border" />
@@ -132,15 +169,23 @@
     text-align: center;
   }
 
+  .fileInfoHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 50%;
+    max-height: 50%;
+    margin: 10px;
+  }
+
   .fileInfoContainer img,
-  .fileInfoContainer iframe,
-  .iconWrapper {
-    align-self: center;
-    width: 80%;
+  .fileInfoContainer iframe {
+    height: 100%;
   }
 
   .iconWrapper {
-    width: 50%;
+    width: 60%;
   }
 
   .bottomWrapper {
@@ -171,11 +216,11 @@
   }
 
   .slideIn {
-    animation: slide-in 1s forwards;
+    animation: slide-in 700ms forwards;
   }
 
   .slideOut {
-    animation: slide-out 1s forwards;
+    animation: slide-out 700ms forwards;
   }
 
   @keyframes slide-in {

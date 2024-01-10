@@ -4,7 +4,7 @@
 //use chrono::{DateTime, Utc};
 //use chrono::prelude::*;
 //use std::process::Command;
-use std::str;
+//use std::str;
 
 mod dirs;
 mod fuzzy_search;
@@ -12,8 +12,7 @@ mod fuzzy_search;
 fn main() {
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![
-            greet,
-            dirs::get_dir,
+            dirs::get_standard_dir_files,
             dirs::list_of_dir,
             dirs::open_file,
             dirs::get_files_in_dir,
@@ -22,11 +21,6 @@ fn main() {
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
-}
-
-#[tauri::command]
-fn greet(name: &str) -> String {
-    format!("Hello, {}!", name)
 }
 
 /* #[tauri::command]

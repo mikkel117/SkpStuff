@@ -12,7 +12,7 @@
   onMount(async () => {
     dirs = await invoke("list_of_dir");
 
-    updateFiles(await invoke("get_dir", { dir: $currentDir }));
+    updateFiles(await invoke("get_standard_dir_files", { dir: $currentDir }));
   });
 
   async function handleClick(item: any) {
@@ -20,7 +20,7 @@
       addToStackHistory(item);
       updateCurrentDir(item);
 
-      updateFiles(await invoke("get_dir", { dir: item }));
+      updateFiles(await invoke("get_standard_dir_files", { dir: item }));
     }
   }
 </script>

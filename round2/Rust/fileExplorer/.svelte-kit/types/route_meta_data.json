@@ -9,6 +9,9 @@
 	"/about": [
 		"src/routes/+layout.ts"
 	],
+	"/lazyLoading": [
+		"src/routes/+layout.ts"
+	],
 	"/rightClick": [
 		"src/routes/+layout.ts"
 	],

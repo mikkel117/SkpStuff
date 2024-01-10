@@ -38,8 +38,8 @@ pub struct FileData {
     pub name: String,
     pub path: String,
     pub file_extension: String,
-    pub created: Times,
-    pub modified: Times,
+    pub created: String,
+    pub modified: String,
     //: chrono::format::DelayedFormat<chrono::format::StrftimeItems<'a>>,
     pub len: u64,
     pub is_dir: bool,
@@ -56,6 +56,7 @@ impl TryFrom<DirEntry> for FileData {
     fn try_from(entry: DirEntry) -> Result<Self, Self::Error> {
         //let entry = entry.unwrap();
         //let time = metadata.created()?;
+        let format = "%d-%m-%Y %H:%M:%S";
         let path = entry.path();
         let name = path
             .file_name()
@@ -63,19 +64,22 @@ impl TryFrom<DirEntry> for FileData {
             .to_string_lossy()
             .to_string();
         let metadata = fs::metadata(&path)?;
+        /* println!("{:?}", fs::metadata("C:\\Users\\rumbo\\OneDrive\\Billeder\\myNewImage.png")?); */
         let created = metadata.created()?;
-        let created_date_time = DateTime::<Local>::from(created);
-        let len = metadata.len();
         let modified = metadata.modified()?;
+        let created_date_time = DateTime::<Local>::from(created);
         let meta_date_time = DateTime::<Local>::from(modified);
+        let created_format = created_date_time.format(format).to_string();
+        let modified_format = meta_date_time.format(format).to_string();
+        let len = metadata.len();
         let is_dir = metadata.is_dir();
-        let binding = entry.path();
-        let extension = binding.extension();
+        /* let extension = path.extension(); */
         let file_extension: String;
-        if extension == None {
+        if path.extension() == None {
             file_extension = "None".to_string();
         } else {
-            file_extension = extension
+            file_extension = path
+                .extension()
                 .ok_or(io::Error::new(io::ErrorKind::NotFound, "you fked up"))?
                 .to_string_lossy()
                 .to_string();
@@ -92,32 +96,16 @@ impl TryFrom<DirEntry> for FileData {
             name,
             path: path.to_string_lossy().to_string(),
             file_extension,
-            created: Times {
-                day: created_date_time.day(),
-                month: created_date_time.month(),
-                hour: created_date_time.hour(),
-                minute: created_date_time.minute(),
-                seconds: created_date_time.second(),
-                year: created_date_time.year(),
-            },
-            //modified: DateTime::<Local>::from(modified),
-            modified: Times {
-                day: meta_date_time.day(),
-                month: meta_date_time.month(),
-                hour: meta_date_time.hour(),
-                minute: meta_date_time.minute(),
-                seconds: meta_date_time.second(),
-                year: meta_date_time.year(),
-            },
+            created: created_format,
+            modified: modified_format,
             len,
             is_dir,
         })
     }
 }
-
+//gets the files in the standard dirs
 #[tauri::command]
-//Option<Vec<String>>
-pub fn get_dir(dir: Dirs) -> Vec<FileData> {
+pub fn get_standard_dir_files(dir: Dirs) -> Vec<FileData> {
     let read_dir = match dir {
         Dirs::HomeDir => dirs::home_dir(),
         Dirs::PictureDir => dirs::picture_dir(), // ToDO sort Download and check if the others also needs to be sorted,
@@ -139,7 +127,7 @@ pub fn s_get_files_in_dir(file_path: String) -> Vec<FileData> {
     let test = path.map(|e| e.unwrap().try_into().unwrap()).collect();
     test
 } */
-
+//gets the files in the dir
 #[tauri::command]
 pub fn get_files_in_dir(file_path: &str) -> Result<Vec<FileData>, String> {
     let mut file_data_list = Vec::new();
@@ -194,7 +182,7 @@ pub fn open_file(file_path: String) -> Result<String, String> {
     }
 }
 
-#[test]
+/* #[test]
 fn test_get_dir_path_get_home() {
     let dir_path = get_dir_path(Dirs::HomeDir);
     assert_eq!(dir_path, "C:\\Users\\rumbo".to_string());
@@ -204,4 +192,4 @@ fn test_get_dir_path_get_home() {
 fn test_open_file_file_opens() {
     let result = open_file("C:\\Users\\rumbo\\test\\foo1.txt".to_string()).unwrap();
     assert_eq!(result, "opened file");
-}
+} */

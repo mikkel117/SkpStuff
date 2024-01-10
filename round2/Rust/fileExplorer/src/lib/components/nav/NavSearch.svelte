@@ -27,7 +27,6 @@
     searchSuggestion = await invoke("fuzzy_finder", {
       fullPath: inputTxt,
     });
-    console.log(searchSuggestion);
   }
 
   async function updateSearchBar() {
@@ -51,6 +50,7 @@
   async function handleSubmit() {
     updateFiles(await invoke("get_files_in_dir", { filePath: inputTxt }));
     addToStackHistory(inputTxt);
+    isInputFocused = false;
   }
 
   const onFocus = () => (isInputFocused = true);
@@ -62,8 +62,6 @@
 
   const clickOnSearchSuggestion = (item: SearchSuggestionType) => {
     inputTxt = item.path;
-    console.log(item);
-
     searchSuggestion = [];
     handleSubmit();
   };

@@ -5,8 +5,8 @@
 </script>
 
 <div class="nav">
-  <BackButton />
-  <!-- <a href="/rightClick">click</a> -->
+  <!-- <BackButton /> -->
+  <a href="/test">click</a>
   <!-- <span></span>
   <ForwardButton /> -->
   <NavSearch />
