@@ -12,7 +12,7 @@
 
   async function changeDirectory() {
     updateFiles(
-      await invoke("get_dir", {
+      await invoke("get_standard_dir_files", {
         dir: $stackHistory[$stackHistory.length - 1],
       })
     );
@@ -24,7 +24,6 @@
       /* $stackHistory.pop(); */
       addToForwardHistory($stackHistory[$stackHistory.length - 1]);
       removeLastPath();
-      console.log($forwardHistory);
     }
 
     switch ($stackHistory[$stackHistory.length - 1]) {

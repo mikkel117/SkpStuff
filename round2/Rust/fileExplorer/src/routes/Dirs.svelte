@@ -11,7 +11,6 @@
   export let dirs: any[] = [];
   onMount(async () => {
     dirs = await invoke("list_of_dir");
-
     updateFiles(await invoke("get_standard_dir_files", { dir: $currentDir }));
   });
 
@@ -19,7 +18,6 @@
     if (currentDir != item) {
       addToStackHistory(item);
       updateCurrentDir(item);
-
       updateFiles(await invoke("get_standard_dir_files", { dir: item }));
     }
   }

@@ -6,7 +6,9 @@ use chrono::prelude::*;
 //use std::collections::BTreeMap;
 
 use std::convert::TryInto;
+use std::fs::File;
 //use std::path::{Path, PathBuf};
+use fs_extra::dir::get_size;
 use std::{
     fs::{self, DirEntry},
     io,
@@ -65,6 +67,14 @@ impl TryFrom<DirEntry> for FileData {
         let created_format = created_date_time.format(format).to_string();
         let modified_format = meta_date_time.format(format).to_string();
         let len = metadata.len();
+        /* let kilobytes = len as f64 / 1024.0;
+        let megabytes = kilobytes / 1024.0;
+        let gigabytes = megabytes / 1024.0;
+        println!("kb: {:?}", kilobytes);
+        println!("mb: {:?}", megabytes > 0.0);
+        println!("gb: {:?}", gigabytes > 0.0);
+        println!("{:?}", name);
+        println!(" "); */
         let is_dir = metadata.is_dir();
         /* let extension = path.extension(); */
         let file_extension: String;
@@ -167,6 +177,13 @@ pub fn list_of_dir() -> Vec<Dirs> {
         Dirs::VideoDir,
     ]
 }
+
+#[tauri::command]
+pub fn get_dir_size(file_path: String) {
+    let folder_size = get_size(&file_path).unwrap();
+    println!("{:?}", folder_size);
+}
+
 #[tauri::command]
 pub fn open_file(file_path: String) -> Result<String, String> {
     match open::that(file_path.clone()) {

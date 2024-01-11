@@ -3,7 +3,7 @@
   import { quintOut } from "svelte/easing"; */
   import type { dirsType } from "$lib/Types";
   import { convertFileSrc } from "@tauri-apps/api/tauri";
-
+  import { invoke } from "@tauri-apps/api/tauri";
   import Icon from "@iconify/svelte";
   export let isOpen: boolean = false;
   export let fileInfoContent: dirsType | null;
@@ -14,12 +14,18 @@
       if (convertedFilePath != null) {
         convertedFilePath = convertFileSrc(fileInfoContent!.path);
       }
-      console.log(fileInfoContent);
+      if (fileInfoContent!.is_dir) {
+        test(fileInfoContent!.path);
+      }
 
       infoWidth = "50%";
     } else {
       fileInfoContent = null;
     }
+  }
+
+  async function test(path: string) {
+    await invoke("get_dir_size", { filePath: path });
   }
 
   function close() {
@@ -40,7 +46,7 @@
           node.setAttribute("src", data.src);
           loaded.set(data.src, true);
         };
-      }, 450);
+      }, 550);
     }
     return {
       destroy() {},
