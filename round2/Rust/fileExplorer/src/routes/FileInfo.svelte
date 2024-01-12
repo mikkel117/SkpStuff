@@ -7,15 +7,18 @@
   import Icon from "@iconify/svelte";
   export let isOpen: boolean = false;
   export let fileInfoContent: dirsType | null;
-  let infoWidth = "0";
+  let infoWidth: string = "0";
   let convertedFilePath: string = "";
+  let showSize: boolean = false;
+  let size: Number = 0;
+  let unit: string = "B";
+  let LoadingSize: boolean = false;
+  let sizeError: string = "";
+
   $: {
     if (isOpen === true) {
       if (convertedFilePath != null) {
         convertedFilePath = convertFileSrc(fileInfoContent!.path);
-      }
-      if (fileInfoContent!.is_dir) {
-        test(fileInfoContent!.path);
       }
 
       infoWidth = "50%";
@@ -24,13 +27,11 @@
     }
   }
 
-  async function test(path: string) {
-    await invoke("get_dir_size", { filePath: path });
-  }
-
   function close() {
     isOpen = false;
     loaded = new Map();
+    showSize = false;
+    size = 0;
   }
 
   let loaded = new Map();
@@ -71,6 +72,25 @@
     return {
       destroy() {},
     };
+  }
+
+  async function seeSize() {
+    if (fileInfoContent!.is_dir) {
+      try {
+        LoadingSize = true;
+        let dirSize: any = await invoke("get_dir_size", {
+          filePath: fileInfoContent!.path,
+        });
+        size = dirSize.size;
+        unit = dirSize.unit;
+      } catch (error: any) {
+        sizeError = error;
+      }
+      LoadingSize = false;
+    } else {
+      size = fileInfoContent!.len;
+    }
+    showSize = true;
   }
 </script>
 
@@ -115,7 +135,21 @@
     <div class="border" />
     <div class="fileFormat-Size">
       <p>Format: {fileInfoContent.file_extension}</p>
-      <p>Size: {fileInfoContent.len}</p>
+      <p>
+        {#if sizeError === ""}
+          Size :
+          {#if showSize}
+            {size}
+            <span>{unit}</span>
+          {:else if !LoadingSize}
+            <button on:click={seeSize}>see size</button>
+          {:else}
+            <span>Loading...</span>
+          {/if}
+        {:else}
+          <span class="error">{sizeError}</span>
+        {/if}
+      </p>
     </div>
     <div class="border" />
     <div>
@@ -219,6 +253,10 @@
   .bottomContainer span:hover {
     opacity: 0.5;
     cursor: pointer;
+  }
+
+  .error {
+    color: red;
   }
 
   .slideIn {

@@ -1,1 +1,1 @@
-export { default as component } from "../../../../src/routes/Taps/+page.svelte";
+export { default as component } from "../../../../src/routes/lazyLoading/+page.svelte";

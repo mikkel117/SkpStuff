@@ -4,9 +4,7 @@ use chrono::prelude::*;
 //use fs_extra::file;
 //use fs_extra::dir::get_size;
 //use std::collections::BTreeMap;
-
 use std::convert::TryInto;
-use std::fs::File;
 //use std::path::{Path, PathBuf};
 use fs_extra::dir::get_size;
 use std::{
@@ -66,7 +64,7 @@ impl TryFrom<DirEntry> for FileData {
         let meta_date_time = DateTime::<Local>::from(modified);
         let created_format = created_date_time.format(format).to_string();
         let modified_format = meta_date_time.format(format).to_string();
-        let len = metadata.len();
+        let len: u64;
         /* let kilobytes = len as f64 / 1024.0;
         let megabytes = kilobytes / 1024.0;
         let gigabytes = megabytes / 1024.0;
@@ -76,6 +74,11 @@ impl TryFrom<DirEntry> for FileData {
         println!("{:?}", name);
         println!(" "); */
         let is_dir = metadata.is_dir();
+        if is_dir {
+            len = 0;
+        } else {
+            len = metadata.len();
+        }
         /* let extension = path.extension(); */
         let file_extension: String;
         if path.extension() == None {
@@ -177,11 +180,51 @@ pub fn list_of_dir() -> Vec<Dirs> {
         Dirs::VideoDir,
     ]
 }
+#[derive(Debug, serde::Serialize, Eq, Ord, PartialEq, PartialOrd, serde::Deserialize)]
+pub struct DirSize {
+    size: String,
+    unit: String,
+}
 
-#[tauri::command]
-pub fn get_dir_size(file_path: String) {
-    let folder_size = get_size(&file_path).unwrap();
+#[tauri::command(async)]
+pub fn get_dir_size(file_path: String) -> Result<DirSize, String> {
+    let folder_size = match get_size(&file_path) {
+        Ok(folder_size) => folder_size,
+        Err(e) => return Err(e.to_string()),
+    };
     println!("{:?}", folder_size);
+    let kilobytes = folder_size as f64 / 1024.0;
+    let megabytes = kilobytes / 1024.0;
+    let gigabytes = megabytes / 1024.0;
+    let mut return_value: DirSize = DirSize {
+        size: "0".to_string(),
+        unit: "KB".to_string(),
+    };
+
+    match gigabytes >= 1.0 {
+        true => {
+            return_value.size = format!("{:.2}", gigabytes);
+            return_value.unit = "GB".to_string();
+        }
+        false => match megabytes >= 1.0 {
+            true => {
+                return_value.size = format!("{:.2}", megabytes);
+                return_value.unit = "MB".to_string();
+            }
+            false => match kilobytes >= 1.0 {
+                true => {
+                    return_value.size = format!("{:.2}", kilobytes);
+                    return_value.unit = "KB".to_string();
+                }
+                false => {
+                    return_value.size = format!("{:.2}", folder_size);
+                    return_value.unit = "B".to_string();
+                }
+            },
+        },
+    }
+    println!("{:?}", return_value);
+    Ok(return_value)
 }
 
 #[tauri::command]

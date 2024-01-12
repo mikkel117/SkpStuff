@@ -1,9 +1,7 @@
 import { c as create_ssr_component, o as onDestroy, b as spread, d as escape_object, f as createEventDispatcher, e as escape, h as add_attribute, v as validate_component, a as subscribe, i as each } from "../../chunks/index2.js";
 import { convertFileSrc, invoke } from "@tauri-apps/api/tauri";
 import { w as writable } from "../../chunks/index.js";
-const stackHistory = writable([
-  "HomeDir"
-]);
+const stackHistory = writable(["HomeDir"]);
 const files = writable([]);
 const matchIconName = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 const stringToIcon = (value, validate, allowSimpleName, provider = "") => {
@@ -1717,7 +1715,7 @@ const Icon = create_ssr_component(($$result, $$props, $$bindings, slots) => {
 });
 const FileInfo_svelte_svelte_type_style_lang = "";
 const css$6 = {
-  code: ".fileInfoContainer.svelte-cmjnic.svelte-cmjnic{height:100%;background-color:#242631;display:flex;flex-direction:column;overflow-x:hidden;overflow-y:auto}.close.svelte-cmjnic.svelte-cmjnic{align-self:end;margin:5px;font-size:larger;transition:opacity 0.5s;cursor:pointer}.close.svelte-cmjnic.svelte-cmjnic:hover{opacity:0.5}.border.svelte-cmjnic.svelte-cmjnic{margin:5px 0 5px 0;width:100%;border-bottom:2px solid gray}.fileName.svelte-cmjnic.svelte-cmjnic{align-self:center;width:90%;text-align:center}.fileInfoContainer.svelte-cmjnic img.svelte-cmjnic,.fileInfoContainer.svelte-cmjnic iframe.svelte-cmjnic,.iconWrapper.svelte-cmjnic.svelte-cmjnic{align-self:center;width:80%}.iconWrapper.svelte-cmjnic.svelte-cmjnic{width:50%}.bottomWrapper.svelte-cmjnic.svelte-cmjnic{display:flex;align-items:end;justify-content:center;height:100%}.bottomContainer.svelte-cmjnic.svelte-cmjnic{border:1px gray solid;padding:15px;display:flex}.bottomContainerBorder.svelte-cmjnic.svelte-cmjnic{border:1px gray solid}.bottomContainer.svelte-cmjnic span.svelte-cmjnic{margin:10px;text-align:center;transition:opacity 0.5s}.bottomContainer.svelte-cmjnic span.svelte-cmjnic:hover{opacity:0.5;cursor:pointer}.slideIn.svelte-cmjnic.svelte-cmjnic{animation:svelte-cmjnic-slide-in 1s forwards}.slideOut.svelte-cmjnic.svelte-cmjnic{animation:svelte-cmjnic-slide-out 1s forwards}@keyframes svelte-cmjnic-slide-in{from{width:0}to{width:50%}}@keyframes svelte-cmjnic-slide-out{from{width:var(--info-width)}to{width:0}}",
+  code: ".fileInfoContainer.svelte-u8512e.svelte-u8512e{height:100%;background-color:#242631;display:flex;flex-direction:column;overflow-x:hidden;overflow-y:auto}.close.svelte-u8512e.svelte-u8512e{align-self:end;margin:5px;font-size:larger;transition:opacity 0.5s;cursor:pointer}.close.svelte-u8512e.svelte-u8512e:hover{opacity:0.5}.border.svelte-u8512e.svelte-u8512e{margin:5px 0 5px 0;width:100%;border-bottom:2px solid gray}.fileName.svelte-u8512e.svelte-u8512e{align-self:center;width:90%;text-align:center}.fileInfoHeader.svelte-u8512e.svelte-u8512e{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:50%;max-height:50%;margin:10px}.fileInfoContainer.svelte-u8512e img.svelte-u8512e,.fileInfoContainer.svelte-u8512e iframe.svelte-u8512e{height:100%}.iconWrapper.svelte-u8512e.svelte-u8512e{width:60%}.bottomWrapper.svelte-u8512e.svelte-u8512e{display:flex;align-items:end;justify-content:center;height:100%}.bottomContainer.svelte-u8512e.svelte-u8512e{border:1px gray solid;padding:15px;display:flex}.bottomContainerBorder.svelte-u8512e.svelte-u8512e{border:1px gray solid}.bottomContainer.svelte-u8512e span.svelte-u8512e{margin:10px;text-align:center;transition:opacity 0.5s}.bottomContainer.svelte-u8512e span.svelte-u8512e:hover{opacity:0.5;cursor:pointer}.slideIn.svelte-u8512e.svelte-u8512e{animation:svelte-u8512e-slide-in 700ms forwards}.slideOut.svelte-u8512e.svelte-u8512e{animation:svelte-u8512e-slide-out 700ms forwards}@keyframes svelte-u8512e-slide-in{from{width:0}to{width:50%}}@keyframes svelte-u8512e-slide-out{from{width:var(--info-width)}to{width:0}}",
   map: null
 };
 const FileInfo = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -1733,7 +1731,6 @@ const FileInfo = create_ssr_component(($$result, $$props, $$bindings, slots) => 
   {
     {
       if (isOpen === true) {
-        console.log(fileInfoContent);
         if (convertedFilePath != null) {
           convertedFilePath = convertFileSrc(fileInfoContent.path);
         }
@@ -1744,11 +1741,11 @@ const FileInfo = create_ssr_component(($$result, $$props, $$bindings, slots) => 
     }
   }
   return `<section class="${[
-    "fileInfoContainer svelte-cmjnic",
+    "fileInfoContainer svelte-u8512e",
     (isOpen ? "slideIn" : "") + " " + (isOpen === false ? "slideOut" : "")
-  ].join(" ").trim()}" style="${"--info-width: " + escape(infoWidth, true)}">${fileInfoContent ? `<div class="close svelte-cmjnic">X
+  ].join(" ").trim()}" style="${"--info-width: " + escape(infoWidth, true)}">${fileInfoContent ? `<div class="close svelte-u8512e">X
     </div>
-    ${fileInfoContent.file_extension === "png" || fileInfoContent.file_extension === "jpg" ? `<img${add_attribute("src", convertedFilePath, 0)} alt="" class="svelte-cmjnic">` : `${fileInfoContent.file_extension === "pdf" || fileInfoContent.file_extension === "txt" ? `<iframe${add_attribute("src", convertedFilePath, 0)} frameborder="0"${add_attribute("title", fileInfoContent.name, 0)} class="svelte-cmjnic"></iframe>` : `${fileInfoContent.is_dir ? `<div class="iconWrapper svelte-cmjnic">${validate_component(Icon, "Icon").$$render(
+    <div class="fileInfoHeader svelte-u8512e">${fileInfoContent.file_extension === "jpg" || fileInfoContent.file_extension === "png" || fileInfoContent.file_extension === "jpeg" || fileInfoContent.file_extension === "gif" ? `<img${add_attribute("alt", fileInfoContent.name, 0)} class="svelte-u8512e">` : `${fileInfoContent.file_extension === "pdf" || fileInfoContent.file_extension === "txt" ? `<iframe frameborder="0"${add_attribute("title", fileInfoContent.name, 0)} class="svelte-u8512e"></iframe>` : `${fileInfoContent.is_dir ? `<div class="iconWrapper svelte-u8512e">${validate_component(Icon, "Icon").$$render(
     $$result,
     {
       icon: "material-symbols:folder",
@@ -1756,39 +1753,31 @@ const FileInfo = create_ssr_component(($$result, $$props, $$bindings, slots) => 
     },
     {},
     {}
-  )}</div>` : `<div class="iconWrapper svelte-cmjnic">${validate_component(Icon, "Icon").$$render(
+  )}</div>` : `<div class="iconWrapper svelte-u8512e">${validate_component(Icon, "Icon").$$render(
     $$result,
     {
-      icon: "teenyicons:pdf-solid",
+      icon: "pepicons-pencil:file",
       width: "100%"
     },
     {},
     {}
-  )}</div>`}`}`}
-    <div class="border svelte-cmjnic"></div>
-    <p class="fileName svelte-cmjnic">${escape(fileInfoContent.name)}</p>
-    <div class="border svelte-cmjnic"></div>
+  )}</div>`}`}`}</div>
+    <div class="border svelte-u8512e"></div>
+    <p class="fileName svelte-u8512e">${escape(fileInfoContent.name)}</p>
+    <div class="border svelte-u8512e"></div>
     <div class="fileFormat-Size"><p>Format: ${escape(fileInfoContent.file_extension)}</p>
-      <p>Size: ${escape(fileInfoContent.len)}</p></div>
-    <div class="border svelte-cmjnic"></div>
-    <div><p>Created : <span>${escape(fileInfoContent.created.day)}.
-          ${escape(fileInfoContent.created.month)}.
-          ${escape(fileInfoContent.created.year)}.
-          ${escape(fileInfoContent.created.hour)}:
-          ${escape(fileInfoContent.created.minute)}:
-          ${escape(fileInfoContent.created.seconds)}</span></p>
-      <p>Modified : <span>${escape(fileInfoContent.modified.day)}.
-          ${escape(fileInfoContent.modified.month)}.
-          ${escape(fileInfoContent.modified.year)}.
-          ${escape(fileInfoContent.modified.hour)}:
-          ${escape(fileInfoContent.modified.minute)}:
-          ${escape(fileInfoContent.modified.seconds)}</span></p></div>
-    <div class="border svelte-cmjnic"></div>
+      
+      <p>Size :
+        ${`<button>see size</button>`}</p></div>
+    <div class="border svelte-u8512e"></div>
+    <div><p>Created : <span>${escape(fileInfoContent.created)}</span></p>
+      <p>Modified : <span>${escape(fileInfoContent.modified)}</span></p></div>
+    <div class="border svelte-u8512e"></div>
 
-    <div class="bottomWrapper svelte-cmjnic"><div class="bottomContainer svelte-cmjnic"><span class="svelte-cmjnic">${validate_component(Icon, "Icon").$$render($$result, { icon: "ic:outline-edit", width: "30" }, {}, {})}
+    <div class="bottomWrapper svelte-u8512e"><div class="bottomContainer svelte-u8512e"><span class="svelte-u8512e">${validate_component(Icon, "Icon").$$render($$result, { icon: "ic:outline-edit", width: "30" }, {}, {})}
           <p>Rename</p></span>
-        <div class="bottomContainerBorder svelte-cmjnic"></div>
-        <span class="svelte-cmjnic">${validate_component(Icon, "Icon").$$render(
+        <div class="bottomContainerBorder svelte-u8512e"></div>
+        <span class="svelte-u8512e">${validate_component(Icon, "Icon").$$render(
     $$result,
     {
       icon: "material-symbols:delete",
@@ -1802,7 +1791,7 @@ const FileInfo = create_ssr_component(($$result, $$props, $$bindings, slots) => 
 });
 const DirFiles_svelte_svelte_type_style_lang = "";
 const css$5 = {
-  code: ".container.svelte-98qof3.svelte-98qof3{width:100%;height:calc(100% -20px);overflow-y:auto;overflow-x:hidden;display:flex;flex-wrap:wrap;justify-content:center}.container.svelte-98qof3>div.svelte-98qof3{font-size:20px;width:25%;display:flex;flex-wrap:wrap;align-items:center;flex-direction:column;background-color:var(--secondary-bg-color);margin:10px;padding:10px;border-radius:1rem}.container.svelte-98qof3>div.svelte-98qof3:hover{opacity:0.7;cursor:pointer}div.svelte-98qof3>p.svelte-98qof3{white-space:nowrap;text-overflow:ellipsis;overflow:hidden;width:100%;text-align:center}div.svelte-98qof3.svelte-98qof3:last-child{padding-bottom:15px}.svelte-98qof3.svelte-98qof3::-webkit-scrollbar{width:10px}.svelte-98qof3.svelte-98qof3::-webkit-scrollbar-track{background:#f1f1f1;border-radius:1rem}.svelte-98qof3.svelte-98qof3::-webkit-scrollbar-thumb{background:#888;border-radius:1rem}.svelte-98qof3.svelte-98qof3::-webkit-scrollbar-thumb:hover{background:#555}",
+  code: ".container.svelte-1utc4pt.svelte-1utc4pt{width:100%;height:calc(100% -20px);overflow-y:auto;overflow-x:hidden;display:flex;flex-wrap:wrap;justify-content:center}.container.svelte-1utc4pt>div.svelte-1utc4pt{font-size:20px;width:25%;display:flex;flex-wrap:wrap;align-items:center;flex-direction:column;background-color:var(--secondary-bg-color);margin:10px;padding:10px;border-radius:1rem}.container.svelte-1utc4pt>div.svelte-1utc4pt:hover{opacity:0.7;cursor:pointer}div.svelte-1utc4pt>p.svelte-1utc4pt{white-space:nowrap;text-overflow:ellipsis;overflow:hidden;width:100%;text-align:center}div.svelte-1utc4pt.svelte-1utc4pt:last-child{padding-bottom:15px}",
   map: null
 };
 const DirFiles = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -1815,8 +1804,8 @@ const DirFiles = create_ssr_component(($$result, $$props, $$bindings, slots) => 
   let $$rendered;
   do {
     $$settled = true;
-    $$rendered = `<div class="container svelte-98qof3">${$files.length ? each($files, (item) => {
-      return `<div class="svelte-98qof3">${item.is_dir ? `${validate_component(Icon, "Icon").$$render(
+    $$rendered = `<div class="container svelte-1utc4pt">${$files.length ? each($files, (item) => {
+      return `<div class="svelte-1utc4pt">${item.is_dir ? `${validate_component(Icon, "Icon").$$render(
         $$result,
         {
           icon: "material-symbols:folder",
@@ -1833,9 +1822,9 @@ const DirFiles = create_ssr_component(($$result, $$props, $$bindings, slots) => 
         {},
         {}
       )}`}
-      <p class="svelte-98qof3">${escape(item.name)}</p>
+      <p class="svelte-1utc4pt">${escape(item.name)}</p>
     </div>`;
-    }) : `<p class="svelte-98qof3">loading</p>`}</div>
+    }) : `<p class="svelte-1utc4pt">loading</p>`}</div>
 ${validate_component(FileInfo, "FileInfo").$$render(
       $$result,
       { isOpen, fileInfoContent },
@@ -1909,24 +1898,27 @@ const BackButton = create_ssr_component(($$result, $$props, $$bindings, slots) =
   $$unsubscribe_stackHistory = subscribe(stackHistory, (value) => $stackHistory = value);
   $$result.css.add(css$3);
   $$unsubscribe_stackHistory();
-  return `${$stackHistory.length === 1 ? `<span class="backArrow cantGoBack svelte-12bsyrm">${validate_component(Icon, "Icon").$$render(
+  return `${$stackHistory.length === 1 ? `<span class="backArrow cantGoBack svelte-12bsyrm">
+    ${validate_component(Icon, "Icon").$$render(
     $$result,
     {
-      icon: "icon-park-outline:back",
+      icon: "ion:arrow-undo-outline",
       width: "20"
     },
     {},
     {}
-  )}</span>` : `<span class="backArrow svelte-12bsyrm">${validate_component(Icon, "Icon").$$render(
+  )}</span>` : `<span class="backArrow svelte-12bsyrm">
+    ${validate_component(Icon, "Icon").$$render(
     $$result,
     {
-      icon: "icon-park-outline:back",
+      icon: "ion:arrow-undo-outline",
       width: "20"
     },
     {},
     {}
   )}</span>`}`;
 });
+const ForwardButton_svelte_svelte_type_style_lang = "";
 const NavSearch_svelte_svelte_type_style_lang = "";
 const css$2 = {
   code: "form.svelte-4snbzg,input.svelte-4snbzg{width:100%;border:none}form.svelte-4snbzg{position:relative}.searchSuggestions.svelte-4snbzg{position:absolute;width:100%;max-height:200px;z-index:100;background-color:var(--secondary-bg-color);color:white;overflow:auto;scroll-behavior:smooth}li.svelte-4snbzg{font-size:large;list-style-type:none;border:1px solid black;padding:10px}li.svelte-4snbzg:hover{background-color:var(--main-bg-color);opacity:0.5}",
@@ -1941,7 +1933,6 @@ const NavSearch = create_ssr_component(($$result, $$props, $$bindings, slots) =>
   let isInputFocused = false;
   async function callSearchSuggestion() {
     searchSuggestion = await invoke("fuzzy_finder", { fullPath: inputTxt });
-    console.log(searchSuggestion);
   }
   async function updateSearchBar() {
     path = $stackHistory[$stackHistory.length - 1];
@@ -1978,12 +1969,14 @@ const NavSearch = create_ssr_component(($$result, $$props, $$bindings, slots) =>
 });
 const Nav_svelte_svelte_type_style_lang = "";
 const css$1 = {
-  code: ".nav.svelte-g1fgsw{margin:10px;display:flex;align-items:center;justify-content:space-between}",
+  code: ".nav.svelte-n51tgf{margin:10px;display:flex;align-items:center;justify-content:space-between}",
   map: null
 };
 const Nav = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   $$result.css.add(css$1);
-  return `<div class="nav svelte-g1fgsw">${validate_component(BackButton, "BackButton").$$render($$result, {}, {}, {})}
+  return `<div class="nav svelte-n51tgf">${validate_component(BackButton, "BackButton").$$render($$result, {}, {}, {})}
+  
+  
   ${validate_component(NavSearch, "NavSearch").$$render($$result, {}, {}, {})}
 </div>`;
 });

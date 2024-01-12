@@ -21,3 +21,8 @@ export type SearchSuggestionType = {
   value: number;
   word: string;
 };
+
+export type DirSizeType = {
+  size: string;
+  unit: string;
+};

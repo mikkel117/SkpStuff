@@ -55,6 +55,7 @@ const Root = create_ssr_component(($$result, $$props, $$bindings, slots) => {
     $$rendered = `
 
 
+
 ${constructors[1] ? `${validate_component(constructors[0] || missing_component, "svelte:component").$$render(
       $$result,
       { data: data_0, this: components[0] },
@@ -102,14 +103,15 @@ const options = {
   track_server_fetches: false,
   embedded: false,
   env_public_prefix: "PUBLIC_",
+  env_private_prefix: "",
   hooks: null,
   // added lazily, via `get_hooks`
   preload_strategy: "modulepreload",
   root: Root,
   service_worker: false,
   templates: {
-    app: ({ head, body, assets: assets2, nonce, env }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<link rel="icon" href="' + assets2 + '/favicon.png" />\n		<meta name="viewport" content="width=device-width" />\n		' + head + '\n	</head>\n	<body data-sveltekit-preload-data="hover">\n		<div>\n			<>' + body + "</>\n\n		</div>\n	</body>\n</html>\n",
-    error: ({ status, message }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<title>' + message + `</title>
+    app: ({ head, body, assets: assets2, nonce, env }) => '<!DOCTYPE html>\r\n<html lang="en">\r\n	<head>\r\n		<meta charset="utf-8" />\r\n		<link rel="icon" href="' + assets2 + '/favicon.png" />\r\n		<meta name="viewport" content="width=device-width" />\r\n		' + head + '\r\n	</head>\r\n	<body data-sveltekit-preload-data="hover">\r\n		<div>\r\n			<>' + body + "</>\r\n\r\n		</div>\r\n	</body>\r\n</html>\r\n",
+    error: ({ status, message }) => '<!doctype html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<title>' + message + `</title>
 
 		<style>
 			body {
@@ -118,8 +120,18 @@ const options = {
 				--divider: #ccc;
 				background: var(--bg);
 				color: var(--fg);
-				font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-					Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+				font-family:
+					system-ui,
+					-apple-system,
+					BlinkMacSystemFont,
+					'Segoe UI',
+					Roboto,
+					Oxygen,
+					Ubuntu,
+					Cantarell,
+					'Open Sans',
+					'Helvetica Neue',
+					sans-serif;
 				display: flex;
 				align-items: center;
 				justify-content: center;
@@ -170,7 +182,7 @@ const options = {
 		<div class="error">
 			<span class="status">` + status + '</span>\n			<div class="message">\n				<h1>' + message + "</h1>\n			</div>\n		</div>\n	</body>\n</html>\n"
   },
-  version_hash: "6v6od6"
+  version_hash: "opsjoe"
 };
 function get_hooks() {
   return {};
@@ -178,12 +190,12 @@ function get_hooks() {
 export {
   assets as a,
   base as b,
-  set_assets as c,
-  set_building as d,
-  set_private_env as e,
+  set_public_env as c,
+  set_assets as d,
+  set_building as e,
   get_hooks as g,
   options as o,
   public_env as p,
   reset as r,
-  set_public_env as s
+  set_private_env as s
 };
