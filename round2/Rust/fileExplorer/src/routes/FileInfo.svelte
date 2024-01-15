@@ -1,6 +1,5 @@
 <script lang="ts">
-  /*   import { fade, fly, slide } from "svelte/transition";
-  import { quintOut } from "svelte/easing"; */
+  /* import { quintOut } from "svelte/easing"; */
   import type { dirsType } from "$lib/Types";
   import { convertFileSrc } from "@tauri-apps/api/tauri";
   import { invoke } from "@tauri-apps/api/tauri";
@@ -20,10 +19,17 @@
       if (convertedFilePath != null) {
         convertedFilePath = convertFileSrc(fileInfoContent!.path);
       }
-
-      infoWidth = "50%";
+      infoWidth = "60%";
     } else {
       fileInfoContent = null;
+    }
+  }
+
+  $: {
+    if (fileInfoContent != null) {
+      showSize = false;
+      size = 0;
+      LoadingSize = false;
     }
   }
 
@@ -67,7 +73,7 @@
         };
 
         node.appendChild(iframe);
-      }, 700);
+      }, 550);
     }
     return {
       destroy() {},
@@ -81,8 +87,10 @@
         let dirSize: any = await invoke("get_dir_size", {
           filePath: fileInfoContent!.path,
         });
-        size = dirSize.size;
-        unit = dirSize.unit;
+        if (dirSize.file_path === fileInfoContent!.path) {
+          size = dirSize.size;
+          unit = dirSize.unit;
+        }
       } catch (error: any) {
         sizeError = error;
       }
@@ -91,6 +99,10 @@
       size = fileInfoContent!.len;
     }
     showSize = true;
+  }
+
+  function deleteFile() {
+    invoke("remove_file", { path: fileInfoContent!.path });
   }
 </script>
 
@@ -169,7 +181,8 @@
           <p>Rename</p>
         </span>
         <div class="bottomContainerBorder" />
-        <span>
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
+        <span on:click={deleteFile}>
           <Icon icon="material-symbols:delete" width="30" />
           <p>Delete</p>
         </span>
@@ -272,7 +285,7 @@
       width: 0;
     }
     to {
-      width: 50%;
+      width: var(--info-width);
     }
   }
 

@@ -1,12 +1,7 @@
 /* use anyhow::Ok; */
-//use byte_unit::{Byte, ByteUnit};
 use chrono::prelude::*;
-//use fs_extra::file;
-//use fs_extra::dir::get_size;
-//use std::collections::BTreeMap;
-use std::convert::TryInto;
-//use std::path::{Path, PathBuf};
 use fs_extra::dir::get_size;
+use std::convert::TryInto;
 use std::{
     fs::{self, DirEntry},
     io,
@@ -24,7 +19,7 @@ pub enum Dirs {
     VideoDir,
 }
 
-#[derive(Debug, serde::Serialize, Eq, Ord, PartialEq, PartialOrd, serde::Deserialize)]
+/* #[derive(Debug, serde::Serialize, Eq, Ord, PartialEq, PartialOrd, serde::Deserialize)]
 pub struct Times {
     pub day: u32,
     pub month: u32,
@@ -32,7 +27,7 @@ pub struct Times {
     pub minute: u32,
     pub seconds: u32,
     pub year: i32,
-}
+} */
 #[derive(Debug, serde::Serialize, Eq, Ord, PartialEq, PartialOrd, serde::Deserialize)]
 pub struct FileData {
     pub name: String,
@@ -47,8 +42,6 @@ pub struct FileData {
 impl TryFrom<DirEntry> for FileData {
     type Error = std::io::Error;
     fn try_from(entry: DirEntry) -> Result<Self, Self::Error> {
-        //let entry = entry.unwrap();
-        //let time = metadata.created()?;
         let format = "%d-%m-%Y %H:%M:%S";
         let path = entry.path();
         let name = path
@@ -57,7 +50,6 @@ impl TryFrom<DirEntry> for FileData {
             .to_string_lossy()
             .to_string();
         let metadata = fs::metadata(&path)?;
-        /* println!("{:?}", fs::metadata("C:\\Users\\rumbo\\OneDrive\\Billeder\\myNewImage.png")?); */
         let created = metadata.created()?;
         let modified = metadata.modified()?;
         let created_date_time = DateTime::<Local>::from(created);
@@ -65,21 +57,12 @@ impl TryFrom<DirEntry> for FileData {
         let created_format = created_date_time.format(format).to_string();
         let modified_format = meta_date_time.format(format).to_string();
         let len: u64;
-        /* let kilobytes = len as f64 / 1024.0;
-        let megabytes = kilobytes / 1024.0;
-        let gigabytes = megabytes / 1024.0;
-        println!("kb: {:?}", kilobytes);
-        println!("mb: {:?}", megabytes > 0.0);
-        println!("gb: {:?}", gigabytes > 0.0);
-        println!("{:?}", name);
-        println!(" "); */
         let is_dir = metadata.is_dir();
         if is_dir {
             len = 0;
         } else {
             len = metadata.len();
         }
-        /* let extension = path.extension(); */
         let file_extension: String;
         if path.extension() == None {
             file_extension = "None".to_string();
@@ -90,14 +73,6 @@ impl TryFrom<DirEntry> for FileData {
                 .to_string_lossy()
                 .to_string();
         }
-
-        /* let byte = Byte::from_bytes(len.into());
-
-        let adjusted_byte = byte.get_adjusted_unit(ByteUnit::MB); */
-        /* if is_dir {
-            let folder_size = get_size(&path);
-            println!("{}: {:?}", name, folder_size);
-        } */
         Ok(Self {
             name,
             path: path.to_string_lossy().to_string(),
@@ -124,15 +99,6 @@ pub fn get_standard_dir_files(dir: Dirs) -> Vec<FileData> {
     let path = fs::read_dir(format!("{}", read_dir.display())).unwrap();
     path.map(|e| e.unwrap().try_into().unwrap()).collect()
 }
-
-/* #[tauri::command]
-//Vec<FileData>
-pub fn s_get_files_in_dir(file_path: String) -> Vec<FileData> {
-    let path = fs::read_dir(file_path).unwrap();
-
-    let test = path.map(|e| e.unwrap().try_into().unwrap()).collect();
-    test
-} */
 //gets the files in the dir
 #[tauri::command]
 pub fn get_files_in_dir(file_path: &str) -> Result<Vec<FileData>, String> {
@@ -165,7 +131,10 @@ pub fn get_dir_path(dir_path: Dirs) -> String {
         Dirs::VideoDir => dirs::video_dir(),
     }
     .unwrap();
-    let path: String = read_dir.into_os_string().into_string().unwrap();
+    let path = match read_dir.into_os_string().into_string() {
+        Ok(path) => path,
+        Err(_) => "".to_string(),
+    };
     path
 }
 
@@ -184,6 +153,7 @@ pub fn list_of_dir() -> Vec<Dirs> {
 pub struct DirSize {
     size: String,
     unit: String,
+    file_path: String,
 }
 
 #[tauri::command(async)]
@@ -199,6 +169,7 @@ pub fn get_dir_size(file_path: String) -> Result<DirSize, String> {
     let mut return_value: DirSize = DirSize {
         size: "0".to_string(),
         unit: "KB".to_string(),
+        file_path: "".to_string(),
     };
 
     match gigabytes >= 1.0 {
@@ -223,7 +194,7 @@ pub fn get_dir_size(file_path: String) -> Result<DirSize, String> {
             },
         },
     }
-    println!("{:?}", return_value);
+    return_value.file_path = file_path;
     Ok(return_value)
 }
 
@@ -233,6 +204,10 @@ pub fn open_file(file_path: String) -> Result<String, String> {
         Ok(_) => Ok("opened file".to_string()),
         Err(_) => Err("failed to open file".to_string()),
     }
+}
+#[tauri::command]
+pub fn remove_file(path: String) {
+    fs::remove_file(path).unwrap();
 }
 
 /* #[test]

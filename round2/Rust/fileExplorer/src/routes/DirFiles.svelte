@@ -33,7 +33,6 @@
       await invoke("open_file", { filePath: file_Path });
     } else {
       updateFiles(await invoke("get_files_in_dir", { filePath: file_Path }));
-
       addToStackHistory(file_Path);
     }
   }
@@ -57,6 +56,7 @@
     <p>loading</p>
   {/each}
 </div>
+
 <FileInfo bind:isOpen bind:fileInfoContent />
 
 <style>

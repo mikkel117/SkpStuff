@@ -18,6 +18,7 @@ fn main() {
             dirs::get_files_in_dir,
             dirs::get_dir_path,
             dirs::get_dir_size,
+            dirs::remove_file,
             fuzzy_search::fuzzy_finder,
         ])
         .run(tauri::generate_context!())

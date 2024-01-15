@@ -1,11 +1,3 @@
-type timeType = {
-  day: number;
-  month: number;
-  hour: number;
-  minute: number;
-  seconds: number;
-  year: number;
-};
 export type dirsType = {
   len: Number;
   modified: string;

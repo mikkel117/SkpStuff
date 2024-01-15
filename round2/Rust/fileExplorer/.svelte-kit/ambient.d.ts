@@ -30,18 +30,22 @@ declare module '$env/static/private' {
 	export const APPDATA: string;
 	export const CARGO: string;
 	export const CARGO_HOME: string;
+	export const CHROME_CRASHPAD_PIPE_NAME: string;
 	export const COLOR: string;
+	export const COLORTERM: string;
 	export const CommonProgramFiles: string;
 	export const CommonProgramW6432: string;
 	export const COMPUTERNAME: string;
 	export const ComSpec: string;
 	export const DriverData: string;
 	export const EDITOR: string;
+	export const GIT_ASKPASS: string;
 	export const HOME: string;
 	export const HOMEDRIVE: string;
 	export const HOMEPATH: string;
 	export const INIT_CWD: string;
 	export const JAVA_HOME: string;
+	export const LANG: string;
 	export const LD_LIBRARY_PATH: string;
 	export const LOCALAPPDATA: string;
 	export const LOGONSERVER: string;
@@ -75,6 +79,7 @@ declare module '$env/static/private' {
 	export const NUMBER_OF_PROCESSORS: string;
 	export const OneDrive: string;
 	export const OneDriveConsumer: string;
+	export const ORIGINAL_XDG_CURRENT_DESKTOP: string;
 	export const OS: string;
 	export const Path: string;
 	export const PATHEXT: string;
@@ -94,7 +99,6 @@ declare module '$env/static/private' {
 	export const RUSTUP_TOOLCHAIN: string;
 	export const RUST_RECURSION_COUNT: string;
 	export const SCITE_USERHOME: string;
-	export const SESSIONNAME: string;
 	export const SystemDrive: string;
 	export const SystemRoot: string;
 	export const TAURI_ARCH: string;
@@ -105,15 +109,19 @@ declare module '$env/static/private' {
 	export const TAURI_PLATFORM_VERSION: string;
 	export const TAURI_TARGET_TRIPLE: string;
 	export const TEMP: string;
+	export const TERM_PROGRAM: string;
+	export const TERM_PROGRAM_VERSION: string;
 	export const TMP: string;
 	export const USERDOMAIN: string;
 	export const USERDOMAIN_ROAMINGPROFILE: string;
 	export const USERNAME: string;
 	export const USERPROFILE: string;
+	export const VSCODE_GIT_ASKPASS_EXTRA_ARGS: string;
+	export const VSCODE_GIT_ASKPASS_MAIN: string;
+	export const VSCODE_GIT_ASKPASS_NODE: string;
+	export const VSCODE_GIT_IPC_HANDLE: string;
+	export const VSCODE_INJECTION: string;
 	export const windir: string;
-	export const WSLENV: string;
-	export const WT_PROFILE_ID: string;
-	export const WT_SESSION: string;
 }
 
 /**
@@ -147,18 +155,22 @@ declare module '$env/dynamic/private' {
 		APPDATA: string;
 		CARGO: string;
 		CARGO_HOME: string;
+		CHROME_CRASHPAD_PIPE_NAME: string;
 		COLOR: string;
+		COLORTERM: string;
 		CommonProgramFiles: string;
 		CommonProgramW6432: string;
 		COMPUTERNAME: string;
 		ComSpec: string;
 		DriverData: string;
 		EDITOR: string;
+		GIT_ASKPASS: string;
 		HOME: string;
 		HOMEDRIVE: string;
 		HOMEPATH: string;
 		INIT_CWD: string;
 		JAVA_HOME: string;
+		LANG: string;
 		LD_LIBRARY_PATH: string;
 		LOCALAPPDATA: string;
 		LOGONSERVER: string;
@@ -192,6 +204,7 @@ declare module '$env/dynamic/private' {
 		NUMBER_OF_PROCESSORS: string;
 		OneDrive: string;
 		OneDriveConsumer: string;
+		ORIGINAL_XDG_CURRENT_DESKTOP: string;
 		OS: string;
 		Path: string;
 		PATHEXT: string;
@@ -211,7 +224,6 @@ declare module '$env/dynamic/private' {
 		RUSTUP_TOOLCHAIN: string;
 		RUST_RECURSION_COUNT: string;
 		SCITE_USERHOME: string;
-		SESSIONNAME: string;
 		SystemDrive: string;
 		SystemRoot: string;
 		TAURI_ARCH: string;
@@ -222,15 +234,19 @@ declare module '$env/dynamic/private' {
 		TAURI_PLATFORM_VERSION: string;
 		TAURI_TARGET_TRIPLE: string;
 		TEMP: string;
+		TERM_PROGRAM: string;
+		TERM_PROGRAM_VERSION: string;
 		TMP: string;
 		USERDOMAIN: string;
 		USERDOMAIN_ROAMINGPROFILE: string;
 		USERNAME: string;
 		USERPROFILE: string;
+		VSCODE_GIT_ASKPASS_EXTRA_ARGS: string;
+		VSCODE_GIT_ASKPASS_MAIN: string;
+		VSCODE_GIT_ASKPASS_NODE: string;
+		VSCODE_GIT_IPC_HANDLE: string;
+		VSCODE_INJECTION: string;
 		windir: string;
-		WSLENV: string;
-		WT_PROFILE_ID: string;
-		WT_SESSION: string;
 		[key: `PUBLIC_${string}`]: undefined;
 		[key: `${string}`]: string | undefined;
 	}
