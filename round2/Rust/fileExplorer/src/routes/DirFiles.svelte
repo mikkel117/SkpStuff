@@ -4,11 +4,13 @@
   import { files, updateFiles } from "$lib/store/filesStore";
   import Icon from "@iconify/svelte";
   import FileInfo from "./FileInfo.svelte";
+  import SlideOut from "./slideOut.svelte";
   import type { dirsType } from "$lib/Types";
 
   let isOpen: boolean = false;
   let fileInfoContent: dirsType;
   let clicked: boolean = false;
+  let infoWidth: string = "0";
 
   //let to: NodeJS.Timeout | null = null;
   let to: any = null;
@@ -25,6 +27,7 @@
       clicked = false;
       fileInfoContent = fileInfo;
       isOpen = true;
+      infoWidth = "50%";
     }, 200);
   }
 
@@ -58,9 +61,49 @@
   {/each}
 </div>
 
-<FileInfo bind:isOpen bind:fileInfoContent />
+<!-- {#if isOpen} -->
+<div
+  class="test"
+  class:slideIn={isOpen}
+  class:slideOut={!isOpen}
+  style="--info-width: {infoWidth}"
+>
+  <FileInfo bind:isOpen bind:fileInfoContent />
+  <!-- <SlideOut bind:isOpen /> -->
+</div>
+
+<!-- {/if} -->
 
 <style>
+  .test {
+    height: 100%;
+    background-color: var(--secondary-bg-color);
+  }
+  .slideIn {
+    animation: slide-in 700ms forwards;
+  }
+
+  .slideOut {
+    animation: slide-out 700ms forwards;
+  }
+
+  @keyframes slide-in {
+    from {
+      width: 0;
+    }
+    to {
+      width: var(--info-width);
+    }
+  }
+
+  @keyframes slide-out {
+    from {
+      width: var(--info-width);
+    }
+    to {
+      width: 0;
+    }
+  }
   .container {
     width: 100%;
     /* height: calc(100% -20px); */

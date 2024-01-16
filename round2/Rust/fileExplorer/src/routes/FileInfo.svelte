@@ -3,9 +3,9 @@
   import { convertFileSrc } from "@tauri-apps/api/tauri";
   import { invoke } from "@tauri-apps/api/tauri";
   import Icon from "@iconify/svelte";
+  import profileImg from "$lib/img/profile_picture.png";
   export let isOpen: boolean = false;
-  export let fileInfoContent: dirsType | null;
-  let infoWidth: string = "0";
+  export let fileInfoContent: dirsType | null = null;
   let convertedFilePath: string = "";
   let showSize: boolean = false;
   let size: Number = 0;
@@ -18,7 +18,6 @@
       if (convertedFilePath != null) {
         convertedFilePath = convertFileSrc(fileInfoContent!.path);
       }
-      infoWidth = "55%";
     } else {
       fileInfoContent = null;
     }
@@ -45,7 +44,7 @@
       img.onload = () => {
         node.setAttribute("src", data.src);
       };
-    }, 550);
+    }, 1000);
     return {
       destroy() {},
     };
@@ -59,7 +58,9 @@
         node.setAttribute("src", data.src);
       };
       node.appendChild(iframe);
-    }, 550);
+      console.log(node);
+    }, 1000);
+
     return {
       destroy() {},
     };
@@ -91,16 +92,14 @@
   }
 </script>
 
-<section
-  class="fileInfoContainer"
-  class:slideIn={isOpen}
-  class:slideOut={isOpen === false}
-  style="--info-width: {infoWidth}"
->
+<section class="fileInfoContainer">
   {#if fileInfoContent}
     <div class="close" on:click={() => close()} on:keydown={() => close()}>
       X
     </div>
+    <!-- <div class="fileInfoHeader"> -->
+    <!-- <Icon icon="material-symbols:folder" width="100%" /> -->
+    <!-- </div>  -->
     <div class="fileInfoHeader">
       {#if fileInfoContent.file_extension === "jpg" || fileInfoContent.file_extension === "png" || fileInfoContent.file_extension === "jpeg" || fileInfoContent.file_extension === "gif"}
         <img
@@ -110,76 +109,36 @@
           alt={fileInfoContent.name}
         />
       {:else if fileInfoContent.file_extension === "pdf" || fileInfoContent.file_extension === "txt"}
-        <iframe
+        <!-- <iframe
           use:lazyLoadIframe={{
             src: convertedFilePath,
           }}
           frameborder="0"
           title={fileInfoContent.name}
-        />
+          /> -->
+        <!-- <iframe
+            src={convertedFilePath}
+            frameborder="0"
+            title={fileInfoContent.name}
+            /> -->
+        <img src={profileImg} alt="" height="100%" />
       {:else if fileInfoContent.is_dir}
         <div class="iconWrapper">
-          <Icon icon="material-symbols:folder" width="80%" />
+          <Icon icon="material-symbols:folder" width="70%" />
         </div>
       {:else}
         <div class="iconWrapper">
-          <Icon icon="pepicons-pencil:file" width="80%" />
+          <Icon icon="pepicons-pencil:file" width="70%" />
         </div>
       {/if}
-    </div>
-    <div class="border" />
-    <p class="fileName">{fileInfoContent.name}</p>
-    <div class="border" />
-    <div class="fileFormat-Size">
-      <p>Format: {fileInfoContent.file_extension}</p>
-      <p>
-        {#if sizeError === ""}
-          Size :
-          {#if showSize}
-            {size}
-            <span>{unit}</span>
-          {:else if !LoadingSize}
-            <button on:click={seeSize}>see size</button>
-          {:else}
-            <span>Loading...</span>
-          {/if}
-        {:else}
-          <span class="error">{sizeError}</span>
-        {/if}
-      </p>
-    </div>
-    <div class="border" />
-    <div>
-      <p>
-        Created : <span>{fileInfoContent.created}</span>
-      </p>
-      <p>
-        Modified : <span>{fileInfoContent.modified}</span>
-      </p>
-    </div>
-    <div class="border" />
-
-    <div class="bottomWrapper">
-      <div class="bottomContainer">
-        <span>
-          <Icon icon="ic:outline-edit" width="30" />
-          <p>Rename</p>
-        </span>
-        <div class="bottomContainerBorder" />
-        <!-- svelte-ignore a11y-click-events-have-key-events -->
-        <span on:click={deleteFile}>
-          <Icon icon="material-symbols:delete" width="30" />
-          <p>Delete</p>
-        </span>
-      </div>
     </div>
   {/if}
 </section>
 
 <style>
   .fileInfoContainer {
+    width: 100%;
     height: 100%;
-    background-color: #242631;
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
@@ -196,6 +155,17 @@
   .close:hover {
     opacity: 0.5;
   }
+  .fileInfoHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 50%;
+    max-height: 50%;
+    padding: 10px;
+    width: 100%;
+    overflow: hidden;
+  }
   .border {
     margin: 5px 0 5px 0;
     width: 100%;
@@ -207,19 +177,9 @@
     text-align: center;
   }
 
-  .fileInfoHeader {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 50%;
-    max-height: 50%;
-    margin: 10px;
-  }
-
   .fileInfoContainer img,
   .fileInfoContainer iframe {
-    height: 80%;
+    width: 100%;
   }
 
   .iconWrapper {
@@ -258,31 +218,5 @@
 
   .error {
     color: red;
-  }
-
-  .slideIn {
-    animation: slide-in 700ms forwards;
-  }
-
-  .slideOut {
-    animation: slide-out 700ms forwards;
-  }
-
-  @keyframes slide-in {
-    from {
-      width: 0;
-    }
-    to {
-      width: var(--info-width);
-    }
-  }
-
-  @keyframes slide-out {
-    from {
-      width: var(--info-width);
-    }
-    to {
-      width: 0;
-    }
   }
 </style>

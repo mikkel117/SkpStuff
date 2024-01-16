@@ -99,6 +99,7 @@ declare module '$env/static/private' {
 	export const RUSTUP_TOOLCHAIN: string;
 	export const RUST_RECURSION_COUNT: string;
 	export const SCITE_USERHOME: string;
+	export const SESSIONNAME: string;
 	export const SystemDrive: string;
 	export const SystemRoot: string;
 	export const TAURI_ARCH: string;
@@ -122,6 +123,9 @@ declare module '$env/static/private' {
 	export const VSCODE_GIT_IPC_HANDLE: string;
 	export const VSCODE_INJECTION: string;
 	export const windir: string;
+	export const WSLENV: string;
+	export const WT_PROFILE_ID: string;
+	export const WT_SESSION: string;
 }
 
 /**
@@ -224,6 +228,7 @@ declare module '$env/dynamic/private' {
 		RUSTUP_TOOLCHAIN: string;
 		RUST_RECURSION_COUNT: string;
 		SCITE_USERHOME: string;
+		SESSIONNAME: string;
 		SystemDrive: string;
 		SystemRoot: string;
 		TAURI_ARCH: string;
@@ -247,6 +252,9 @@ declare module '$env/dynamic/private' {
 		VSCODE_GIT_IPC_HANDLE: string;
 		VSCODE_INJECTION: string;
 		windir: string;
+		WSLENV: string;
+		WT_PROFILE_ID: string;
+		WT_SESSION: string;
 		[key: `PUBLIC_${string}`]: undefined;
 		[key: `${string}`]: string | undefined;
 	}
