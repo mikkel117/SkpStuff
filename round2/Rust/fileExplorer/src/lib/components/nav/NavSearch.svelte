@@ -4,8 +4,8 @@
     stackHistory,
     addToStackHistory,
   } from "$lib/store/stackHistoryStore";
-  import { files, updateFiles } from "$lib/store/filesStore";
-  import type { dirsType, SearchSuggestionType } from "$lib/Types";
+  import { updateFiles } from "$lib/store/filesStore";
+  import type { SearchSuggestionType } from "$lib/Types";
   let inputTxt: string = "";
   let path: string = "";
   let searchSuggestion: SearchSuggestionType[] = [];
@@ -50,7 +50,7 @@
   async function handleSubmit() {
     updateFiles(await invoke("get_files_in_dir", { filePath: inputTxt }));
     addToStackHistory(inputTxt);
-    isInputFocused = false;
+    searchSuggestion = [];
   }
 
   const onFocus = () => (isInputFocused = true);
@@ -62,7 +62,6 @@
 
   const clickOnSearchSuggestion = (item: SearchSuggestionType) => {
     inputTxt = item.path;
-    searchSuggestion = [];
     handleSubmit();
   };
 </script>
@@ -98,6 +97,7 @@
 
   .searchSuggestions {
     position: absolute;
+    margin-top: 5px;
     width: 100%;
     max-height: 200px;
     z-index: 100;

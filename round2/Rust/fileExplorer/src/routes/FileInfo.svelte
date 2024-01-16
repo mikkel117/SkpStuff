@@ -1,5 +1,4 @@
 <script lang="ts">
-  /* import { quintOut } from "svelte/easing"; */
   import type { dirsType } from "$lib/Types";
   import { convertFileSrc } from "@tauri-apps/api/tauri";
   import { invoke } from "@tauri-apps/api/tauri";
@@ -19,7 +18,7 @@
       if (convertedFilePath != null) {
         convertedFilePath = convertFileSrc(fileInfoContent!.path);
       }
-      infoWidth = "60%";
+      infoWidth = "55%";
     } else {
       fileInfoContent = null;
     }
@@ -35,46 +34,32 @@
 
   function close() {
     isOpen = false;
-    loaded = new Map();
     showSize = false;
     size = 0;
   }
 
-  let loaded = new Map();
-
   function lazyLoadImage(node: any, data: any) {
-    if (loaded.has(data.src)) {
-      node.setAttribute("src", data.src);
-    } else {
-      setTimeout(() => {
-        const img = new Image();
-        img.src = data.src;
-        img.onload = () => {
-          node.setAttribute("src", data.src);
-          loaded.set(data.src, true);
-        };
-      }, 550);
-    }
+    setTimeout(() => {
+      const img = new Image();
+      img.src = data.src;
+      img.onload = () => {
+        node.setAttribute("src", data.src);
+      };
+    }, 550);
     return {
       destroy() {},
     };
   }
 
   function lazyLoadIframe(node: any, data: any) {
-    if (loaded.has(data.src)) {
-      node.setAttribute("src", data.src);
-    } else {
-      setTimeout(() => {
-        const iframe = document.createElement("iframe");
-        iframe.src = data.src;
-        iframe.onload = () => {
-          node.setAttribute("src", data.src);
-          loaded.set(data.src, true);
-        };
-
-        node.appendChild(iframe);
-      }, 550);
-    }
+    setTimeout(() => {
+      const iframe = document.createElement("iframe");
+      iframe.src = data.src;
+      iframe.onload = () => {
+        node.setAttribute("src", data.src);
+      };
+      node.appendChild(iframe);
+    }, 550);
     return {
       destroy() {},
     };
@@ -134,11 +119,11 @@
         />
       {:else if fileInfoContent.is_dir}
         <div class="iconWrapper">
-          <Icon icon="material-symbols:folder" width="100%" />
+          <Icon icon="material-symbols:folder" width="80%" />
         </div>
       {:else}
         <div class="iconWrapper">
-          <Icon icon="pepicons-pencil:file" width="100%" />
+          <Icon icon="pepicons-pencil:file" width="80%" />
         </div>
       {/if}
     </div>
@@ -234,11 +219,14 @@
 
   .fileInfoContainer img,
   .fileInfoContainer iframe {
-    height: 100%;
+    height: 80%;
   }
 
   .iconWrapper {
-    width: 60%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .bottomWrapper {

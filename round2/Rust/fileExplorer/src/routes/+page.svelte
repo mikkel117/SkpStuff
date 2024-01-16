@@ -6,7 +6,7 @@
   import Nav from "../lib/components/nav/Nav.svelte";
 </script>
 
-<!-- <div class="Container">
+<div class="Container">
   <Tabs />
   <Nav />
   <section>
@@ -14,9 +14,9 @@
 
     <DirFiles />
   </section>
-</div> -->
+</div>
 
-<!-- <style>
+<style>
   .Container {
     height: 100vh;
     overflow-y: clip;
@@ -28,4 +28,4 @@
     height: 100%;
     overflow-x: hidden;
   }
-</style> -->
+</style>

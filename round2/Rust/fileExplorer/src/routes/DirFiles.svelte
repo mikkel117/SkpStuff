@@ -44,6 +44,7 @@
       on:click={(e) => handleClick(item)}
       on:keydown={(e) => handleClick(item)}
       on:dblclick={() => handleDoubleClick(item.path, item.is_dir)}
+      class:maxHeight={$files.length < 10}
     >
       {#if item.is_dir}
         <Icon icon="material-symbols:folder" width="70" />
@@ -62,12 +63,15 @@
 <style>
   .container {
     width: 100%;
-    height: calc(100% -20px);
+    /* height: calc(100% -20px); */
     overflow-y: auto;
     overflow-x: hidden;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+  }
+  .maxHeight {
+    height: 30%;
   }
   .container > div {
     font-size: 20px;
@@ -76,6 +80,7 @@
     flex-wrap: wrap;
     align-items: center;
     flex-direction: column;
+    justify-content: center;
     background-color: var(--secondary-bg-color);
     margin: 10px;
     padding: 10px;
@@ -84,7 +89,10 @@
 
   .container > div:hover {
     opacity: 0.7;
-    cursor: pointer;
+  }
+
+  .container > div {
+    transition: opacity 0.2s ease-in-out;
   }
 
   div > p {

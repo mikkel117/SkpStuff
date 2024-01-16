@@ -15,7 +15,7 @@
   });
 
   async function handleClick(item: any) {
-    if (currentDir != item) {
+    if ($currentDir != item) {
       addToStackHistory(item);
       updateCurrentDir(item);
       updateFiles(await invoke("get_standard_dir_files", { dir: item }));
